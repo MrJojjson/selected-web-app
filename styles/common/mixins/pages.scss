@@ -1,0 +1,6 @@
+@import '../metrics.scss';
+@import '../colors.scss';
+
+@mixin pages() {
+    margin-bottom: $spacing-xl;
+}

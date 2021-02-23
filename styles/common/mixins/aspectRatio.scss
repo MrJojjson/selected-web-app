@@ -1,0 +1,15 @@
+@mixin aspect-ratio($ratio: 2) {
+    $gap: 100 / $ratio;
+    width: 100%;
+    height: 0;
+    padding-bottom: #{$gap + '%'};
+}
+
+@mixin aspect-ratio-child() {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

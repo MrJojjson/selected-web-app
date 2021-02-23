@@ -1,0 +1,23 @@
+@import '../metrics.scss';
+@import '../colors.scss';
+
+@mixin section($type, $margin: true, $background: false) {
+    min-height: $section-min-height;
+    padding: $default-app-spacing;
+    @if $type == 'primary' {
+        border-top: 1px solid $color-primary-border;
+    } @else if $type == 'secondary' {
+        border-top: 1px solid $color-secondary-border;
+        @if $background {
+            background-color: $color-secondary-background;
+        }
+    } @else if $type == 'highlight' {
+        border-top: 1px solid $color-highlight;
+        @if $background {
+            background-color: $color-highlight;
+        }
+    }
+    @if $margin {
+        margin-bottom: $spacing-xxl;
+    }
+}

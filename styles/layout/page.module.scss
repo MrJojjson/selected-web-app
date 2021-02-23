@@ -1,0 +1,10 @@
+@import '../common/metrics.scss';
+@import '../common/mixins/flex.scss';
+
+.page {
+    @include flex(center, center, column);
+    flex: $default-flex;
+    height: 100%;
+    // padding: $default-app-spacing;
+    // box-sizing: border-box;
+}

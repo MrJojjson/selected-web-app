@@ -1,0 +1,37 @@
+@import '../common/colors.scss';
+@import '../common/metrics.scss';
+.text {
+    width: auto;
+    padding: $spacing-none;
+    margin: $spacing-none;
+    &.line {
+        white-space: nowrap;
+    }
+
+    &.s {
+        font-size: $font-size-s;
+    }
+
+    &.m {
+        font-size: $font-size-m;
+    }
+
+    &.l {
+        font-size: $font-size-l;
+    }
+
+    &.xl {
+        font-size: $font-size-xl;
+    }
+    &.primary {
+        color: $color-primary;
+    }
+
+    &.secondary {
+        color: $color-secondary;
+    }
+
+    &.underline {
+        text-decoration: underline;
+    }
+}

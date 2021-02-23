@@ -1,0 +1,53 @@
+@import '../common/colors.scss';
+@import '../common/metrics.scss';
+
+.link {
+    transition: all $transition-speed;
+    white-space: nowrap;
+    cursor: pointer;
+    &.primary {
+        color: $color-primary;
+    }
+
+    &.secondary {
+        color: $color-secondary;
+    }
+
+    &.s {
+        font-size: $font-size-s;
+    }
+
+    &.m {
+        font-size: $font-size-m;
+    }
+
+    &.l {
+        font-size: $font-size-l;
+    }
+
+    &.xl {
+        font-size: $font-size-xl;
+    }
+
+    &.underline {
+        text-decoration: underline;
+    }
+
+    &[aria-current] {
+        color: $color-highlight;
+        font-weight: $font-weight-thin;
+    }
+    &:hover {
+        color: $color-highlight;
+    }
+    &:active {
+        transform: translateY($active-size);
+    }
+}
+
+.fake_link {
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}

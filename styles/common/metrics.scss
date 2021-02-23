@@ -1,0 +1,74 @@
+@import './mixins/breakpoints.scss';
+
+$border-radius-none: 0px;
+$border-radius-xs: 2.5px;
+$border-radius-s: 5px;
+$border-radius-m: 10px;
+$border-radius-l: 20px;
+$border-radius-r: 50px;
+
+$spacing-none: 0px;
+$spacing-xxs: 5px;
+$spacing-xs: 10px;
+$spacing-s: 15px;
+$spacing-m: 25px;
+$spacing-l: 35px;
+$spacing-xl: 50px;
+$spacing-xxl: 90px;
+$spacing-xxxl: 150px;
+
+$height-none: 0px;
+$height-xs: 20px;
+$height-s: 40px;
+$height-m: 50px;
+$height-l: 70px;
+$height-xl: 100px;
+
+$font-size-s: 0.875rem;
+$font-size-m: 1rem;
+$font-size-l: 1.25rem;
+$font-size-xl: 1.5rem;
+$header-size-s: 1.25rem;
+$header-size-m: 1.75rem;
+$header-size-l: 2.25rem;
+$header-size-xl: 2.75rem;
+
+$font-weight-thin: 100;
+$font-weight-normal: 240;
+$font-weight-medium: 400;
+$font-weight-bold: 600;
+
+$z-index-naked: 0;
+$z-index-shoe: 1;
+$z-index-pants: 2;
+$z-index-belt: 3;
+$z-index-shirt: 4;
+$z-index-scarf: 5;
+$z-index-hat: 6;
+
+$hover-opacity: 0.9;
+$active-size: 1px;
+
+$transition-speed: 0.25s;
+$transition-modal-speed: 1s;
+
+$max-width: 100vw;
+$default-app-spacing: 2vw;
+$default-title-spacing: $spacing-m;
+$default-sub-title-spacing: $spacing-s;
+$default-inner-app-spacing: $default-title-spacing;
+
+$default-flex: 5;
+
+$navbar-height: $height-s;
+$palette-width: 300px;
+
+$section-min-height: 20vh;
+$section-spacing: $spacing-xxl;
+
+$modal-min-width: 20vw;
+$modal-max-width: 40vw;
+
+$alert-min-width: 50vw;
+$alert-min-height: 10vh;
+$alert-max-height: 20vh;

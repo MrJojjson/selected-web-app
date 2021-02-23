@@ -1,0 +1,40 @@
+@import '../common/colors.scss';
+@import '../common/metrics.scss';
+@import '../common/mixins/flex.scss';
+@import '../common/mixins/fades.scss';
+@import '../common/mixins/section.scss';
+
+$navbar-item-padding: $spacing-l;
+$navbar-item-modal-padding: $spacing-xl;
+
+.header {
+    @include flex(center, flex-start, row);
+    height: $navbar-height;
+    width: 100%;
+    .system {
+        @include flex(center, flex-start, row);
+        flex: 1;
+        background-color: $color-highlight-back;
+        height: 100%;
+        padding: 0 $default-app-spacing;
+        box-sizing: border-box;
+        border-right: 1px solid $color-highlight;
+    }
+    .settings {
+        @include flex(center, center, row);
+        flex: $default-flex;
+        height: 100%;
+        border-bottom: 1px solid $color-primary-border;
+        padding: 0 $default-app-spacing;
+        box-sizing: border-box;
+    }
+    .auth {
+        @include flex(center, space-between, row);
+        flex: 1;
+        background-color: $color-highlight-back;
+        height: 100%;
+        padding: 0 $default-app-spacing;
+        box-sizing: border-box;
+        border-left: 1px solid $color-highlight;
+    }
+}
