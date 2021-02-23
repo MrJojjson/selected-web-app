@@ -1,8 +1,10 @@
 import NextLink, { LinkProps } from 'next/link';
+import { map } from 'ramda';
 import React from 'react';
 import styles from '../../../../styles/atoms/link.module.scss';
 import { toTypes } from '../../../types/linkTypes';
 import { Text, TextType } from '../text';
+import cn from 'classnames';
 
 export type LinkType = Omit<LinkProps, 'href'> &
     Omit<TextType, 'children'> & {
@@ -32,4 +34,21 @@ export const FakeLink = ({ title, onClick }: Pick<LinkType, 'title' | 'onClick'>
             </Text>
         </button>
     );
+};
+
+export type ListType = {
+    links: LinkType[];
+    className?: string;
+};
+
+export const LinkList = ({ links = [], className }: ListType) => {
+    const linkList = map(
+        (props) => (
+            <li key={props.pathname}>
+                <Link {...props} />{' '}
+            </li>
+        ),
+        links,
+    );
+    return <ul className={cn(styles.link_list, className)}>{linkList}</ul>;
 };

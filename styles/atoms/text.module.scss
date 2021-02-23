@@ -1,9 +1,15 @@
 @import '../common/colors.scss';
 @import '../common/metrics.scss';
+@import '../common/mixins/flex.scss';
+
+$icon-flex: $spacing-xs;
+
 .text {
     width: auto;
     padding: $spacing-none;
     margin: $spacing-none;
+    word-break: break-word;
+    @include flex(center, center, row);
     &.line {
         white-space: nowrap;
     }
@@ -31,7 +37,44 @@
         color: $color-secondary;
     }
 
+    &.highlight {
+        color: $color-highlight;
+    }
+
     &.underline {
         text-decoration: underline;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
+
+    .icon {
+        font-size: $font-size-l;
+    }
+
+    &.row {
+        flex-direction: row;
+        .icon {
+            margin-right: $icon-flex;
+        }
+    }
+    &.column {
+        flex-direction: column;
+        .icon {
+            margin-top: $icon-flex;
+        }
+    }
+    &.row-reverse {
+        flex-direction: row-reverse;
+        .icon {
+            margin-left: $icon-flex;
+        }
+    }
+    &.column-reverse {
+        flex-direction: column-reverse;
+        .icon {
+            margin-bottom: $icon-flex;
+        }
     }
 }

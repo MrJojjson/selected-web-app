@@ -10,6 +10,13 @@
     font-family: Ubuntu;
 }
 
+ul,
+ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 p,
 a,
 h1,
@@ -30,7 +37,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-
+    @include flex(flex-start, flex-start, column);
     .content {
         @include flex(flex-start, flex-start, row);
         width: 100%;

@@ -1,7 +1,9 @@
 import cn from 'classnames';
 import React, { forwardRef } from 'react';
 import styles from '../../../../styles/atoms/text.module.scss';
-import { fontSizeType, textTag, themeType } from '../../../types';
+import { directionType, fontSizeStyle, fontSizeType, textTag, themeType } from '../../../types';
+import { IconName } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type TextType = {
     children: string;
@@ -12,20 +14,43 @@ export type TextType = {
     className?: string;
     href?: string;
     hyper?: boolean;
+    style?: fontSizeStyle;
+    icon?: IconName;
+    direction?: directionType;
 };
 
 export const Text = forwardRef(
-    ({ children, tag = 'p', theme = 'primary', fontSize = 'm', oneLine, className, href, hyper }: TextType, ref) => {
+    (
+        {
+            children,
+            tag = 'p',
+            theme = 'primary',
+            fontSize = 'm',
+            oneLine,
+            className,
+            href,
+            hyper,
+            style,
+            icon,
+            direction = 'row',
+        }: TextType,
+        ref,
+    ) => {
+        const faIcon = icon && <FontAwesomeIcon className={styles.icon} icon={['fas', icon]} />;
+
         const text = React.createElement(
             tag,
             {
                 className: cn(styles.text, styles[tag], styles[theme], styles[fontSize], className, {
                     [styles.line]: oneLine === true,
                     [styles.underline]: hyper,
+                    [styles[style]]: style,
+                    [styles[direction]]: !!icon && !!children,
                 }),
                 ref,
                 href,
             },
+            faIcon,
             children,
         );
         return text;

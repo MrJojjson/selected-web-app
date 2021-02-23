@@ -1,9 +1,11 @@
 @import '../common/colors.scss';
 @import '../common/metrics.scss';
+@import '../common/mixins/flex.scss';
 
-$hadow-h: 5px;
+$shadow-h: 5px;
 
 .button {
+    @include flex(center, center, row);
     border: none;
     border-radius: $border-radius-s;
     padding: $spacing-xxs $spacing-s;
@@ -11,15 +13,20 @@ $hadow-h: 5px;
     box-sizing: border-box;
     cursor: pointer;
     transition: all $transition-speed;
-    margin-bottom: $hadow-h;
+    margin-bottom: $shadow-h;
     &.primary {
         color: $color-primary;
         background-color: $color-primary-background;
-        border: 1px solid $color-primary-border;
-        box-shadow: $hadow-h $hadow-h $color-primary-background-back;
+        border: 1px solid $color-primary-background;
+        box-shadow: $shadow-h $shadow-h $color-primary-background-back;
         &:active {
             // transform: translateY($active-size);
             box-shadow: 0px 0px $color-primary-background-back;
+        }
+        .icon {
+            path {
+                fill: $color-primary;
+            }
         }
     }
 
@@ -27,17 +34,27 @@ $hadow-h: 5px;
         color: $color-secondary;
         background-color: $color-secondary-background;
         border: 1px solid $color-secondary-border;
-        box-shadow: $hadow-h $hadow-h $color-secondary-background-back;
+        box-shadow: $shadow-h $shadow-h $color-secondary-background-back;
+        .icon {
+            path {
+                fill: $color-secondary;
+            }
+        }
     }
 
     &.highlight {
         color: $color-secondary;
         background-color: $color-highlight;
         border: none;
-        box-shadow: $hadow-h $hadow-h $color-highlight-back;
+        box-shadow: $shadow-h $shadow-h $color-highlight-back;
         &:active {
             transform: translate(5px, 5px);
             box-shadow: 0px 0px $color-highlight-back;
+        }
+        .icon {
+            path {
+                fill: $color-secondary;
+            }
         }
     }
 

@@ -36,12 +36,25 @@
     &[aria-current] {
         color: $color-highlight;
         font-weight: $font-weight-thin;
+        a {
+            color: $color-highlight;
+            font-weight: $font-weight-thin;
+        }
     }
     &:hover {
         color: $color-highlight;
     }
     &:active {
         transform: translateY($active-size);
+    }
+}
+
+.link_list {
+    li {
+        display: flex;
+        &:not(:last-of-type) {
+            margin-bottom: $default-margin;
+        }
     }
 }
 

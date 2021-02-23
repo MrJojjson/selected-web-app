@@ -10,7 +10,7 @@
     .middle,
     .bottom {
         width: 100%;
-        padding: $default-app-spacing;
+        padding: $default-padding;
         box-sizing: border-box;
     }
 
@@ -25,7 +25,11 @@
         border-right: 1px solid $color-primary-border;
     }
     .bottom {
-        flex: 1;
+        @include flex(center, center, column);
+        flex: 0.5;
         background-color: $color-highlight-back;
+        .btn_settings {
+            margin-bottom: $default-margin;
+        }
     }
 }

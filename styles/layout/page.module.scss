@@ -1,10 +1,18 @@
+@import '../common/colors.scss';
 @import '../common/metrics.scss';
 @import '../common/mixins/flex.scss';
 
 .page {
+    position: relative;
     @include flex(center, center, column);
     flex: $default-flex;
     height: 100%;
-    // padding: $default-app-spacing;
-    // box-sizing: border-box;
+    width: 100%;
+    .content {
+        @include flex(center, center, column);
+        padding: $default-app-spacing;
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+    }
 }

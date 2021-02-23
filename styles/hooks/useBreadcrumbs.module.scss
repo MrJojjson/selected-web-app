@@ -1,0 +1,48 @@
+@import '../common/colors.scss';
+@import '../common/metrics.scss';
+@import '../common/mixins/flex.scss';
+
+.breadcrumb {
+    @include flex(center, flex-start, row);
+    width: 100%;
+    height: 0;
+    white-space: nowrap;
+    transition: all $transition-speed;
+    &.active {
+        height: $breadcrumbs-height;
+        transition: all $transition-speed;
+    }
+
+    .breadcrumbs {
+        @include flex(center, center, row);
+        list-style-type: none;
+        padding: 0 $default-padding;
+        margin: 0;
+        white-space: nowrap;
+
+        li {
+            margin: auto $default-margin auto auto;
+            display: flex;
+            &:not(:last-of-type) {
+                a {
+                    font-size: $font-size-s;
+
+                    color: $color-highlight;
+                    &:after {
+                        content: ' ';
+                        color: $color-highlight;
+                    }
+                }
+            }
+            &:last-of-type {
+                a {
+                    font-size: $font-size-s;
+
+                    color: $color-disabled;
+                    font-style: italic;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}

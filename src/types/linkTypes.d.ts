@@ -1,8 +1,1 @@
-export type toTypes =
-    | '/'
-    | '/auth'
-    | '/whatWeOffer/product'
-    | '/whatWeOffer/features'
-    | '/whatWeOffer/pricing'
-    | '/about'
-    | '/idea';
+export type toTypes = '' | '/' | '/settings' | '/dashboard' | '/graphs';

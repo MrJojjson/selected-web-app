@@ -1,20 +1,30 @@
 import React from 'react';
-import { buttonType, themeType } from '../../../types';
+import { buttonType, directionType, themeType } from '../../../types';
 import cn from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconName } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../../../styles/atoms/button.module.scss';
+import { Text, TextType } from '../text';
 
-type ButtonType = {
+type ButtonType = Pick<TextType, 'icon' | 'direction' | 'theme' | 'className'> & {
     onClick: () => void;
-    label: string;
+    label?: string;
     type?: buttonType;
-    theme?: themeType;
-    className?: string;
     id?: string;
     mini?: boolean;
 };
 
-export const Button = ({ onClick, label, theme = 'primary', className, mini, ...rest }: ButtonType) => {
+export const Button = ({
+    onClick,
+    label,
+    theme = 'primary',
+    className,
+    mini,
+    icon,
+    direction = 'row',
+    ...rest
+}: ButtonType) => {
     return (
         <button
             onClick={() => onClick()}
@@ -23,7 +33,10 @@ export const Button = ({ onClick, label, theme = 'primary', className, mini, ...
             })}
             {...rest}
         >
-            {label}
+            {/* {icon && <FontAwesomeIcon className={styles.icon} icon={['fas', icon]} />} */}
+            <Text tag="span" oneLine icon={icon} fontSize="s" className={styles.text}>
+                {label}
+            </Text>
         </button>
     );
 };

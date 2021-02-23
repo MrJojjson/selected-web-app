@@ -8,6 +8,12 @@ import { Navbar } from '../src/components/organisms';
 import { Palette } from '../src/components/organisms/palette';
 import { store } from '../src/redux/store';
 import '../styles/globals.scss';
+import { config, library } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false;
+
+import { fas } from '@fortawesome/free-solid-svg-icons';
+library.add(fas);
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
