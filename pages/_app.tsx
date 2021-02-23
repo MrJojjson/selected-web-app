@@ -6,7 +6,6 @@ import { AlertBase } from '../src/components/molecules/alert';
 import { ModalBase } from '../src/components/molecules/modal';
 import { Navbar } from '../src/components/organisms';
 import { Palette } from '../src/components/organisms/palette';
-import { FakeAuthProvider } from '../src/redux/fakeAuth';
 import { store } from '../src/redux/store';
 import '../styles/globals.scss';
 
@@ -17,15 +16,15 @@ Router.events.on('routeChangeError', () => NProgress.done());
 function MyApp({ Component, pageProps, token }) {
     return (
         <Provider store={store}>
-            <FakeAuthProvider>
-                <AlertBase />
-                <Navbar />
-                <div className="content">
-                    <Palette />
-                    <Component {...pageProps} />
-                </div>
-                <ModalBase />
-            </FakeAuthProvider>
+            {/* <FakeAuthProvider> */}
+            <AlertBase />
+            <Navbar />
+            <div className="content">
+                <Palette />
+                <Component {...pageProps} />
+            </div>
+            <ModalBase />
+            {/* </FakeAuthProvider> */}
         </Provider>
     );
 }
