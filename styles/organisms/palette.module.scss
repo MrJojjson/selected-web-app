@@ -27,7 +27,7 @@
     .bottom {
         @include flex(center, center, column);
         flex: 0.5;
-        background-color: $color-highlight-back;
+        background-color: $color-highlight;
         .btn_settings {
             margin-bottom: $default-margin;
         }

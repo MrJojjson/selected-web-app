@@ -14,7 +14,7 @@ $navbar-item-modal-padding: $spacing-xl;
     .system {
         @include flex(center, flex-start, row);
         flex: 1;
-        background-color: $color-highlight-back;
+        background-color: $color-highlight;
         height: 100%;
         padding: 0 $default-app-spacing;
         box-sizing: border-box;
@@ -31,7 +31,7 @@ $navbar-item-modal-padding: $spacing-xl;
     .auth {
         @include flex(center, space-between, row);
         flex: 1;
-        background-color: $color-highlight-back;
+        background-color: $color-highlight;
         height: 100%;
         padding: 0 $default-app-spacing;
         box-sizing: border-box;

@@ -1,10 +1,18 @@
 import { Text } from '../src/components/atoms';
+import { PrimaryLayout } from '../src/components/layout/primary';
 import { Page } from '../src/components/layout/page';
+import { withLayout } from '@moxy/next-layout';
+import { Head } from '../src/components/layout/head';
 
-export default function Graphs() {
+const Graphs = () => {
     return (
-        <Page>
-            <Text>Graphs page</Text>
-        </Page>
+        <>
+            <Head title="Graphs" />
+            <Page>
+                <Text>Graphs page</Text>
+            </Page>
+        </>
     );
-}
+};
+
+export default withLayout(<PrimaryLayout />)(Graphs);

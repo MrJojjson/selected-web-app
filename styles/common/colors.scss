@@ -2,11 +2,11 @@
 $color-primary: rgba(45, 52, 54, 1);
 $color-secondary: #ffffff;
 
-$color-highlight: rgba(225, 112, 85, 1);
-$color-highlight-back: rgba(225, 112, 85, 0.5);
+$color-highlight: rgba(92, 137, 146, 1);
+$color-highlight-back: rgba(92, 137, 146, 0.75);
 
-$color-error: #c0392b;
-$color-alert: #ffc700;
+$color-error: rgba(237, 155, 147, 1);
+$color-alert: rgba(237, 209, 147, 1);
 
 $color-primary-shadow: rgba(178, 190, 195, 1);
 $color-secondary-shadow: #4a4a4a;
@@ -22,3 +22,5 @@ $color-secondary-background-back: rgba(44, 62, 80, 0.5);
 
 $color-primary-border: rgba(45, 52, 54, 0.25);
 $color-secondary-border: $color-secondary;
+
+$color-icon: rgba(31, 86, 96, 1);

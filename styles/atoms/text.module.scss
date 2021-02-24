@@ -5,11 +5,12 @@
 $icon-flex: $spacing-xs;
 
 .text {
+    @include flex(center, flex-start, row);
+
     width: auto;
     padding: $spacing-none;
     margin: $spacing-none;
     word-break: break-word;
-    @include flex(center, center, row);
     &.line {
         white-space: nowrap;
     }
@@ -51,6 +52,9 @@ $icon-flex: $spacing-xs;
 
     .icon {
         font-size: $font-size-l;
+        path {
+            fill: $color-icon;
+        }
     }
 
     &.row {

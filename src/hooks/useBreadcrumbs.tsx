@@ -8,24 +8,22 @@ import { convertStringToFriendlyFormat } from './useUrl';
 type BreadcrumbType = Pick<LinkType, 'pathname' | 'title'>;
 
 const convertBreadcrumb = (str: string) =>
-    str &&
-    (str
-        .replace(/-/g, ' ')
-        .replace(/oe/g, 'ö')
-        .replace(/ae/g, 'ä')
-        .replace(/ue/g, 'ü')
-        .toUpperCase() as LinkType['pathname']);
+    str && (str.replace(/-/g, ' ').replace(/oe/g, 'ö').replace(/ae/g, 'ä').replace(/ue/g, 'ü') as LinkType['pathname']);
 
 export const useBreadcrumbs = () => {
     const { asPath } = useRouter();
     const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbType[]>([]);
     useEffect(() => {
         if (asPath) {
-            const linkPath = asPath.split('/');
-            linkPath.shift();
+            const linkPath = asPath === '/' ? [asPath] : asPath.split('/');
 
             const pathArray = linkPath.map((title, i) => {
-                const pathname = convertBreadcrumb('/' + linkPath.slice(0, i + 1).join('/'));
+                let pathname = convertBreadcrumb('/' + linkPath.slice(0, i + 1).join('/'));
+
+                if (!title || title === '/') {
+                    title = 'home';
+                    pathname = '/';
+                }
                 const friendlyTitle = convertStringToFriendlyFormat({ path: title });
                 return { title: friendlyTitle, pathname };
             });
@@ -33,10 +31,6 @@ export const useBreadcrumbs = () => {
             setBreadcrumbs(pathArray);
         }
     }, [asPath]);
-
-    if (asPath !== '/') {
-        breadcrumbs.unshift({ pathname: '/', title: 'home' });
-    }
 
     return (
         <nav

@@ -5,6 +5,7 @@
     transition: all $transition-speed;
     white-space: nowrap;
     cursor: pointer;
+    padding: $default-padding $default-padding / 2;
     &.primary {
         color: $color-primary;
     }
@@ -42,19 +43,17 @@
         }
     }
     &:hover {
-        color: $color-highlight;
+        color: $color-secondary;
+        background-color: $color-highlight;
+        border-radius: $border-radius-s;
+        svg {
+            path {
+                fill: $color-secondary;
+            }
+        }
     }
     &:active {
         transform: translateY($active-size);
-    }
-}
-
-.link_list {
-    li {
-        display: flex;
-        &:not(:last-of-type) {
-            margin-bottom: $default-margin;
-        }
     }
 }
 

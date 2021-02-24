@@ -1,7 +1,9 @@
 import { Header, Link } from '../src/components/atoms';
 import { Page } from '../src/components/layout/page';
+import { PrimaryLayout } from '../src/components/layout/primary';
+import { withLayout } from '@moxy/next-layout';
 
-export default function FourOhFour() {
+const FourOhFour = () => {
     return (
         <Page>
             <div>
@@ -10,4 +12,6 @@ export default function FourOhFour() {
             </div>
         </Page>
     );
-}
+};
+
+export default withLayout(<PrimaryLayout />)(FourOhFour);

@@ -1,12 +1,10 @@
 import cn from 'classnames';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styles from '../../../../styles/organisms/navbar.module.scss';
-import { useStringNameFromUrl } from '../../../hooks/useUrl';
 import { modalToggleOpen } from '../../../redux/actions/modalActions';
 import { getModalOpenState } from '../../../redux/selectors/modalSelector';
-import { Button, Header, Text } from '../../atoms';
+import { Button, Text } from '../../atoms';
 import { NavbarMiddlePanel } from './navbarMiddlePanel';
 export const Navbar = () => {
     const dispatch = useDispatch();

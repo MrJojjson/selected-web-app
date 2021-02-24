@@ -17,6 +17,7 @@ export type TextType = {
     style?: fontSizeStyle;
     icon?: IconName;
     direction?: directionType;
+    onClick?: () => void;
 };
 
 export const Text = forwardRef(
@@ -33,6 +34,7 @@ export const Text = forwardRef(
             style,
             icon,
             direction = 'row',
+            onClick,
         }: TextType,
         ref,
     ) => {
@@ -49,6 +51,7 @@ export const Text = forwardRef(
                 }),
                 ref,
                 href,
+                onClick,
             },
             faIcon,
             children,
