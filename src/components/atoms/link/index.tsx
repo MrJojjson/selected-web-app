@@ -18,7 +18,7 @@ export type LinkType = Omit<LinkProps, 'href'> &
 
 export const Link = ({ pathname, hash, query, title, as, ...rest }: LinkType) => {
     return (
-        <NextLink href={{ pathname, hash, query }} as={as} passHref>
+        <NextLink href={{ pathname, hash, query }} as={as} passHref shallow>
             <Text className={styles.link} tag="a" oneLine={true} {...rest}>
                 {title}
             </Text>
@@ -44,7 +44,7 @@ export type ListType = {
 export const LinkList = ({ links = [], className }: ListType) => {
     const linkList = map(
         (props) => (
-            <li key={props.pathname}>
+            <li key={props.pathname + props.href}>
                 <Link {...props} />{' '}
             </li>
         ),

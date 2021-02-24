@@ -20,6 +20,8 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps, token }) {
+    console.log('Component', Component);
+
     return (
         <Provider store={store}>
             {/* <FakeAuthProvider> */}
