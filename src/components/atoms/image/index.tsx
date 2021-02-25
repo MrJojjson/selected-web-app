@@ -1,7 +1,7 @@
 import React from 'react';
 import { useProgressiveImg } from '../../../hooks/useProgressiveImg';
-import styles from '../../../../styles/atoms/image.module.scss';
-import NextImage from 'next/image';
+import './image.style.scss';
+import cn from 'classnames';
 
 export type ImageType = {
     src: string;
@@ -23,10 +23,15 @@ export const Image: React.FC<ImageType> = ({
     const { newSrc, blur } = useProgressiveImg({ lowQualitySrc: lowResSrc, highQualitySrc: src });
 
     return (
-        <figure
-            className={`${styles.image} ${blur ? styles.blur : styles.no_blur} ${styles.aspectRatio}  ${className}`}
-        >
-            <NextImage src={newSrc} layout="fill" objectFit="cover" {...rest} />
+        <figure className={cn('image', [aspectRatio], className)}>
+            <img
+                src={newSrc}
+                style={{ top: `${highlight}%`, transform: `translateY(-${highlight}%)` }}
+                className={cn([highlight], {
+                    blur: blur,
+                })}
+                {...rest}
+            />
         </figure>
     );
 };

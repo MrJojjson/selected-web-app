@@ -1,8 +1,0 @@
-@import '../common/metrics.scss';
-@import '../common/mixins/flex.scss';
-
-.content {
-    @include flex(flex-start, flex-start, row);
-    width: 100%;
-    height: calc(100vh - #{$navbar-height});
-}

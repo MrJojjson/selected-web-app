@@ -1,14 +1,23 @@
 import React, { ChangeEvent, useState } from 'react';
-import styles from '../../../../styles/atoms/hamburger.module.scss';
-import cn from 'classnames';
 import { map } from 'ramda';
-import { DropdownType } from '../../../types/dropdownTypes';
+
+export type DropdownType = {
+    options: DropdownOptionType[];
+    id: string;
+    label: string;
+    defaultValue?: string;
+    onOptionChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export type DropdownOptionType = {
+    label: string;
+    value: string;
+};
 
 export const Dropdown = ({ options, id, label, defaultValue, onOptionChange }: DropdownType) => {
     const [value, setValue] = useState<string>(defaultValue);
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        console.log('target.value', event.target.value);
         onOptionChange(event);
         setValue(event.target.value);
     };

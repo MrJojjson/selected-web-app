@@ -1,0 +1,36 @@
+@import '../../../common/sass/metrics.scss';
+@import '../../../common/sass/mixins/aspectRatio.scss';
+@import '../../../common/sass/mixins/flex.scss';
+
+.image {
+    overflow: hidden;
+    position: relative;
+    border-radius: $border-radius-xs;
+    margin: 0;
+
+    img {
+        @include aspect-ratio-child();
+        filter: none;
+        transition: filter $transition-speed ease-out;
+        &.blur {
+            filter: blur(10px);
+            transition: blur $transition-speed;
+        }
+    }
+
+    &.thirty-nine {
+        @include aspect-ratio(30/9);
+    }
+
+    &.twentyone-nine {
+        @include aspect-ratio(21/9);
+    }
+
+    &.sixteen-nine {
+        @include aspect-ratio(16/9);
+    }
+
+    &.three-two {
+        @include aspect-ratio(3/2);
+    }
+}

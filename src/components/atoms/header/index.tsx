@@ -1,6 +1,6 @@
 import React from 'react';
 import { fontSizeType, headerTag, themeType } from '../../../types';
-import styles from '../../../../styles/atoms/header.module.scss';
+import './header.style.scss';
 import cn from 'classnames';
 
 export type HeaderType = {
@@ -24,8 +24,8 @@ export const Header = ({
     return React.createElement(
         tag,
         {
-            className: cn(styles[tag], styles[theme], styles[fontSize], className, {
-                [styles.line]: oneLine === true,
+            className: cn([tag], [theme], [fontSize], className, {
+                line: oneLine,
             }),
             ...rest,
         },

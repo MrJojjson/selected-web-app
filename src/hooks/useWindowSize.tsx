@@ -34,6 +34,5 @@ export const useWindowSize = (): UseWindowSizeReturn => {
     const mobile = windowSize.width <= 768;
     const tablet = windowSize.width > 768 && windowSize.width <= 1080;
     const desktop = windowSize.width > 1080;
-
     return { windowSize, mobile, tablet, desktop };
 };

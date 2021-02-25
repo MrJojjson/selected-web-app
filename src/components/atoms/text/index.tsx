@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import React, { forwardRef } from 'react';
-import styles from '../../../../styles/atoms/text.module.scss';
+import './text.style.scss';
 import { directionType, fontSizeStyle, fontSizeType, textTag, themeType } from '../../../types';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,16 +38,16 @@ export const Text = forwardRef(
         }: TextType,
         ref,
     ) => {
-        const faIcon = icon && <FontAwesomeIcon className={styles.icon} icon={['fas', icon]} />;
+        const faIcon = icon && <FontAwesomeIcon className={'icon'} icon={['fas', icon]} />;
 
         const text = React.createElement(
             tag,
             {
-                className: cn(styles.text, styles[tag], styles[theme], styles[fontSize], className, {
-                    [styles.line]: oneLine === true,
-                    [styles.underline]: hyper,
-                    [styles[style]]: style,
-                    [styles[direction]]: !!icon && !!children,
+                className: cn('text', [tag], [theme], [fontSize], className, {
+                    line: oneLine === true,
+                    underline: hyper,
+                    [style]: style,
+                    [direction]: !!icon && !!children,
                 }),
                 ref,
                 href,

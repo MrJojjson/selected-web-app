@@ -1,0 +1,87 @@
+@import '../../../common/sass/colors.scss';
+@import '../../../common/sass/metrics.scss';
+@import '../../../common/sass/mixins/flex.scss';
+
+$input-height: $height-m;
+$label-padding: 1px $spacing-s;
+
+$label-shown-pos: ($height-s / 3);
+$error-shown-pos: ($height-s / 4);
+
+$input-border: 1px solid $color-primary-border;
+
+.input_wrapper {
+    @include flex(flex-start, center, column);
+    position: relative;
+    transition: all $transition-speed;
+
+    input {
+        border-radius: $border-radius-s;
+        padding: $spacing-none $spacing-s;
+        height: $input-height;
+        transition: all $transition-speed;
+        border: $input-border;
+        box-sizing: border-box;
+        min-width: 20vw;
+        width: 100%;
+        font-size: $font-size-m;
+        &:hover {
+            border-radius: $border-radius-xs;
+        }
+        &:focus {
+            border-radius: $border-radius-xs;
+        }
+
+        &:not(:placeholder-shown) + label {
+            transition: all $transition-speed;
+            position: absolute;
+            top: -$label-shown-pos;
+            background-color: $color-primary-background;
+            border: $input-border;
+            opacity: 1;
+        }
+    }
+
+    label,
+    .error {
+        border-radius: $border-radius-s;
+        padding: $label-padding;
+        border: none;
+        transition: all $transition-speed;
+        position: absolute;
+        opacity: 0;
+        font-size: $font-size-s;
+        background-color: $color-error;
+    }
+
+    label {
+        top: 0;
+        left: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .error {
+        right: 0;
+        bottom: 0;
+        border-top-right-radius: 0;
+        transition: all $transition-speed;
+    }
+
+    .error_show {
+        transition: all $transition-speed;
+        bottom: -$error-shown-pos;
+        opacity: 1;
+    }
+
+    &.primary {
+        color: $color-primary;
+        background-color: $color-primary-background;
+        border: 1px solid $color-primary-border;
+    }
+
+    &.secondary {
+        color: $color-secondary;
+        background-color: $color-secondary-background;
+        border: 1px solid $color-secondary-border;
+    }
+}

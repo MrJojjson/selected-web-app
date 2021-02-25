@@ -1,8 +1,6 @@
 import cn from 'classnames';
-import document from 'global/document';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styles from '../../../../styles/molecules/modal.module.scss';
 import { Portal } from '../../../hooks/usePortal';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { modalToggleOpen } from '../../../redux/actions/modalActions';
@@ -10,8 +8,7 @@ import { getAuthLoggedInState } from '../../../redux/selectors/authSelectors';
 import { getModalContentTypeState, getModalOpenState } from '../../../redux/selectors/modalSelector';
 import { ModalStateContentType } from '../../../redux/types/modalTypes';
 import { Hamburger } from '../../atoms/hamburger';
-
-const MODAL_ID = 'modal_content';
+import './modal.style.scss';
 
 export type ModalType = {
     content: JSX.Element;
@@ -23,15 +20,13 @@ export const setModal = ({ content, id, fromId }: ModalType) => {
     const open = getModalOpenState();
     const contentType = getModalContentTypeState();
     if (fromId !== contentType) return null;
-    if (process.browser) {
-        const modalRoot = document.getElementById(id);
-        if (!open) {
-            return <Portal target={modalRoot}></Portal>;
-        }
-        modalRoot.classList.add('new');
-
-        return <Portal target={modalRoot}>{content}</Portal>;
+    const modalRoot = document.getElementById(id);
+    if (!open) {
+        return <Portal target={modalRoot}></Portal>;
     }
+    modalRoot.classList.add('new');
+
+    return <Portal target={modalRoot}>{content}</Portal>;
 };
 
 const setModalFocus = (inputs: HTMLInputElement[]) => {
@@ -73,20 +68,18 @@ export const ModalBase = () => {
         <div
             id="modal"
             style={{ width: `${width + 80}px` }}
-            className={cn(styles.modal, {
-                [styles.active]: open,
+            className={cn('modal', {
+                active: open,
             })}
         >
             <Hamburger
-                className={cn(styles.header_close, {
-                    [styles.header_close__hide]: contentType === 'menu',
+                className={cn('header_close', {
+                    header_close__hide: contentType === 'menu',
                 })}
                 open={open}
-                onClick={() =>
-                    process.browser && dispatch(modalToggleOpen({ override: false, contentType: 'undefined' }))
-                }
+                onClick={() => dispatch(modalToggleOpen({ override: false, contentType: 'undefined' }))}
             />
-            <div id={MODAL_ID} ref={modalContentRef} className={styles.modal_content}></div>
+            <div id="modal_content" ref={modalContentRef} className="modal_content"></div>
         </div>
     );
 };

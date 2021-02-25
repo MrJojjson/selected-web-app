@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { toTypes } from '../types';
 
 export type OnUsePushType = {
@@ -6,7 +5,8 @@ export type OnUsePushType = {
 };
 
 export const useRouterPush = () => {
-    const router = useRouter();
-    const onUsePush = ({ to }: OnUsePushType) => router.push(to);
-    return { onUsePush };
+    // const router = useRouter();
+    // const onUsePush = ({ to }: OnUsePushType) => router.push(to);
+    // return { onUsePush };
+    return null;
 };

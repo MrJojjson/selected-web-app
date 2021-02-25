@@ -1,0 +1,84 @@
+@import '../../../common/sass/colors.scss';
+@import '../../../common/sass/metrics.scss';
+@import '../../../common/sass/mixins/flex.scss';
+
+$icon-flex: $spacing-xs;
+
+.text {
+    @include flex(center, flex-start, row);
+
+    width: auto;
+    padding: $spacing-none;
+    margin: $spacing-none;
+    word-break: break-word;
+    &.line {
+        white-space: nowrap;
+    }
+
+    &.s {
+        font-size: $font-size-s;
+    }
+
+    &.m {
+        font-size: $font-size-m;
+    }
+
+    &.l {
+        font-size: $font-size-l;
+    }
+
+    &.xl {
+        font-size: $font-size-xl;
+    }
+    &.primary {
+        color: $color-primary;
+    }
+
+    &.secondary {
+        color: $color-secondary;
+    }
+
+    &.highlight {
+        color: $color-highlight;
+    }
+
+    &.underline {
+        text-decoration: underline;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
+
+    .icon {
+        font-size: $font-size-l;
+        path {
+            fill: $color-icon;
+        }
+    }
+
+    &.row {
+        flex-direction: row;
+        .icon {
+            margin-right: $icon-flex;
+        }
+    }
+    &.column {
+        flex-direction: column;
+        .icon {
+            margin-top: $icon-flex;
+        }
+    }
+    &.row-reverse {
+        flex-direction: row-reverse;
+        .icon {
+            margin-left: $icon-flex;
+        }
+    }
+    &.column-reverse {
+        flex-direction: column-reverse;
+        .icon {
+            margin-bottom: $icon-flex;
+        }
+    }
+}

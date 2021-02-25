@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 type UseStringNameFromUrlType = {
@@ -6,21 +5,21 @@ type UseStringNameFromUrlType = {
 };
 
 export const useStringNameFromUrl = ({ path }: UseStringNameFromUrlType) => {
-    const { asPath } = useRouter();
+    // const { asPath } = useRouter();
     const [nameFromUrl, setNameFromUrl] = useState<string>();
-    useEffect(() => {
-        const stirngToUse = path || asPath;
-        const linkPath = stirngToUse.split('/');
-        linkPath.shift();
-        linkPath.length > 1 && linkPath.reverse().pop();
+    // useEffect(() => {
+    //     const stirngToUse = path || asPath;
+    //     const linkPath = stirngToUse.split('/');
+    //     linkPath.shift();
+    //     linkPath.length > 1 && linkPath.reverse().pop();
 
-        const name = linkPath
-            .toString()
-            .split(/\s*\-\s*/g)
-            .join(' ');
+    //     const name = linkPath
+    //         .toString()
+    //         .split(/\s*\-\s*/g)
+    //         .join(' ');
 
-        setNameFromUrl(name || 'Home');
-    }, [asPath, path]);
+    //     setNameFromUrl(name || 'Home');
+    // }, [asPath, path]);
     return nameFromUrl;
 };
 

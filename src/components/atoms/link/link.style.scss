@@ -1,0 +1,40 @@
+@import '../../../common/sass/colors.scss';
+@import '../../../common/sass/metrics.scss';
+@mixin styleLink() {
+    color: $color-secondary;
+    background-color: $color-highlight;
+    border-radius: $border-radius-s;
+    svg {
+        path {
+            fill: $color-secondary;
+        }
+    }
+}
+.link {
+    transition: all $transition-speed;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: $default-padding $default-padding / 2;
+
+    &:hover {
+        @include styleLink();
+    }
+    &:active {
+        transform: translateY($active-size);
+    }
+}
+
+.active {
+    pointer-events: none;
+    cursor: default;
+    .link {
+        @include styleLink();
+    }
+}
+
+.fake_link {
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}

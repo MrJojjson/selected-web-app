@@ -9,6 +9,3 @@ export const getAuthLoggedInState = () =>
     useSelector(({ auth }: IStoreState): AuthStateType['loggedIn'] => auth.loggedIn);
 
 export const getAuthTokenState = () => useSelector(({ auth }: IStoreState): AuthStateType['token'] => auth.token);
-
-export const getModalContentTypeState = () =>
-    useSelector(({ modal }: IStoreState): ModalState['contentType'] => modal.contentType);

@@ -1,29 +1,18 @@
-import cn from 'classnames';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import styles from '../../../../styles/organisms/navbar.module.scss';
-import { modalToggleOpen } from '../../../redux/actions/modalActions';
-import { getModalOpenState } from '../../../redux/selectors/modalSelector';
-import { Button, Text } from '../../atoms';
+import { Text } from '../../atoms';
+import './navbar.style.scss';
 import { NavbarMiddlePanel } from './navbarMiddlePanel';
+
 export const Navbar = () => {
-    const dispatch = useDispatch();
-    const modalOpen = getModalOpenState();
     return (
-        <header className={cn(styles.header)}>
-            <div className={styles.system}>
+        <header className="header">
+            <div className="system">
                 <Text theme="secondary">System quick access?</Text>
             </div>
 
             <NavbarMiddlePanel />
-            <div className={styles.auth}>
+            <div className="auth">
                 <Text theme="secondary">Auth?</Text>
-                <Button
-                    direction="row-reverse"
-                    mini
-                    icon={modalOpen ? 'window-minimize' : 'window-maximize'}
-                    onClick={() => dispatch(modalToggleOpen({ contentType: 'menu' }))}
-                />
             </div>
         </header>
     );

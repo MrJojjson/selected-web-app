@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../../styles/organisms/palette.module.scss';
+import './palette.style.scss';
 import { LinkList, LinkType } from '../../atoms';
 
 const links: LinkType[] = [
@@ -10,14 +10,14 @@ const links: LinkType[] = [
     },
     {
         title: 'Graph',
-        pathname: '/graphs',
+        pathname: '/graph',
         icon: 'chart-bar',
     },
 ];
 
 export const PaletteTopPanel = () => {
     return (
-        <div className={styles.top}>
+        <div className="top">
             <LinkList links={links} />
         </div>
     );

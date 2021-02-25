@@ -1,35 +1,32 @@
-import { ReactPortal, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import styles from '../../../../styles/molecules/alert.module.scss';
-import { Button } from '../../atoms';
-
-const ID = 'alert';
+import cn from 'classnames';
+import React, { useRef } from 'react';
+import { Portal } from '../../../hooks/usePortal';
+import { getAlertOpenState } from '../../../redux/selectors/alertSelector';
+import './alert.style.scss';
 
 export type AlertType = {
     content: JSX.Element;
+    id: 'alert_content';
 };
 
-export const Alert = ({ content }: AlertType) => {
-    const [alert, setAlert] = useState<ReactPortal>(null);
-
-    useEffect(() => {
-        if (process.browser) {
-            const alertRoot = document.getElementById(ID);
-            alertRoot && setAlert(createPortal(content, alertRoot));
-        }
-    }, [process.browser, content]);
-
-    return alert;
+export const setAlert = ({ content, id }: AlertType) => {
+    const open = getAlertOpenState();
+    const alertRoot = document.getElementById(id);
+    return <Portal target={alertRoot}>{content}</Portal>;
 };
 
 export const AlertBase = () => {
+    const open = getAlertOpenState();
+    const alertContentRef = useRef<any | null>(null);
+
     return (
-        <div id={ID} className={styles.alert}>
-            <Button
-                label="Close"
-                onClick={() => process.browser && document.getElementById(ID).classList.remove(styles.active)}
-                className={styles.header}
-            />
+        <div
+            id="alert"
+            className={cn('alert', {
+                active: open,
+            })}
+        >
+            <div id="alert_content" ref={alertContentRef} className="alert_content"></div>
         </div>
     );
 };

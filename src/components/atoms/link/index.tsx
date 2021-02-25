@@ -1,35 +1,44 @@
-import NextLink, { LinkProps } from 'next/link';
+import { Link as ReachLink } from '@reach/router';
 import { map } from 'ramda';
 import React from 'react';
-import styles from '../../../../styles/atoms/link.module.scss';
+import './link.style.scss';
 import { toTypes } from '../../../types/linkTypes';
 import { Text, TextType } from '../text';
 import cn from 'classnames';
 
-export type LinkType = Omit<LinkProps, 'href'> &
-    Omit<TextType, 'children'> & {
-        pathname: toTypes;
-        hash?: string;
-        query?: string;
-        title?: string;
-        href?: string;
-        onClick?: () => void;
-    };
+export type LinkType = Omit<TextType, 'children'> & {
+    pathname: toTypes;
+    hash?: string;
+    query?: string;
+    title?: string;
+    href?: string;
+    onClick?: () => void;
+};
 
-export const Link = ({ pathname, hash, query, title, as, ...rest }: LinkType) => {
+const isActive = ({ isCurrent }) => {
+    return isCurrent ? { className: 'active' } : {};
+};
+
+export const Link = ({ pathname, hash, query, title, ...rest }: LinkType) => {
+    let to = pathname;
+    if (query) {
+        pathname += `?${query}`;
+    } else if (hash) {
+        pathname += `#${hash}`;
+    }
     return (
-        <NextLink href={{ pathname, hash, query }} passHref>
-            <Text className={styles.link} tag="a" oneLine={true} {...rest}>
+        <ReachLink to={to} getProps={isActive}>
+            <Text className="link" tag="span" oneLine={true} {...rest}>
                 {title}
             </Text>
-        </NextLink>
+        </ReachLink>
     );
 };
 
 export const FakeLink = ({ title, onClick }: Pick<LinkType, 'title' | 'onClick'>) => {
     return (
-        <button className={styles.fake_link} onClick={() => onClick && onClick()}>
-            <Text className={styles.link} tag="p" oneLine={true}>
+        <button className="fake_link" onClick={() => onClick && onClick()}>
+            <Text className="link" tag="p" oneLine={true}>
                 {title}
             </Text>
         </button>
@@ -50,5 +59,5 @@ export const LinkList = ({ links = [], className }: ListType) => {
         ),
         links,
     );
-    return <ul className={cn(styles.link_list, className)}>{linkList}</ul>;
+    return <ul className={cn('link_list', className)}>{linkList}</ul>;
 };
