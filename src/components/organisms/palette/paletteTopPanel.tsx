@@ -1,17 +1,27 @@
 import React from 'react';
-import './palette.style.scss';
 import { LinkList, LinkType } from '../../atoms';
+import './palette.style.scss';
 
 const links: LinkType[] = [
     {
-        title: 'Dashboard',
+        title: 'Dasboard',
         pathname: '/dashboard',
-        icon: 'tachometer-alt',
+        icon: 'columns',
     },
     {
-        title: 'Graph',
-        pathname: '/graph',
-        icon: 'chart-bar',
+        title: 'Purchases',
+        pathname: '/puchases',
+        icon: 'money-bill',
+    },
+    {
+        title: 'Casks',
+        pathname: '/casks',
+        icon: 'pallet',
+    },
+    {
+        title: 'Liquor',
+        pathname: '/liqour',
+        icon: 'flask',
     },
 ];
 

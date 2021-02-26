@@ -16,10 +16,10 @@ export type LinkType = Omit<TextType, 'children'> & {
 };
 
 const isActive = ({ isCurrent }) => {
-    return isCurrent ? { className: 'active' } : {};
+    return isCurrent ? { className: `active` } : {};
 };
 
-export const Link = ({ pathname, hash, query, title, ...rest }: LinkType) => {
+export const Link = ({ pathname, hash, query, title, className, ...rest }: LinkType) => {
     let to = pathname;
     if (query) {
         pathname += `?${query}`;
@@ -28,7 +28,7 @@ export const Link = ({ pathname, hash, query, title, ...rest }: LinkType) => {
     }
     return (
         <ReachLink to={to} getProps={isActive}>
-            <Text className="link" tag="span" oneLine={true} {...rest}>
+            <Text className="link" theme="secondary" tag="span" oneLine={true} {...rest}>
                 {title}
             </Text>
         </ReachLink>
@@ -48,16 +48,25 @@ export const FakeLink = ({ title, onClick }: Pick<LinkType, 'title' | 'onClick'>
 export type ListType = {
     links: LinkType[];
     className?: string;
+    mini?: boolean;
 };
 
-export const LinkList = ({ links = [], className }: ListType) => {
+export const LinkList = ({ links = [], className, mini }: ListType) => {
     const linkList = map(
         (props) => (
             <li key={props.pathname}>
-                <Link {...props} />
+                <Link direction="column" {...props} />
             </li>
         ),
         links,
     );
-    return <ul className={cn('link_list', className)}>{linkList}</ul>;
+    return (
+        <ul
+            className={cn('link_list', className, {
+                mini: mini,
+            })}
+        >
+            {linkList}
+        </ul>
+    );
 };

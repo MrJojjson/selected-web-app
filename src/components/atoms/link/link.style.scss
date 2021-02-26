@@ -3,7 +3,6 @@
 @mixin styleLink() {
     color: $color-secondary;
     background-color: $color-highlight;
-    border-radius: $border-radius-s;
     svg {
         path {
             fill: $color-secondary;
@@ -14,7 +13,6 @@
     transition: all $transition-speed;
     white-space: nowrap;
     cursor: pointer;
-    padding: $default-padding $default-padding / 2;
 
     &:hover {
         @include styleLink();
@@ -25,10 +23,12 @@
 }
 
 .active {
+    transition: all $transition-speed;
     pointer-events: none;
     cursor: default;
     .link {
         @include styleLink();
+        font-weight: $font-weight-bold;
     }
 }
 
@@ -37,4 +37,17 @@
     background: transparent;
     margin: 0;
     padding: 0;
+}
+
+.link_list {
+    width: 100%;
+    li .text {
+        border-bottom: 1px solid $color-divider;
+        padding: $default-padding * 1.5 0;
+    }
+    &.mini {
+        li .text {
+            padding: $default-padding 0;
+        }
+    }
 }

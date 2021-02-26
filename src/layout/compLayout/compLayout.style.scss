@@ -1,0 +1,14 @@
+@import '../../common/sass/colors.scss';
+@import '../../common/sass/metrics.scss';
+@import '../../common/sass/mixins/flex.scss';
+
+.comp_layout {
+    @include flex(flex-start, flex-start, column);
+    width: auto;
+    height: auto;
+    margin: $default-margin;
+    padding: $default-padding;
+    box-sizing: border-box;
+    border-radius: $default-border-radius;
+    background-color: $color-white;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../components/atoms';
 
-export const Graph = () => {
-    return <Text>Graph</Text>;
+export const Liquor = () => {
+    return <Text>Liquor</Text>;
 };

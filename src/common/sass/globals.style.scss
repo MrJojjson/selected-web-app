@@ -1,4 +1,6 @@
 @import './metrics.scss';
+@import './colors.scss';
+
 @import './mixins/flex.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
@@ -29,7 +31,7 @@ h4 {
 html,
 body,
 #root {
-    @include flex(flex-start, flex-start, column);
+    @include flex(flex-start, flex-start, row);
 
     margin: 0;
     padding: 0;
@@ -37,15 +39,15 @@ body,
     height: 100%;
     width: 100%;
     .content {
-        @include flex(flex-start, flex-start, row);
+        @include flex(flex-start, flex-start, column);
         width: 100%;
-        height: calc(100vh - #{$navbar-height});
+        flex: 1;
+        height: 100%;
+        background-color: $color-secondary;
         .router {
             position: relative;
-            @include flex(center, center, column);
-            height: 100%;
             width: 100%;
-            flex: $default-flex;
+            height: calc(100vh - #{$navbar-height});
         }
     }
 }

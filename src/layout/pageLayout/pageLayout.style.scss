@@ -1,0 +1,13 @@
+@import '../../common/sass/colors.scss';
+@import '../../common/sass/metrics.scss';
+@import '../../common/sass/mixins/flex.scss';
+
+.page_layout {
+    @include flex(flex-start, flex-start, row);
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    padding: $default-padding;
+    box-sizing: border-box;
+    border-radius: $default-border-radius;
+}

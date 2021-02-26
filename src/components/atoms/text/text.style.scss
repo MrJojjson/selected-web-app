@@ -3,7 +3,6 @@
 @import '../../../common/sass/mixins/flex.scss';
 
 $icon-flex: $spacing-xs;
-
 .text {
     @include flex(center, flex-start, row);
 
@@ -11,6 +10,14 @@ $icon-flex: $spacing-xs;
     padding: $spacing-none;
     margin: $spacing-none;
     word-break: break-word;
+
+    .icon {
+        font-size: $font-size-l;
+        path {
+            fill: $color-icon;
+        }
+    }
+
     &.line {
         white-space: nowrap;
     }
@@ -32,14 +39,29 @@ $icon-flex: $spacing-xs;
     }
     &.primary {
         color: $color-primary;
+        .icon {
+            path {
+                fill: $color-primary;
+            }
+        }
     }
 
     &.secondary {
         color: $color-secondary;
+        .icon {
+            path {
+                fill: $color-secondary;
+            }
+        }
     }
 
     &.highlight {
         color: $color-highlight;
+        .icon {
+            path {
+                fill: $color-highlight;
+            }
+        }
     }
 
     &.underline {
@@ -48,13 +70,6 @@ $icon-flex: $spacing-xs;
 
     &.italic {
         font-style: italic;
-    }
-
-    .icon {
-        font-size: $font-size-l;
-        path {
-            fill: $color-icon;
-        }
     }
 
     &.row {
@@ -66,7 +81,7 @@ $icon-flex: $spacing-xs;
     &.column {
         flex-direction: column;
         .icon {
-            margin-top: $icon-flex;
+            margin-bottom: $icon-flex;
         }
     }
     &.row-reverse {
@@ -78,7 +93,7 @@ $icon-flex: $spacing-xs;
     &.column-reverse {
         flex-direction: column-reverse;
         .icon {
-            margin-bottom: $icon-flex;
+            margin-top: $icon-flex;
         }
     }
 }

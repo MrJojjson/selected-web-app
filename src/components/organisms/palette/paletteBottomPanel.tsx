@@ -1,14 +1,24 @@
 import React from 'react';
-import { Button, Text } from '../../atoms';
-import { navigate } from '@reach/router';
-
+import { LinkList, LinkType } from '../../atoms';
 import './palette.style.scss';
+
+const links: LinkType[] = [
+    {
+        title: 'Profile',
+        pathname: '/profile',
+        icon: 'user',
+    },
+    {
+        title: 'Settings',
+        pathname: '/settings',
+        icon: 'cog',
+    },
+];
 
 export const PaletteBottomPanel = () => {
     return (
-        <div id="palette_bottom_panel" className="bottom">
-            <Button className="btn_settings" icon="cogs" label="Settings" onClick={() => navigate('/settings')} />
-            {/* <Text fontSize="s" theme="secondary">{`Version: ${env.REACT_APP_VERSION}`}</Text> */}
+        <div className="bottom">
+            <LinkList links={links} mini />
         </div>
     );
 };
