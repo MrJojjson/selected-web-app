@@ -1,13 +1,15 @@
 import React from 'react';
-import { Text } from '../components/atoms';
+import { ExistingItem } from '../components/molecules/bars/existingItem';
+import { NewItem } from '../components/molecules/bars/newItem';
+import { PurchaseSpot } from '../components/molecules/spot/purchase';
 import { PageLayout } from '../layout/pageLayout';
 
 export const Purchases = () => {
     return (
         <PageLayout>
-            <Text key="1">Purchases</Text>
-            <Text key="2">Purchases</Text>
-            <Text key="3">Purchases</Text>
+            <NewItem />
+            <ExistingItem />
+            <PurchaseSpot />
         </PageLayout>
     );
 };

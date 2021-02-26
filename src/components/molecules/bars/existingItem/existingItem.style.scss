@@ -1,0 +1,6 @@
+@import '../../../../common//sass/mixins/flex.scss';
+
+.existing_item {
+    @include flex(center, flex-end, row);
+    width: 100%;
+}

@@ -1,0 +1,17 @@
+@import '../../../../common/sass/metrics.scss';
+@import '../../../../common/sass/colors.scss';
+
+.table_spot {
+    display: grid;
+    width: 100%;
+    .table_headings,
+    .table_content {
+        display: grid;
+    }
+    .table_headings {
+        padding: $default-padding;
+    }
+    .table_content {
+        padding: 0 $default-padding;
+    }
+}
