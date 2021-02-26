@@ -1,0 +1,43 @@
+@import '../../common/sass/colors.scss';
+@import '../../common/sass/metrics.scss';
+@import '../../common/sass/mixins/flex.scss';
+
+.bar_layout {
+    @include flex(flex-start, flex-start, column);
+    width: 100%;
+    height: auto;
+    transition: all 5s;
+    .bar {
+        width: 100%;
+        @include flex(center, space-between, row);
+        .left {
+            @include flex(center, flex-start, row);
+            width: 100%;
+            margin-right: $default-margin;
+            button {
+                width: 100%;
+                &:not(:last-of-type) {
+                    margin-right: $default-margin;
+                }
+            }
+        }
+        .right {
+            margin-left: $default-margin;
+        }
+    }
+
+    .bar_content {
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        transition: all $transition-speed;
+        opacity: 0;
+    }
+
+    &.open {
+        .bar_content {
+            padding: $default-padding 0;
+            opacity: 1;
+        }
+    }
+}

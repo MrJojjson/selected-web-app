@@ -9,9 +9,9 @@
         display: grid;
     }
     .table_headings {
-        padding: $default-padding;
+        height: $height-m;
     }
     .table_content {
-        padding: 0 $default-padding;
+        height: $height-m;
     }
 }

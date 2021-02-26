@@ -2,7 +2,7 @@
 @import '../../../common/sass/metrics.scss';
 @import '../../../common/sass/mixins/flex.scss';
 
-$input-height: $height-m;
+$input-height: $height-s;
 $label-padding: 1px $spacing-s;
 
 $label-shown-pos: ($height-s / 3);
@@ -22,8 +22,7 @@ $input-border: 1px solid $color-primary-border;
         transition: all $transition-speed;
         border: $input-border;
         box-sizing: border-box;
-        min-width: 20vw;
-        width: 100%;
+        min-width: 15vw;
         font-size: $font-size-m;
         &:hover {
             border-radius: $border-radius-xs;

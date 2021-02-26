@@ -37,9 +37,10 @@ $icon-flex: $spacing-xs;
     &.xl {
         font-size: $font-size-xl;
     }
+
     &.primary {
         color: $color-primary;
-        .icon {
+        svg {
             path {
                 fill: $color-primary;
             }
@@ -48,7 +49,7 @@ $icon-flex: $spacing-xs;
 
     &.secondary {
         color: $color-secondary;
-        .icon {
+        svg {
             path {
                 fill: $color-secondary;
             }
@@ -57,7 +58,7 @@ $icon-flex: $spacing-xs;
 
     &.highlight {
         color: $color-highlight;
-        .icon {
+        svg {
             path {
                 fill: $color-highlight;
             }
@@ -74,19 +75,19 @@ $icon-flex: $spacing-xs;
 
     &.row {
         flex-direction: row;
-        .icon {
+        svg {
             margin-right: $icon-flex;
         }
     }
     &.column {
         flex-direction: column;
-        .icon {
+        svg {
             margin-bottom: $icon-flex;
         }
     }
     &.row-reverse {
         flex-direction: row-reverse;
-        .icon {
+        svg {
             margin-left: $icon-flex;
         }
     }

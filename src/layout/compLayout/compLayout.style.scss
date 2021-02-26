@@ -7,7 +7,7 @@
     width: 100%;
     height: auto;
     margin: $default-margin;
-    padding: $default-padding;
+    padding: $default-padding $default-padding * 2;
     box-sizing: border-box;
     border-radius: $default-border-radius;
     background-color: $color-white;

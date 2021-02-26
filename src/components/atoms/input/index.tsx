@@ -28,7 +28,7 @@ export const Input = ({ onChange, onBlur, label, theme, error = '', ...rest }: I
                 {...rest}
             />
             <label htmlFor={rest.id}>{label}</label>
-            <Text theme="secondary" className={cn('error', 'error_show', 'error_hide')}>
+            <Text theme="secondary" className={cn('error', { error_show: error !== '' })}>
                 {error}
             </Text>
         </div>
