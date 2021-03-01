@@ -18,8 +18,6 @@ const returnHeadings = (headings: TableSpotType['headings']) =>
     );
 
 export const TableSpot = ({ headings }: TableSpotType) => {
-    console.log('headings', headings);
-
     return (
         <div className="table_spot">
             <div className="table_headings" style={{ gridTemplateColumns: `repeat(${headings.length}, auto)` }}>

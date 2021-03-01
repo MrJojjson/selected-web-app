@@ -1,11 +1,11 @@
-import { curryN } from 'ramda';
-import React, { useEffect, useRef, useState } from 'react';
-import './barLayout.style.scss';
 import cn from 'classnames';
+import React, { useEffect, useRef, useState } from 'react';
+import { Bar } from './bar';
+import './barLayout.style.scss';
 
-type BarLayoutType = {
-    left: JSX.Element;
-    right: JSX.Element;
+export type BarLayoutType = {
+    left?: JSX.Element;
+    right?: JSX.Element;
     children?: JSX.Element | JSX.Element[];
     open?: boolean;
 };
@@ -29,10 +29,7 @@ export const BarLayout = ({ left, right, children, open }: BarLayoutType) => {
                 open,
             })}
         >
-            <div className="bar">
-                <div className="left">{left}</div>
-                <div className="right">{right}</div>
-            </div>
+            <Bar left={left} right={right} />
             <div ref={barContentRef} className="bar_content" style={{ height }}>
                 {children}
             </div>

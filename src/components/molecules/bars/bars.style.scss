@@ -14,27 +14,32 @@
     }
 }
 
-.new_item_form {
+.incoming_item_form {
     @include flex(flex-start, flex-start, column);
-    .bars_new_item {
-        @include flex(flex-start, flex-start, column);
+    .bars_incoming_item {
         width: 100%;
-        .bars_new_item_content {
-            @include flex(center, space-between, row);
+        .bars_incoming_item_content {
             flex-wrap: wrap;
             width: 100%;
-            margin: $default-margin 0;
-
-            input {
-                margin: 0 0 $default-margin 0;
+            margin-bottom: $default-margin;
+            .bars_incoming_item_description {
+                @include flex(center, flex-start, row);
+                flex-wrap: wrap;
+                width: 100%;
+                margin-bottom: $default-margin;
+                .bars_incoming_item_title {
+                    margin-left: $default-margin;
+                }
             }
-        }
-    }
-    button {
-        &:last-of-type {
-            align-self: flex-end;
-            margin-right: 5px;
-            min-width: 20vw;
+            .bars_incoming_item_list {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                row-gap: $default-padding;
+                column-gap: $default-padding;
+            }
         }
     }
 }

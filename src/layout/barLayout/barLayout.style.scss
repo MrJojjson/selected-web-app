@@ -6,37 +6,41 @@
     @include flex(flex-start, flex-start, column);
     width: 100%;
     height: auto;
-    transition: all 5s;
+    transition: all $transition-speed;
     .bar {
         width: 100%;
         @include flex(center, space-between, row);
+        margin-bottom: $default-margin;
         .left {
             @include flex(center, flex-start, row);
             width: 100%;
             margin-right: $default-margin;
             button {
-                width: 100%;
+                // width: 100%;
+                &:not(:last-of-type) {
+                    margin-right: $default-margin;
+                }
+            }
+            .dropdown {
+                margin-top: $default-margin;
                 &:not(:last-of-type) {
                     margin-right: $default-margin;
                 }
             }
         }
-        .right {
-            margin-left: $default-margin;
-        }
     }
 
     .bar_content {
         width: 100%;
-        padding: 0;
-        overflow: hidden;
+        padding: 0 $default-padding / 2;
+        overflow-y: hidden;
         transition: all $transition-speed;
         opacity: 0;
+        box-sizing: content-box;
     }
 
     &.open {
         .bar_content {
-            padding: $default-padding 0;
             opacity: 1;
         }
     }

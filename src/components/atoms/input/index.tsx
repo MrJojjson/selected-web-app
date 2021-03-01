@@ -17,11 +17,12 @@ export type InputType = {
     autoComplete?: inputAutoCompleteTypes;
     required?: boolean;
     defaultValue?: string;
+    className?: string;
 };
 
-export const Input = ({ onChange, onBlur, label, theme, error = '', ...rest }: InputType) => {
+export const Input = ({ onChange, onBlur, label, theme, error = '', className, ...rest }: InputType) => {
     return (
-        <div className={'input_wrapper'}>
+        <div className={cn('input_wrapper', className)}>
             <input
                 onChange={(event) => onChange && onChange(event)}
                 onBlur={(event) => onBlur && onBlur(event)}

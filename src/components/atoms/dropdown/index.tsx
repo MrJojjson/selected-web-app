@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { map } from 'ramda';
+import './dropdown.style.scss';
 
 export type DropdownType = {
     options: DropdownOptionType[];
@@ -23,9 +24,8 @@ export const Dropdown = ({ options, id, label, defaultValue, onOptionChange }: D
     };
 
     return (
-        <>
+        <span className="dropdown">
             <label htmlFor={id}>{label}</label>
-
             <select name={id} id={id} value={value} onChange={handleChange}>
                 {map(({ value, label }) => {
                     return (
@@ -35,6 +35,6 @@ export const Dropdown = ({ options, id, label, defaultValue, onOptionChange }: D
                     );
                 }, options)}
             </select>
-        </>
+        </span>
     );
 };

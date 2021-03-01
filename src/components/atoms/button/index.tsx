@@ -29,7 +29,7 @@ export const Button = ({
             })}
             {...rest}
         >
-            <Text tag="span" direction={direction} oneLine icon={icon} fontSize="s" className={'text'}>
+            <Text tag="span" direction={direction} oneLine icon={icon} className={'text'}>
                 {label}
             </Text>
         </button>
