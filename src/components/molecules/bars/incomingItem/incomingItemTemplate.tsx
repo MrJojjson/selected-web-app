@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { puchaseIncomingData, puchaseIncomingSelected } from '../../../../redux';
 import { getPurchaseIncomingSelectedState } from '../../../../redux/selectors/purchaseSelector';
-import { inputType } from '../../../../types';
+import { inputType } from '../../../../types/inputTypes';
 import { Button, Header, Input, InputType } from '../../../atoms';
 import { Selector } from '../../../atoms/selectors';
 import { IncomingItemListId } from './incomingItemAdds';
@@ -20,7 +20,7 @@ type GenerateInputType = Pick<InputType, 'label' | 'id' | 'onBlur'> & {
 
 const generateInput = ({ label, type = 'text', id, onBlur }: GenerateInputType) => (
     <li>
-        <Input label={label} placeholder={label} id={id} type={type} onBlur={onBlur} />
+        <Input label={label} placeholder={label} name={id} type={type} onBlur={onBlur} />
     </li>
 );
 
@@ -79,14 +79,11 @@ export const CaskAndLiquourTemplate = ({ id, uid, title }: TemplateType) => {
         <>
             <div className="bars_incoming_item_description">
                 <Selector checked={selected} onChange={() => dispatch(puchaseIncomingSelected({ id: uid }))} />
-                {/* <Header fontSize="s" className="bars_incoming_item_title">
-                    {title}
-                </Header> */}
                 <Input
                     label={title}
                     placeholder={title}
                     defaultValue="The cask of all dreams"
-                    id={`${uid}-name`}
+                    name={`${uid}-name`}
                     type="text"
                     className="bars_incoming_item_title"
                 />

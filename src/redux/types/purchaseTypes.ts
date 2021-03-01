@@ -22,6 +22,7 @@ export type PurchaseIncomingSelectedAction = {
 
 export type PurchaseIncomingDataType = {
     value: string;
+    name: string;
 };
 
 export type PurchaseIncomingDataActionType = {

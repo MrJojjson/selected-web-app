@@ -1,4 +1,4 @@
-import { includes, insert, without } from 'ramda';
+import { includes, insert, lensPath, set, without } from 'ramda';
 import {
     PurchaseActions,
     PurchaseState,
@@ -36,15 +36,17 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
                 },
             };
         case PURCHASE_INCOMING_DATA:
+            console.log('action', action);
+
             return {
                 ...state,
                 incoming: {
                     ...state.incoming,
-                    // data: {
-                    //     ...state.incoming.data,
-                    //     [action.payload.id]: [...action.payload.data[action.payload.id], action.payload.data],
-                    // },
-                    data: insert((action.payload.id as unknown) as number, action.payload.data, state.incoming.data),
+                    data: set(
+                        lensPath([action.payload.id, action.payload.data.name]),
+                        action.payload.data.value,
+                        state.incoming.data,
+                    ),
                 },
             };
         default:
