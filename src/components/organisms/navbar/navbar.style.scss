@@ -1,15 +1,10 @@
 @import '../../../common/sass/colors.scss';
 @import '../../../common/sass/metrics.scss';
 @import '../../../common/sass/mixins/flex.scss';
-@import '../../../common/sass/mixins/fades.scss';
-@import '../../../common/sass/mixins/section.scss';
 
-$navbar-item-padding: $spacing-l;
-$navbar-item-modal-padding: $spacing-xl;
-
-.header {
+header {
     @include flex(center, center, row);
     height: $navbar-height;
-    background-color: white;
+    background-color: $color-white;
     width: 100%;
 }

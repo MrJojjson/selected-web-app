@@ -1,18 +1,34 @@
+import { WhiskyVarsType } from './../../types/whiskyTypes';
 export const PURCHASE_INCOMING_SELECTED = 'PURCHASE_INCOMING_SELECTED';
-export const PURCHASE_INCOMING_DATA = 'PURCHASE_INCOMING_DATA';
+export const PURCHASE_INCOMING_ADDED = 'PURCHASE_INCOMING_ADDED';
+export const PURCHASE_INCOMING_ADDED_DATA = 'PURCHASE_INCOMING_ADDED_DATA';
+
+export type PurchaseIncomingAddedState = {
+    data: WhiskyVarsType[];
+    id: string;
+};
 
 export type PurchaseIncomingState = {
     selected: string[];
     data: [];
+    added: PurchaseIncomingAddedState[];
 };
 
 export type PurchaseState = {
     incoming: PurchaseIncomingState;
 };
 
+// NEW ITEM
+export type PurchaseIncomingAddedAction = {
+    type: 'PURCHASE_INCOMING_ADDED';
+    payload: {};
+};
+
+// SELECTED
 export type PurchaseIncomingSelectedActionType = {
     id?: string;
     clear?: boolean;
+    remove?: boolean;
 };
 
 export type PurchaseIncomingSelectedAction = {
@@ -20,19 +36,20 @@ export type PurchaseIncomingSelectedAction = {
     payload: PurchaseIncomingSelectedActionType;
 };
 
-export type PurchaseIncomingDataType = {
-    value: string;
-    name: string;
-};
+// DATA
 
-export type PurchaseIncomingDataActionType = {
+export type PurchaseIncomingAddedDataActionType = {
     id: string;
-    data: PurchaseIncomingDataType;
+    uid: string;
+    value: string;
 };
 
-export type PurchaseIncomingDataAction = {
-    type: 'PURCHASE_INCOMING_DATA';
-    payload: PurchaseIncomingDataActionType;
+export type PurchaseIncomingAddedDataAction = {
+    type: 'PURCHASE_INCOMING_ADDED_DATA';
+    payload: PurchaseIncomingAddedDataActionType;
 };
 
-export type PurchaseActions = PurchaseIncomingSelectedAction | PurchaseIncomingDataAction;
+export type PurchaseActions =
+    | PurchaseIncomingAddedAction
+    | PurchaseIncomingSelectedAction
+    | PurchaseIncomingAddedDataAction;

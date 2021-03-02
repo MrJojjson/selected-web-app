@@ -10,3 +10,8 @@ export const getPurchaseIncomingSelectedState = () =>
         ({ purchase }: StoreState): PurchaseIncomingState['selected'] =>
             getPurchaseIncomingState({ ...purchase })?.selected,
     );
+
+export const getPurchaseIncomingAddedState = () =>
+    useSelector(
+        ({ purchase }: StoreState): PurchaseIncomingState['added'] => getPurchaseIncomingState({ ...purchase })?.added,
+    );

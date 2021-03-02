@@ -35,8 +35,6 @@ export const IncomingItem = ({ ...rest }: IncomingItemType) => {
 
     const addIncomingItem = () => {
         const uid = uniqueId('whisky');
-        console.log('uid', uid);
-
         setItems([...items, <IncomingItemWhisky key={uid} uid={uid} />]);
     };
 

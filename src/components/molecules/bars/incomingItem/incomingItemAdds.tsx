@@ -1,6 +1,5 @@
 import { map } from 'ramda';
 import React from 'react';
-import { uniqueId } from '../../../../common/utils/uniqueId';
 import { Button, ButtonType } from '../../../atoms';
 
 type IncomingItemAddsType = {

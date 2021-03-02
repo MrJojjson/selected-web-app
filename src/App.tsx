@@ -17,10 +17,8 @@ export const App = () => {
     return (
         <Provider store={store}>
             <Palette />
-
             <div className="content">
                 <Navbar />
-
                 <Router className="router">{...appRoutes}</Router>
             </div>
             <AlertBase />
