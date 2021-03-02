@@ -1,15 +1,16 @@
 import { includes, map } from 'ramda';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { BarLayout } from '../../../../layout/barLayout';
-import { puchaseIncomingAddedData, puchaseIncomingSelected } from '../../../../redux';
+import { BarLayout } from '../../../layout/barLayout';
+import { purchaseIncomingAddedData, purchaseIncomingSelected } from '../../../redux';
 import {
     getPurchaseIncomingAddedState,
     getPurchaseIncomingSelectedState,
-} from '../../../../redux/selectors/purchaseSelector';
-import { PurchaseIncomingAddedState } from '../../../../redux/types/purchaseTypes';
-import { Button, Header, Input } from '../../../atoms';
-import { Selector } from '../../../atoms/selectors';
+} from '../../../redux/selectors/purchaseSelector';
+import { PurchaseIncomingAddedState } from '../../../redux/types/purchaseTypes';
+import { Button, Header, Input } from '../../atoms';
+import { Selector } from '../../atoms/selectors';
+import { BarsHeading } from './barsHeading';
 
 type OnBlurInputType = {
     event: React.ChangeEvent<EventTarget & HTMLInputElement>;
@@ -26,7 +27,7 @@ export const IncomingItemWhisky = () => {
 
     const onBlurInput = ({ event, uid }: OnBlurInputType) => {
         const { value, name } = event?.currentTarget;
-        dispatch(puchaseIncomingAddedData({ id: name, uid, value }));
+        dispatch(purchaseIncomingAddedData({ id: name, uid, value }));
     };
     const returnList = ({ data, id: uid }: PurchaseIncomingAddedState) => {
         return map(
@@ -50,7 +51,7 @@ export const IncomingItemWhisky = () => {
                 <div className="bars_incoming_item_description">
                     <Selector
                         checked={includes(id, selected)}
-                        onChange={() => dispatch(puchaseIncomingSelected({ id }))}
+                        onChange={() => dispatch(purchaseIncomingSelected({ id }))}
                     />
                     <Input
                         label={'Name'}
@@ -73,7 +74,7 @@ export const IncomingItemWhisky = () => {
     };
 
     return (
-        <BarLayout left={<Header>New puchases</Header>} right={toggle} open={open}>
+        <BarLayout left={<BarsHeading title="New purchase" />} right={toggle} open={open}>
             <form
                 className="incoming_item_form"
                 noValidate

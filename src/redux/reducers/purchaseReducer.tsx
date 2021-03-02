@@ -1,4 +1,18 @@
-import { append, findIndex, includes, insert, lensPath, map, over, propEq, reject, set, view, without } from 'ramda';
+import {
+    append,
+    findIndex,
+    includes,
+    insert,
+    lensPath,
+    map,
+    over,
+    pluck,
+    propEq,
+    reject,
+    set,
+    view,
+    without,
+} from 'ramda';
 import { uniqueId } from '../../common/utils/uniqueId';
 import { WhiskyVars } from '../../types/whiskyTypes';
 import {
@@ -39,6 +53,13 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
 
             if (action.payload.clear) {
                 return set(lensPath(['incoming', 'selected']), [], state);
+            }
+
+            if (action.payload.all) {
+                return set(lensPath(['incoming']), { selected: pluck('id', added), data, added }, state);
+            }
+            if (action.payload.all === false) {
+                return set(lensPath(['incoming']), { selected: [], data, added }, state);
             }
             const exists = includes(action.payload.id, selected);
 

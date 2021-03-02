@@ -4,18 +4,15 @@ import React from 'react';
 import { Casks } from './pages/casks';
 import { Dashboard } from './pages/dashboard';
 import { Home } from './pages/home';
-import { Liquor } from './pages/liquor';
 import { Profile } from './pages/profile';
 import { Purchases } from './pages/purchases';
 import { Settings } from './pages/settings';
-import { PageLayout } from './layout/pageLayout';
+import { Whisky } from './pages/whisky';
 import { toTypes } from './types/linkTypes';
 
 const Route = (props: { component: JSX.Element } & RouteComponentProps) => props.component;
 
 type RouteType = { component: JSX.Element; path: toTypes } & Omit<RouteComponentProps, 'path'>;
-
-const layout = (component: RouteType['component']) => <PageLayout>{component}</PageLayout>;
 
 const routeList: RouteType[] = [
     {
@@ -35,11 +32,11 @@ const routeList: RouteType[] = [
         component: <Profile />,
     },
     {
-        path: '/liqour',
-        component: <Liquor />,
+        path: '/whisky',
+        component: <Whisky />,
     },
     {
-        path: '/puchases',
+        path: '/purchases',
         component: <Purchases />,
     },
     {

@@ -1,22 +1,14 @@
 import React from 'react';
 import { ExistingItem } from '../components/molecules/bars/existingItem';
-import { IncomingItemWhisky } from '../components/molecules/bars/incomingItem/incomingItemWhisky';
+import { IncomingItemWhisky } from '../components/molecules/bars/incomingItemWhisky';
 import { PurchaseSpot } from '../components/molecules/spot/purchase';
 import { PageLayout } from '../layout/pageLayout';
 
 export const Purchases = () => {
     return (
-        <>
-            <PageLayout>
-                <IncomingItemWhisky />
-                <ExistingItem
-                    key="existing_item"
-                    title="Cask and liqour"
-                    description="46900 sek - 600l"
-                    meta={new Date(2010, 7, 5).toISOString()}
-                    content={<PurchaseSpot />}
-                />
-            </PageLayout>
-        </>
+        <PageLayout>
+            <IncomingItemWhisky key="purchases-incoming-item" />
+            <ExistingItem key="purchases-existing-item" content={<PurchaseSpot />} />
+        </PageLayout>
     );
 };

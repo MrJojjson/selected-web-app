@@ -1,6 +1,11 @@
 import React from 'react';
 import { Text } from '../components/atoms';
+import { PageLayout } from '../layout/pageLayout';
 
 export const Home = () => {
-    return <Text>Home</Text>;
+    return (
+        <PageLayout>
+            <Text>Home</Text>
+        </PageLayout>
+    );
 };

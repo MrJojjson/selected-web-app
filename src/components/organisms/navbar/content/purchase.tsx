@@ -1,26 +1,29 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Bar } from '../../../../layout/barLayout/bar';
-import {
-    getPurchaseIncomingSelectedState,
-    puchaseIncomingSelected,
-    getPurchaseIncomingAddedState,
-    purchaseIncomingAdded,
-} from '../../../../redux';
+import { purchaseIncomingSelected, purchaseIncomingAdded, getPurchaseIncomingState } from '../../../../redux';
 import { Button } from '../../../atoms';
 
 export const PurchaseNav = () => {
     const dispatch = useDispatch();
-    const selectedExists = getPurchaseIncomingSelectedState()?.length > 0;
-    const addedExists = getPurchaseIncomingAddedState()?.length > 0;
+    const { selected, added } = getPurchaseIncomingState();
+
+    const selectedExists = selected?.length > 0;
+    const addedExists = added?.length > 0;
+
+    const allSelected = selected?.length === added.length;
 
     const add = (
+        <Button mini label="Purchase" theme="highlight" icon="plus" onClick={() => dispatch(purchaseIncomingAdded())} />
+    );
+
+    const selectAll = (
         <Button
             mini
-            label="Add new purchase"
-            theme="highlight"
-            icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded())}
+            label={allSelected ? 'Deselect all' : 'Select all'}
+            theme="secondary"
+            icon={allSelected ? 'minus-square' : 'plus-square'}
+            onClick={() => dispatch(purchaseIncomingSelected({ all: !allSelected }))}
         />
     );
 
@@ -30,17 +33,17 @@ export const PurchaseNav = () => {
             label="Remove"
             theme="secondary"
             icon="trash"
-            onClick={() => dispatch(puchaseIncomingSelected({ remove: true }))}
+            onClick={() => dispatch(purchaseIncomingSelected({ remove: true }))}
         />
     );
 
     const clear = (
         <Button
             mini
-            label="Clear"
+            label="Clear selected"
             theme="primary"
             icon="minus-square"
-            onClick={() => dispatch(puchaseIncomingSelected({ clear: true }))}
+            onClick={() => dispatch(purchaseIncomingSelected({ clear: true }))}
         />
     );
 
@@ -50,7 +53,7 @@ export const PurchaseNav = () => {
             label="Archive"
             theme="primary"
             icon="archive"
-            onClick={() => dispatch(puchaseIncomingSelected({ clear: true }))}
+            onClick={() => dispatch(purchaseIncomingSelected({ clear: true }))}
         />
     );
 
@@ -60,7 +63,7 @@ export const PurchaseNav = () => {
             label="Save"
             theme="highlight"
             icon="save"
-            onClick={() => dispatch(puchaseIncomingSelected({ clear: true }))}
+            onClick={() => dispatch(purchaseIncomingSelected({ clear: true }))}
         />
     );
 
@@ -68,7 +71,8 @@ export const PurchaseNav = () => {
         <>
             {selectedExists && remove}
             {selectedExists && archive}
-            {selectedExists && clear}
+            {selectedExists && !allSelected && clear}
+            {addedExists && selectAll}
             {addedExists && submit}
         </>
     );

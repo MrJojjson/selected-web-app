@@ -1,14 +1,14 @@
-import { RouteComponentProps, Router } from '@reach/router';
-import React from 'react';
-import './common/sass/globals.style.scss';
-import { Navbar, Palette } from './components/organisms';
-import appRoutes from './routes';
-import { store } from './redux/store';
-import { Provider } from 'react-redux';
-import { AlertBase, ModalBase } from './components/molecules';
 import { config, library } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@reach/router';
+import React from 'react';
+import { Provider } from 'react-redux';
+import './common/sass/globals.style.scss';
+import { AlertBase, ModalBase } from './components/molecules';
+import { Navbar, Palette } from './components/organisms';
+import { store } from './redux/store';
+import appRoutes from './routes';
 
 config.autoAddCss = false;
 

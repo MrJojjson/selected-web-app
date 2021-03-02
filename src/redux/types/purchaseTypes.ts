@@ -29,6 +29,7 @@ export type PurchaseIncomingSelectedActionType = {
     id?: string;
     clear?: boolean;
     remove?: boolean;
+    all?: boolean;
 };
 
 export type PurchaseIncomingSelectedAction = {

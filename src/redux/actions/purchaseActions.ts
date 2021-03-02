@@ -10,12 +10,12 @@ export const purchaseIncomingAdded = () => ({
     type: PURCHASE_INCOMING_ADDED,
 });
 
-export const puchaseIncomingSelected = ({ ...props }: PurchaseIncomingSelectedActionType) => ({
+export const purchaseIncomingSelected = ({ ...props }: PurchaseIncomingSelectedActionType) => ({
     type: PURCHASE_INCOMING_SELECTED,
     payload: { ...props },
 });
 
-export const puchaseIncomingAddedData = ({ ...props }: PurchaseIncomingAddedDataActionType) => ({
+export const purchaseIncomingAddedData = ({ ...props }: PurchaseIncomingAddedDataActionType) => ({
     type: PURCHASE_INCOMING_ADDED_DATA,
     payload: { ...props },
 });

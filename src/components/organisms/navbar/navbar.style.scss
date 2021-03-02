@@ -8,6 +8,7 @@ header {
     background-color: $color-white;
     padding: 0 ($default-padding + $default-margin);
     width: 100%;
+    margin-bottom: $default-margin * 0.5;
     button:not(:last-of-type) {
         margin-right: $default-margin;
     }
