@@ -1,6 +1,5 @@
 import React from 'react';
 import { ExistingItem } from '../components/molecules/bars/existingItem';
-import { IncomingItem } from '../components/molecules/bars/incomingItem';
 import { IncomingItemWhisky } from '../components/molecules/bars/incomingItem/incomingItemWhisky';
 import { PurchaseSpot } from '../components/molecules/spot/purchase';
 import { PageLayout } from '../layout/pageLayout';
@@ -9,7 +8,6 @@ export const Purchases = () => {
     return (
         <>
             <PageLayout>
-                {/* <IncomingItem key="incoming_item" title="Add purchase" /> */}
                 <IncomingItemWhisky />
                 <ExistingItem
                     key="existing_item"

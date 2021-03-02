@@ -3,8 +3,12 @@
 @import '../../../common/sass/mixins/flex.scss';
 
 header {
-    @include flex(center, center, row);
+    @include flex(center, flex-start, row);
     height: $navbar-height;
     background-color: $color-white;
+    padding: 0 ($default-padding + $default-margin);
     width: 100%;
+    button:not(:last-of-type) {
+        margin-right: $default-margin;
+    }
 }

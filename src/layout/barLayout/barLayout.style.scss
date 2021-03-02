@@ -7,28 +7,6 @@
     width: 100%;
     height: auto;
     transition: all $transition-speed;
-    .bar {
-        width: 100%;
-        @include flex(center, space-between, row);
-        margin-bottom: $default-margin;
-        .left {
-            @include flex(center, flex-start, row);
-            width: 100%;
-            margin-right: $default-margin;
-            button {
-                // width: 100%;
-                &:not(:last-of-type) {
-                    margin-right: $default-margin;
-                }
-            }
-            .dropdown {
-                margin-top: $default-margin;
-                &:not(:last-of-type) {
-                    margin-right: $default-margin;
-                }
-            }
-        }
-    }
 
     .bar_content {
         width: 100%;
@@ -43,5 +21,30 @@
         .bar_content {
             opacity: 1;
         }
+    }
+}
+
+.bar {
+    width: 100%;
+    @include flex(center, space-between, row);
+    .left {
+        @include flex(center, flex-start, row);
+        width: 100%;
+        margin-right: $default-margin;
+        button {
+            // width: 100%;
+            &:not(:last-of-type) {
+                margin-right: $default-margin;
+            }
+        }
+        .dropdown {
+            margin-top: $default-margin;
+            &:not(:last-of-type) {
+                margin-right: $default-margin;
+            }
+        }
+    }
+    .right {
+        @include flex(center, flex-end, row);
     }
 }

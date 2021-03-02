@@ -1,13 +1,14 @@
 import { includes, map } from 'ramda';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { BarLayout } from '../../../../layout/barLayout';
 import { puchaseIncomingAddedData, puchaseIncomingSelected } from '../../../../redux';
 import {
     getPurchaseIncomingAddedState,
     getPurchaseIncomingSelectedState,
 } from '../../../../redux/selectors/purchaseSelector';
 import { PurchaseIncomingAddedState } from '../../../../redux/types/purchaseTypes';
-import { Input } from '../../../atoms';
+import { Button, Header, Input } from '../../../atoms';
 import { Selector } from '../../../atoms/selectors';
 
 type OnBlurInputType = {
@@ -19,7 +20,9 @@ export const IncomingItemWhisky = () => {
     const added = getPurchaseIncomingAddedState();
     const selected = getPurchaseIncomingSelectedState();
     const dispatch = useDispatch();
-    console.log('selected', selected);
+    const [open, setOpen] = useState<boolean>(false);
+
+    useEffect(() => setOpen(added?.length > 0), [added]);
 
     const onBlurInput = ({ event, uid }: OnBlurInputType) => {
         const { value, name } = event?.currentTarget;
@@ -43,7 +46,7 @@ export const IncomingItemWhisky = () => {
     };
     const mapAdded = map(({ data, id }) => {
         return (
-            <div key={id}>
+            <div key={id} className="bars_incoming_item">
                 <div className="bars_incoming_item_description">
                     <Selector
                         checked={includes(id, selected)}
@@ -63,5 +66,21 @@ export const IncomingItemWhisky = () => {
         );
     }, added);
 
-    return <>{mapAdded}</>;
+    const toggle = <Button mini icon={open ? 'chevron-up' : 'chevron-down'} onClick={() => setOpen(!open)} />;
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
+
+    return (
+        <BarLayout left={<Header>New puchases</Header>} right={toggle} open={open}>
+            <form
+                className="incoming_item_form"
+                noValidate
+                onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
+            >
+                {mapAdded}
+            </form>
+        </BarLayout>
+    );
 };
