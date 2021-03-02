@@ -75,7 +75,7 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
             const index = findIndex(propEq('id', uid))(added);
             const deepIndex = findIndex(propEq('id', id))(added[index].data);
 
-            return set(lensPath(['incoming', 'added', index, 'data', deepIndex, id]), value, state);
+            return set(lensPath(['incoming', 'added', index, 'data', deepIndex, 'value']), value, state);
         default:
             return state;
     }

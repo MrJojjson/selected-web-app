@@ -1,12 +1,23 @@
+import { filter, lensPath, map, mergeAll, pluck, reduceBy, view } from 'ramda';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { fetchData } from '../../../../hooks/useApi';
 import { Bar } from '../../../../layout/barLayout/bar';
-import { purchaseIncomingSelected, purchaseIncomingAdded, getPurchaseIncomingState } from '../../../../redux';
+import {
+    purchaseIncomingSelected,
+    purchaseIncomingAdded,
+    getPurchaseIncomingState,
+    getPurchaseIncomingAddedState,
+    getAuthTokenState,
+    alertToggleOpen,
+} from '../../../../redux';
+import { WhiskyType } from '../../../../types/whiskyTypes';
 import { Button } from '../../../atoms';
 
 export const PurchaseNav = () => {
     const dispatch = useDispatch();
     const { selected, added } = getPurchaseIncomingState();
+    const token = getAuthTokenState();
 
     const selectedExists = selected?.length > 0;
     const addedExists = added?.length > 0;
@@ -57,15 +68,27 @@ export const PurchaseNav = () => {
         />
     );
 
-    const submit = (
-        <Button
-            mini
-            label="Save"
-            theme="highlight"
-            icon="save"
-            onClick={() => dispatch(purchaseIncomingSelected({ clear: true }))}
-        />
-    );
+    const onSubmit = () => {
+        map(async ({ data: addedData }) => {
+            const data = mergeAll(map(({ id, value }) => ({ [id]: value }), addedData));
+
+            await fetchData({
+                method: 'post',
+                endpoint: 'whiskies',
+                data,
+                token,
+            })
+                .then((res) => {
+                    dispatch(purchaseIncomingSelected({ all: true }));
+                    setTimeout(() => {
+                        dispatch(purchaseIncomingSelected({ remove: true }));
+                    }, 2500);
+                })
+                .catch((err) => console.log('err', err));
+        }, added);
+    };
+
+    const submit = <Button mini label="Save" theme="highlight" icon="save" onClick={onSubmit} />;
 
     const rightBar = (
         <>
