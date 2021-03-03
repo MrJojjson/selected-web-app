@@ -1,5 +1,5 @@
 import React from 'react';
-import { fontSizeType, headerTag, themeType } from '../../../types';
+import { fontSizeType, headerTag, themeType } from '../../../types/commonTypes';
 import './header.style.scss';
 import cn from 'classnames';
 
@@ -16,7 +16,7 @@ export const Header = ({
     tag = 'h3',
     children,
     theme = 'primary',
-    fontSize = 'm',
+    fontSize = 's',
     oneLine,
     className,
     ...rest

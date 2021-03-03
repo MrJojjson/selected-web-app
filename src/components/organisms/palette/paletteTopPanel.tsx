@@ -5,12 +5,12 @@ import './palette.style.scss';
 const links: LinkType[] = [
     {
         title: 'Dasboard',
-        pathname: '/dashboard',
+        pathname: '/',
         icon: 'columns',
     },
     {
         title: 'Purchases',
-        pathname: '/puchases',
+        pathname: '/purchases',
         icon: 'money-bill',
     },
     {
@@ -19,8 +19,8 @@ const links: LinkType[] = [
         icon: 'pallet',
     },
     {
-        title: 'Liquor',
-        pathname: '/liqour',
+        title: 'Whisky',
+        pathname: '/whisky',
         icon: 'flask',
     },
 ];

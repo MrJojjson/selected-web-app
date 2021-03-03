@@ -6,9 +6,11 @@
     @include flex(flex-start, flex-start, column);
     width: 100%;
     height: auto;
-    margin: $default-margin;
     padding: $default-padding $default-padding * 2;
     box-sizing: border-box;
     border-radius: $default-border-radius;
     background-color: $color-white;
+    &:not(:last-of-type) {
+        margin-bottom: $default-margin;
+    }
 }

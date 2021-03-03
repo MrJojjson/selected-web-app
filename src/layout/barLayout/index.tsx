@@ -19,9 +19,10 @@ export const BarLayout = ({ left, right, children, open }: BarLayoutType) => {
             setHeight(0);
         } else if (barContentRef && barContentRef.current) {
             const { height } = barContentRef.current?.firstChild?.getBoundingClientRect() || {};
+
             typeof height === 'number' && setHeight(height + 20);
         }
-    }, [children]);
+    }, [children, open]);
 
     return (
         <div

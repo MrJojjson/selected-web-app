@@ -1,19 +1,11 @@
-import { AuthStateType, SET_LOGGED_IN_STATE, SET_FAKE_LOGGED_IN_STATE } from '../types/authTypes';
+import { AuthStateType, AUTH_LOGGED_IN_STATE } from '../types/authTypes';
 
-type SetLoginStateType = Pick<AuthStateType, 'loggedIn' | 'token'>;
+type SetLoginStateType = Pick<AuthStateType, 'user' | 'token'>;
 
-export const setLoginState = ({ loggedIn, token }: SetLoginStateType) => ({
-    type: SET_LOGGED_IN_STATE,
+export const authSetLoggedIn = ({ user, token }: SetLoginStateType) => ({
+    type: AUTH_LOGGED_IN_STATE,
     payload: {
-        loggedIn,
-        token,
-    },
-});
-
-export const setFakeLoginState = ({ loggedIn, token }: SetLoginStateType) => ({
-    type: SET_FAKE_LOGGED_IN_STATE,
-    payload: {
-        loggedIn,
+        user,
         token,
     },
 });

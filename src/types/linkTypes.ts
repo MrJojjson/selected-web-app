@@ -1,1 +1,1 @@
-export type toTypes = '' | '/' | '/settings' | '/dashboard' | '/profile' | '/casks' | '/liqour' | '/puchases';
+export type toTypes = '' | '/' | '/settings' | '/profile' | '/casks' | '/whisky' | '/purchases';

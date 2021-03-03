@@ -1,31 +1,48 @@
+import { useLocation } from '@reach/router';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { alertToggleOpen, getAlertOpenState, getModalOpenState, modalToggleOpen } from '../../../redux';
-import { Button } from '../../atoms';
+import { PurchaseNav } from '../../organisms/navbar/content/purchase';
 import './navbar.style.scss';
+import { Location } from '@reach/router';
+import { find, includes } from 'ramda';
+import { DashboardNav } from './content/dashboard';
+import { CaskNav } from './content/cask';
+import { WhiskyNav } from './content/whisky';
+import { ProfileNav } from './content/profile';
+import { SettingseNav } from './content/settings';
+
+const navList: { path: string; comp: JSX.Element }[] = [
+    {
+        path: 'dashboard',
+        comp: <DashboardNav />,
+    },
+    {
+        path: 'purchases',
+        comp: <PurchaseNav />,
+    },
+    {
+        path: 'cask',
+        comp: <CaskNav />,
+    },
+    {
+        path: 'whisky',
+        comp: <WhiskyNav />,
+    },
+    {
+        path: 'profile',
+        comp: <ProfileNav />,
+    },
+    {
+        path: 'settings',
+        comp: <SettingseNav />,
+    },
+];
 
 export const Navbar = () => {
-    const dispatch = useDispatch();
-    const modalOpen = getModalOpenState();
-    const alertOpen = getAlertOpenState();
     return (
-        <header className="header">
-            <Button
-                mini
-                theme="secondary"
-                direction="row-reverse"
-                label="Modal"
-                icon={modalOpen ? 'window-minimize' : 'window-maximize'}
-                onClick={() => dispatch(modalToggleOpen({ contentType: 'menu' }))}
-            />
-            <Button
-                mini
-                theme="highlight"
-                direction="row-reverse"
-                label="Alert"
-                icon={alertOpen ? 'window-minimize' : 'window-maximize'}
-                onClick={() => dispatch(alertToggleOpen({}))}
-            />
+        <header id="navbar">
+            <Location>
+                {({ location }) => find(({ path }) => includes(path, location?.pathname), navList)?.comp}
+            </Location>
         </header>
     );
 };
