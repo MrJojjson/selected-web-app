@@ -13,8 +13,6 @@ export const Whisky = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const { data = [], fetch } = getWhiskiesState();
-    console.log('fetch', fetch);
-    console.log('data', data);
 
     useEffect(() => {
         if (fetch) {
@@ -30,10 +28,10 @@ export const Whisky = () => {
         }
     }, [fetch]);
 
-    const returnWhiskies = map(({ id, name, distillery, distilledDate }) => {
+    const returnWhiskies = map(({ ...rest }) => {
+        const { id, name, distillery, distilledDate } = rest || {};
         return (
             <ExistingItem
-                key={id}
                 title={name}
                 description={distillery}
                 meta={distilledDate.toString()}

@@ -7,7 +7,7 @@ type PageLayoutType = {
     children: JSX.Element | JSX.Element[];
 };
 
-const layout = (child: JSX.Element) => <CompLayout key={child.key}>{child}</CompLayout>;
+const layout = (child: JSX.Element) => <CompLayout key={child?.key}>{child}</CompLayout>;
 
 export const PageLayout = ({ children }: PageLayoutType) => {
     const renderChildren = Array.isArray(children) ? map((child) => layout(child), children) : layout(children);
