@@ -8,7 +8,7 @@ export const Purchases = () => {
     return (
         <PageLayout>
             <IncomingItemWhisky key="purchases-incoming-item" />
-            <ExistingItem key="purchases-existing-item" content={<PurchaseSpot />} />
+            <ExistingItem title="Existing" key="purchases-existing-item" content={<PurchaseSpot />} />
         </PageLayout>
     );
 };

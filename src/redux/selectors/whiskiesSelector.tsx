@@ -7,3 +7,5 @@ export const getWhiskiesState = () => useSelector(({ whiskies }: StoreState): Wh
 export const getWhiskiesSelectedState = () => getWhiskiesState()?.selected;
 
 export const getWhiskiesAddState = () => getWhiskiesState()?.data;
+
+export const getWhiskiesFetchState = () => getWhiskiesState()?.fetch;

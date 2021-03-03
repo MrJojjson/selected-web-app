@@ -3,7 +3,6 @@ import { map } from 'ramda';
 import React from 'react';
 import { Casks } from './pages/casks';
 import { Dashboard } from './pages/dashboard';
-import { Home } from './pages/home';
 import { Profile } from './pages/profile';
 import { Purchases } from './pages/purchases';
 import { Settings } from './pages/settings';
@@ -17,10 +16,6 @@ type RouteType = { component: JSX.Element; path: toTypes } & Omit<RouteComponent
 const routeList: RouteType[] = [
     {
         path: '/',
-        component: <Home />,
-    },
-    {
-        path: '/dashboard',
         component: <Dashboard />,
     },
     {

@@ -1,10 +1,12 @@
 import { WhiskyType } from '../../types/whiskyTypes';
 export const WHISKIES_SELECTED = 'WHISKIES_SELECTED';
 export const WHISKIES_ADD_DATA = 'WHISKIES_ADD_DATA';
+export const WHISKIES_SET_FETCH = 'WHISKIES_SET_FETCH';
 
 export type WhiskiesState = {
     data: WhiskyType[];
     selected: string[];
+    fetch: boolean;
 };
 
 // SELECTED
@@ -30,4 +32,14 @@ export type WhiskiesAddDataAction = {
     payload: WhiskiesAddDataActionType;
 };
 
-export type WhiskiesActions = WhiskiesSelectedAction | WhiskiesAddDataAction;
+// FETCH
+export type WhiskiesSetFetchActionType = {
+    fetch: boolean;
+};
+
+export type WhiskiesSetFetchAction = {
+    type: 'WHISKIES_SET_FETCH';
+    payload: WhiskiesSetFetchActionType;
+};
+
+export type WhiskiesActions = WhiskiesSelectedAction | WhiskiesAddDataAction | WhiskiesSetFetchAction;

@@ -6,21 +6,29 @@ import { ExistingItem } from '../components/molecules/bars/existingItem';
 import { WhiskySpot } from '../components/molecules/spot/whisky';
 import { fetchData } from '../hooks/useApi';
 import { PageLayout } from '../layout/pageLayout';
-import { getAuthTokenState, whiskiesAddData } from '../redux';
-import { getWhiskiesAddState } from '../redux/selectors/whiskiesSelector';
+import { getAuthTokenState, whiskiesAddData, whiskiesSetFetch } from '../redux';
+import { getWhiskiesState } from '../redux/selectors/whiskiesSelector';
 
 export const Whisky = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
+    const { data = [], fetch } = getWhiskiesState();
+    console.log('fetch', fetch);
+    console.log('data', data);
+
     useEffect(() => {
-        fetchData({
-            endpoint: 'whiskies',
-            token,
-        })
-            .then((data) => dispatch(whiskiesAddData({ data })))
-            .catch((err) => console.log('err', err));
-    }, []);
-    const whiskies = getWhiskiesAddState();
+        if (fetch) {
+            fetchData({
+                endpoint: 'whiskies',
+                token,
+            })
+                .then((data) => {
+                    dispatch(whiskiesSetFetch({ fetch: false }));
+                    dispatch(whiskiesAddData({ data }));
+                })
+                .catch((err) => console.log('err', err));
+        }
+    }, [fetch]);
 
     const returnWhiskies = map(({ id, name, distillery, distilledDate }) => {
         return (
@@ -32,7 +40,7 @@ export const Whisky = () => {
                 content={<WhiskySpot />}
             />
         );
-    }, whiskies);
+    }, data);
 
     return <PageLayout>{returnWhiskies}</PageLayout>;
 };

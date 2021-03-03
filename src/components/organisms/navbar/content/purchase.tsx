@@ -1,17 +1,15 @@
-import { filter, lensPath, map, mergeAll, pluck, reduceBy, view } from 'ramda';
+import { map, mergeAll } from 'ramda';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchData } from '../../../../hooks/useApi';
 import { Bar } from '../../../../layout/barLayout/bar';
 import {
-    purchaseIncomingSelected,
-    purchaseIncomingAdded,
-    getPurchaseIncomingState,
-    getPurchaseIncomingAddedState,
     getAuthTokenState,
-    alertToggleOpen,
+    getPurchaseIncomingState,
+    purchaseIncomingAdded,
+    purchaseIncomingSelected,
+    whiskiesSetFetch,
 } from '../../../../redux';
-import { WhiskyType } from '../../../../types/whiskyTypes';
 import { Button } from '../../../atoms';
 
 export const PurchaseNav = () => {
@@ -80,6 +78,7 @@ export const PurchaseNav = () => {
             })
                 .then((res) => {
                     dispatch(purchaseIncomingSelected({ all: true }));
+                    dispatch(whiskiesSetFetch({ fetch: true }));
                     setTimeout(() => {
                         dispatch(purchaseIncomingSelected({ remove: true }));
                     }, 2500);

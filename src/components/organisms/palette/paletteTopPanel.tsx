@@ -5,7 +5,7 @@ import './palette.style.scss';
 const links: LinkType[] = [
     {
         title: 'Dasboard',
-        pathname: '/dashboard',
+        pathname: '/',
         icon: 'columns',
     },
     {

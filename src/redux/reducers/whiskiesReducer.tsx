@@ -1,9 +1,16 @@
 import { append, includes, lensPath, pluck, reject, set, without } from 'ramda';
-import { WhiskiesActions, WhiskiesState, WHISKIES_ADD_DATA, WHISKIES_SELECTED } from '../types/whiskyTypes';
+import {
+    WhiskiesActions,
+    WhiskiesState,
+    WHISKIES_ADD_DATA,
+    WHISKIES_SELECTED,
+    WHISKIES_SET_FETCH,
+} from '../types/whiskyTypes';
 
 const initialState: WhiskiesState = {
     data: [],
     selected: [],
+    fetch: true,
 };
 
 export const WhiskiesReducer = (state: WhiskiesState = initialState, action: WhiskiesActions) => {
@@ -39,6 +46,8 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
 
         case WHISKIES_ADD_DATA:
             return set(lensPath(['data']), action.payload.data, state);
+        case WHISKIES_SET_FETCH:
+            return set(lensPath(['fetch']), action.payload.fetch, state);
         default:
             return state;
     }

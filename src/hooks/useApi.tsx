@@ -72,5 +72,5 @@ export const fetchData = async ({ endpoint, id, idPos, token, data, method = 'ge
         body: JSON.stringify(data),
     })
         .then((res) => res.json())
-        .catch((err) => err.json());
+        .catch((err) => err);
 };
