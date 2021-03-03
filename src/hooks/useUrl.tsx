@@ -25,7 +25,7 @@ export const useStringNameFromUrl = ({ path }: UseStringNameFromUrlType) => {
 
 export const convertStringToFriendlyFormat = ({ path }: UseStringNameFromUrlType) => {
     const name = path
-        .toString()
+        ?.toString()
         .split(/\s*\-\s*/g)
         .join(' ');
 

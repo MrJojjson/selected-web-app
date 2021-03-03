@@ -2,7 +2,6 @@ import { map, mergeAll } from 'ramda';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchData } from '../../../../hooks/useApi';
-import { Bar } from '../../../../layout/barLayout/bar';
 import {
     getAuthTokenState,
     getPurchaseIncomingState,
@@ -11,6 +10,7 @@ import {
     whiskiesSetFetch,
 } from '../../../../redux';
 import { Button } from '../../../atoms';
+import { NavbarContentTemplate } from '../navbarContentTemplate';
 
 export const PurchaseNav = () => {
     const dispatch = useDispatch();
@@ -89,15 +89,15 @@ export const PurchaseNav = () => {
 
     const submit = <Button mini label="Save" theme="highlight" icon="save" onClick={onSubmit} />;
 
-    const rightBar = (
+    const leftBar = (
         <>
+            {addedExists && selectAll}
+            {selectedExists && !allSelected && clear}
             {selectedExists && remove}
             {selectedExists && archive}
-            {selectedExists && !allSelected && clear}
-            {addedExists && selectAll}
             {addedExists && submit}
         </>
     );
 
-    return <Bar left={add} right={rightBar} />;
+    return <NavbarContentTemplate start={leftBar} end={add} />;
 };

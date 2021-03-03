@@ -38,7 +38,7 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
         case PURCHASE_INCOMING_ADDED:
             return set(
                 lensPath(['incoming', 'added']),
-                append({ data: WhiskyVars, id: uniqueId('new-whisky-') }, state.incoming.added),
+                append({ data: WhiskyVars, uid: uniqueId('new-whisky-') }, state.incoming.added),
                 state,
             );
 
@@ -46,7 +46,7 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
             if (action.payload.remove) {
                 return set(
                     lensPath(['incoming']),
-                    { selected: [], data, added: reject(({ id }) => includes(id, selected), added) },
+                    { selected: [], data, added: reject(({ uid }) => includes(uid, selected), added) },
                     state,
                 );
             }
@@ -56,23 +56,23 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
             }
 
             if (action.payload.all) {
-                return set(lensPath(['incoming']), { selected: pluck('id', added), data, added }, state);
+                return set(lensPath(['incoming']), { selected: pluck('uid', added), data, added }, state);
             }
             if (action.payload.all === false) {
                 return set(lensPath(['incoming']), { selected: [], data, added }, state);
             }
-            const exists = includes(action.payload.id, selected);
+            const exists = includes(action.payload.uid, selected);
 
             return set(
                 lensPath(['incoming', 'selected']),
-                exists ? without([action.payload.id], selected) : append(action.payload.id, selected),
+                exists ? without([action.payload.uid], selected) : append(action.payload.uid, selected),
                 state,
             );
 
         case PURCHASE_INCOMING_ADDED_DATA:
             const { uid, id, value } = action?.payload;
 
-            const index = findIndex(propEq('id', uid))(added);
+            const index = findIndex(propEq('uid', uid))(added);
             const deepIndex = findIndex(propEq('id', id))(added[index].data);
 
             return set(lensPath(['incoming', 'added', index, 'data', deepIndex, 'value']), value, state);

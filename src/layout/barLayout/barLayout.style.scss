@@ -24,24 +24,53 @@
     }
 }
 
-.bar {
+.bar_element {
+    width: 100%;
+    @include flex(center, space-between, row);
+    padding: $default-padding 0;
+    .start {
+        @include flex(center, flex-start, row);
+        width: 100%;
+        margin-right: $default-margin;
+        height: 100%;
+        * {
+            margin-right: $default-margin;
+        }
+    }
+    .end {
+        @include flex(center, flex-end, row);
+    }
+}
+
+.bar_heading {
     width: 100%;
     @include flex(center, space-between, row);
     .left {
         @include flex(center, flex-start, row);
         width: 100%;
         margin-right: $default-margin;
-        button {
-            // width: 100%;
-            &:not(:last-of-type) {
-                margin-right: $default-margin;
+        .bar_heading_heading {
+            @include flex(center, flex-start, row);
+            width: 100%;
+            .bar_heading_description,
+            .bar_heading_meta {
+                margin-left: $default-margin * 2;
+                padding-left: $default-padding;
+
+                border-left: 1px solid $color-primary-border;
             }
         }
-        .dropdown {
-            margin-top: $default-margin;
-            &:not(:last-of-type) {
-                margin-right: $default-margin;
-            }
+    }
+    button {
+        // width: 100%;
+        &:not(:last-of-type) {
+            margin-right: $default-margin;
+        }
+    }
+    .dropdown {
+        margin-top: $default-margin;
+        &:not(:last-of-type) {
+            margin-right: $default-margin;
         }
     }
     .right {

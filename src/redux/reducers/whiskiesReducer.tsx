@@ -5,12 +5,14 @@ import {
     WHISKIES_ADD_DATA,
     WHISKIES_SELECTED,
     WHISKIES_SET_FETCH,
+    WHISKIES_TOGGLE_EDIT,
 } from '../types/whiskyTypes';
 
 const initialState: WhiskiesState = {
     data: [],
     selected: [],
     fetch: true,
+    edit: false,
 };
 
 export const WhiskiesReducer = (state: WhiskiesState = initialState, action: WhiskiesActions) => {
@@ -22,7 +24,7 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                 return {
                     ...state,
                     selected: [],
-                    data: reject(({ id }) => includes(id, selected), data),
+                    data: reject(({ uid }) => includes(uid, selected), data),
                 };
             }
 
@@ -31,7 +33,7 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
             }
 
             if (action.payload.all) {
-                return { ...state, selected: pluck('id', data), data };
+                return { ...state, selected: pluck('uid', data), data };
             }
             if (action.payload.all === false) {
                 return { ...state, selected: [], data };
@@ -48,6 +50,8 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
             return set(lensPath(['data']), action.payload.data, state);
         case WHISKIES_SET_FETCH:
             return set(lensPath(['fetch']), action.payload.fetch, state);
+        case WHISKIES_TOGGLE_EDIT:
+            return set(lensPath(['edit']), !state.edit, state);
         default:
             return state;
     }

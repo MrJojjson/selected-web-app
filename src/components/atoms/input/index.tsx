@@ -21,9 +21,10 @@ export type InputType = {
     required?: boolean;
     defaultValue?: string;
     className?: string;
+    dataUid?: string;
 };
 
-export const Input = ({ onChange, onBlur, label, theme, error = '', className, ...rest }: InputType) => {
+export const Input = ({ onChange, onBlur, label, theme, error = '', dataUid, className, ...rest }: InputType) => {
     return (
         <div className={cn('input_wrapper', className)}>
             <input

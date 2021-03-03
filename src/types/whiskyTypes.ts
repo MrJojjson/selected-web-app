@@ -1,8 +1,6 @@
-import { uniqueId } from './../common/utils/uniqueId';
 import { inputType } from './inputTypes';
 
 export type WhiskyType = {
-    id: string;
     name: string;
     distillery: string;
     distilledDate: Date;
@@ -15,7 +13,6 @@ export type WhiskyType = {
     createdAtUtc: Date;
     updatedAtUtc: Date;
     cask: WhiskyCaskType;
-    reracks: RerackType;
 };
 
 type WhiskyKeyType = keyof WhiskyType;

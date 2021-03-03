@@ -1,12 +1,13 @@
 import cn from 'classnames';
 import React, { forwardRef } from 'react';
 import './text.style.scss';
-import { directionType, fontSizeStyle, fontSizeType, textTag, themeType } from '../../../types';
+import { directionType, fontSizeStyle, fontSizeType, textTag, themeType } from '../../../types/commonTypes';
+
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type TextType = {
-    children: string;
+    children: string | number;
     tag?: textTag;
     theme?: themeType;
     fontSize?: fontSizeType;

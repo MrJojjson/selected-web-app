@@ -5,11 +5,12 @@ import './selectors.style.scss';
 type SelectorType = {
     onChange: () => void;
     checked?: boolean;
+    className?: string;
 };
 
-export const Selector = ({ checked = false, onChange }: SelectorType) => {
+export const Selector = ({ checked = false, onChange, className }: SelectorType) => {
     return (
-        <span onClick={onChange}>
+        <span className={className} onClick={onChange}>
             <input onChange={onChange} type="checkbox" checked={checked} />
             <span>
                 <FontAwesomeIcon icon={['fas', 'check']} />

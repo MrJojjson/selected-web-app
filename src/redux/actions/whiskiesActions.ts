@@ -5,6 +5,7 @@ import {
     WHISKIES_ADD_DATA,
     WHISKIES_SET_FETCH,
     WhiskiesSetFetchActionType,
+    WHISKIES_TOGGLE_EDIT,
 } from '../types/whiskyTypes';
 
 export const whiskiesSelected = ({ ...props }: WhiskiesSelectedActionType) => ({
@@ -20,4 +21,8 @@ export const whiskiesAddData = ({ ...props }: WhiskiesAddDataActionType) => ({
 export const whiskiesSetFetch = ({ ...props }: WhiskiesSetFetchActionType) => ({
     type: WHISKIES_SET_FETCH,
     payload: { ...props },
+});
+
+export const whiskiesToggleEdit = () => ({
+    type: WHISKIES_TOGGLE_EDIT,
 });

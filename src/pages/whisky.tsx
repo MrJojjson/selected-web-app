@@ -1,18 +1,18 @@
 import { map } from 'ramda';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Text } from '../components/atoms';
-import { ExistingItem } from '../components/molecules/bars/existingItem';
-import { WhiskySpot } from '../components/molecules/spot/whisky';
+import { AddedWhiskiesForm } from '../components/molecules/forms/whiskies/addedWhiskiesForm';
 import { fetchData } from '../hooks/useApi';
 import { PageLayout } from '../layout/pageLayout';
 import { getAuthTokenState, whiskiesAddData, whiskiesSetFetch } from '../redux';
-import { getWhiskiesState } from '../redux/selectors/whiskiesSelector';
+import { getWhiskiesFetchState } from '../redux/selectors/whiskiesSelector';
+import { WhiskiesDataType } from '../redux/types/whiskyTypes';
+import { WhiskyVars, WhiskyVarsType } from '../types/whiskyTypes';
 
 export const Whisky = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
-    const { data = [], fetch } = getWhiskiesState();
+    const fetch = getWhiskiesFetchState();
 
     useEffect(() => {
         if (fetch) {
@@ -20,25 +20,34 @@ export const Whisky = () => {
                 endpoint: 'whiskies',
                 token,
             })
-                .then((data) => {
-                    dispatch(whiskiesSetFetch({ fetch: false }));
-                    dispatch(whiskiesAddData({ data }));
+                .then((res) => {
+                    if (!res?.message) {
+                        dispatch(whiskiesSetFetch({ fetch: false }));
+                        const data = map((rest) => {
+                            const whisky = map(
+                                ({ id, title, type }) => ({ value: rest[id], id, title, type } as WhiskyVarsType),
+                                WhiskyVars,
+                            );
+
+                            const returnWhisky = {
+                                data: whisky,
+                                uid: rest.id,
+                                title: rest.name,
+                                description: rest.distillery,
+                                meta: rest.distilledDate,
+                            } as WhiskiesDataType;
+                            return returnWhisky;
+                        }, res);
+                        dispatch(whiskiesAddData({ data }));
+                    }
                 })
                 .catch((err) => console.log('err', err));
         }
     }, [fetch]);
 
-    const returnWhiskies = map(({ ...rest }) => {
-        const { id, name, distillery, distilledDate } = rest || {};
-        return (
-            <ExistingItem
-                title={name}
-                description={distillery}
-                meta={distilledDate.toString()}
-                content={<WhiskySpot />}
-            />
-        );
-    }, data);
-
-    return <PageLayout>{returnWhiskies}</PageLayout>;
+    return (
+        <PageLayout disableLayout>
+            <AddedWhiskiesForm key="added-whiskies-form" />
+        </PageLayout>
+    );
 };

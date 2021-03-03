@@ -1,0 +1,29 @@
+@import '../../../../common/sass/mixins/flex.scss';
+@import '../../../../common/sass/metrics.scss';
+@import '../../../../common/sass/colors.scss';
+
+.whisky_list_form {
+    @include flex(flex-start, flex-start, column);
+}
+.whisky_list_container {
+    width: 100%;
+    margin-top: $default-margin;
+
+    .whisky_list_container_list {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        row-gap: $default-padding * 2;
+        column-gap: $default-padding;
+    }
+}
+.whisky_list_bar_description {
+    @include flex(center, flex-start, row);
+    flex-wrap: wrap;
+    width: 100%;
+    .whisky_list_selector {
+        margin-right: $default-margin;
+    }
+}

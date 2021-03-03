@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Bar } from '../../../../layout/barLayout/bar';
+import { BarElement } from '../../../../layout/barLayout/bar';
 import { purchaseIncomingSelected } from '../../../../redux';
 import { Button } from '../../../atoms';
 
@@ -17,5 +17,5 @@ export const CaskNav = () => {
         />
     );
 
-    return <Bar left={test} />;
+    return <BarElement end={test} />;
 };
