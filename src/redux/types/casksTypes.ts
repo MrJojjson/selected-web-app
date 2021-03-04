@@ -1,16 +1,20 @@
 import { BarElementType, BarHeadingType } from '../../layout/barLayout/bar';
 import { CaskVarsType } from '../../types/caskTypes';
+import { FormsListWhiskyOnBlurType } from './formsTypes';
 
 export const CASKS_SELECTED = 'CASKS_SELECTED';
 export const CASKS_ADD_DATA = 'CASKS_ADD_DATA';
 export const CASKS_SET_FETCH = 'CASKS_SET_FETCH';
 export const CASKS_TOGGLE_EDIT = 'CASKS_TOGGLE_EDIT';
+export const CASKS_RENAME = 'CASKS_RENAME';
+export const CASKS_REDO = 'CASKS_REDO';
 
 export type CasksState = {
     data: CasksDataType[];
     selected: string[];
     fetch: boolean;
     edit: boolean;
+    history: CasksDataType[][];
 };
 
 export type CasksDataType = Omit<BarElementType, 'className'> &
@@ -57,4 +61,23 @@ export type CasksToggleEditAction = {
     type: 'CASKS_TOGGLE_EDIT';
 };
 
-export type CasksActions = CasksSelectedAction | CasksAddDataAction | CasksSetFetchAction | CasksToggleEditAction;
+// REDO
+export type CasksRedoAction = {
+    type: 'CASKS_REDO';
+};
+
+// RENAME
+export type CasksRenameActionType = FormsListWhiskyOnBlurType;
+
+export type CasksRenameAction = {
+    type: 'CASKS_RENAME';
+    payload: CasksRenameActionType;
+};
+
+export type CasksActions =
+    | CasksSelectedAction
+    | CasksAddDataAction
+    | CasksSetFetchAction
+    | CasksToggleEditAction
+    | CasksRedoAction
+    | CasksRenameAction;

@@ -103,7 +103,6 @@ export const PurchaseNav = () => {
     const onSubmit = () => {
         map(async ({ data: addedData, fetch }) => {
             const data = mergeAll(map(({ id, value }) => ({ [(id as unknown) as string]: value }), addedData));
-            console.log('data', data);
 
             await fetchData({
                 data,

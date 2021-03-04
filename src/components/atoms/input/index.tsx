@@ -41,7 +41,6 @@ export const Input = ({
             options: { year: 'numeric', month: 'numeric', day: 'numeric' },
             locale: 'sv-SE',
         });
-        console.log('rest', rest);
     }
 
     const [val, setVal] = useState<string | number>(value);

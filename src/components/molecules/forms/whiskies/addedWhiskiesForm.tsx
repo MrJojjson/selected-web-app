@@ -6,7 +6,6 @@ import { InputList } from '../lists/inputList';
 
 export const AddedWhiskiesForm = () => {
     const { data, selected, edit } = getWhiskiesState();
-    console.log('data', data);
 
     const returnWhiskies = map(({ uid, data, ...rest }) => {
         return (

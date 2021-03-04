@@ -3,11 +3,66 @@
 @import '../../common/sass/mixins/flex.scss';
 
 .page_layout {
-    @include flex(flex-start, flex-start, row);
+    @include flex(flex-start, space-between, row);
     flex-wrap: wrap;
     width: 100%;
     height: auto;
     padding: $default-padding;
     box-sizing: border-box;
     border-radius: $default-border-radius;
+
+    &.columns-1 > * {
+        width: 100%;
+        .input_list_container {
+            li {
+                width: 22.5%;
+            }
+        }
+    }
+
+    &.columns-2 > * {
+        width: 47.5%;
+        .input_list_container {
+            li {
+                width: 45%;
+            }
+        }
+    }
+
+    &.columns-3 > *,
+    &.columns-4 > * {
+        width: 30%;
+        .input_list_container {
+            li {
+                width: 100%;
+                margin: 0 0 $default-margin 0;
+            }
+        }
+        .bar_element {
+            position: relative;
+
+            .start {
+                @include flex(flex-start, space-between, column);
+                margin: 0;
+                p {
+                    margin: 0;
+                }
+                .input_list_selector {
+                    margin: 0;
+                    position: absolute;
+                    top: -$default-padding * 1.5;
+                    left: -$default-padding * 2.75;
+                }
+            }
+        }
+    }
+
+    &.columns-4 > * {
+        width: 22.5%;
+        .input_list_container {
+            li {
+                width: 100%;
+            }
+        }
+    }
 }

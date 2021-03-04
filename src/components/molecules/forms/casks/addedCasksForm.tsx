@@ -1,7 +1,7 @@
 import { map } from 'ramda';
 import React from 'react';
 import { CompLayout } from '../../../../layout/compLayout';
-import { casksSelected } from '../../../../redux/actions/casksActions';
+import { casksRename, casksSelected } from '../../../../redux/actions/casksActions';
 import { getCasksState } from '../../../../redux/selectors/casksSelector';
 import { InputList } from '../lists/inputList';
 
@@ -14,8 +14,7 @@ export const AddedCasksForm = () => {
                     uid={uid}
                     selected={selected}
                     onChangeSelect={({ uid }) => casksSelected({ id: uid })}
-                    onBlurInput={(props) => console.log('props', props)}
-                    onChangeWorkingTitle={(props) => console.log('props', props)}
+                    onBlurInput={(props) => casksRename({ ...props })}
                     data={[{ data, uid }]}
                     overrideOpen={false}
                     edit={edit}

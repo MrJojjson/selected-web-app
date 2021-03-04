@@ -8,22 +8,17 @@
 .input_list_container {
     width: 100%;
     padding: $default-padding * 2 0;
-
+    @include flex(flex-start, flex-start, row);
+    flex-wrap: wrap;
+    li {
+        &:not(:last-of-type) {
+            margin: 0 $default-margin $default-margin 0;
+        }
+    }
     .bar_element {
         margin-bottom: $default-margin;
     }
-    .input_list_container_heading {
-        @include flex(flex-start, flex-start, row);
-    }
-    .input_list_container_list {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        row-gap: $default-padding * 2;
-        column-gap: $default-padding;
-    }
+
     &:not(:last-of-type) {
         border-bottom: 1px solid $color-primary-border;
     }
@@ -45,6 +40,7 @@
     &.hide {
         margin-right: 0px;
         width: 0px;
+        height: 0px;
         overflow: hidden;
     }
 }

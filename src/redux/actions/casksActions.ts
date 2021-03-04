@@ -6,6 +6,9 @@ import {
     CASKS_SET_FETCH,
     CasksSetFetchActionType,
     CASKS_TOGGLE_EDIT,
+    CasksRenameActionType,
+    CASKS_RENAME,
+    CASKS_REDO,
 } from '../types/casksTypes';
 
 export const casksSelected = ({ ...props }: CasksSelectedActionType) => ({
@@ -25,4 +28,13 @@ export const casksSetFetch = ({ ...props }: CasksSetFetchActionType) => ({
 
 export const casksToggleEdit = () => ({
     type: CASKS_TOGGLE_EDIT,
+});
+
+export const casksRedo = () => ({
+    type: CASKS_REDO,
+});
+
+export const casksRename = ({ ...props }: CasksRenameActionType) => ({
+    type: CASKS_RENAME,
+    payload: { ...props },
 });

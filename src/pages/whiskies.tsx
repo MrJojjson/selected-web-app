@@ -6,6 +6,7 @@ import { AddedWhiskiesForm } from '../components/molecules/forms/whiskies/addedW
 import { fetchData } from '../hooks/useApi';
 import { PageLayout } from '../layout/pageLayout';
 import { getAuthTokenState, whiskiesAddData, whiskiesSetFetch } from '../redux';
+import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
 import { getWhiskiesFetchState } from '../redux/selectors/whiskiesSelector';
 import { WhiskiesDataType } from '../redux/types/whiskyTypes';
 import { APIWhiskiesReturnType, WhiskyVars, WhiskyVarsType } from '../types/whiskyTypes';
@@ -14,7 +15,7 @@ export const Whiskies = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const fetch = getWhiskiesFetchState();
-
+    const columns = getSystemLayoutColumnsState({ page: 'whiskies' });
     useEffect(() => {
         if (fetch) {
             fetchData({
@@ -51,7 +52,7 @@ export const Whiskies = () => {
     }, [fetch]);
 
     return (
-        <PageLayout disableLayout>
+        <PageLayout columns={columns} disableLayout>
             <AddedWhiskiesForm key="added-whiskies-form" />
         </PageLayout>
     );

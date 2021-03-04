@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     getAuthTokenState,
     getWhiskiesState,
+    setSystemLayoutColumns,
     whiskiesRedo,
     whiskiesSelected,
     whiskiesToggleEdit,
 } from '../../../../redux';
+import { getSystemLayoutColumnsState } from '../../../../redux/selectors/systemSelector';
 import { Button } from '../../../atoms';
 import { NavbarContentTemplate } from '../navbarContentTemplate';
 
 export const WhiskyNav = () => {
     const dispatch = useDispatch();
     const { selected, data, edit, history } = getWhiskiesState();
+    const columns = getSystemLayoutColumnsState({ page: 'whiskies' });
     const token = getAuthTokenState();
 
     const selectedExists = selected?.length > 0;
@@ -63,6 +66,24 @@ export const WhiskyNav = () => {
             onClick={() => dispatch(whiskiesSelected({ clear: true }))}
         />
     );
+    let columnsNr = Number(columns);
+    let columnsCarousel = columnsNr + 1;
+    if (columnsCarousel > 4) {
+        columnsCarousel = 1;
+    }
+    const layout = (
+        <Button
+            mini
+            label={`Columns ${columnsCarousel}`}
+            theme="highlight"
+            icon="wizards-of-the-coast"
+            onClick={() =>
+                dispatch(
+                    setSystemLayoutColumns({ page: 'whiskies', columns: columnsCarousel.toString() as typeof columns }),
+                )
+            }
+        />
+    );
 
     const onSubmit = () => {
         // map(async ({ data: addedData }) => {
@@ -99,6 +120,7 @@ export const WhiskyNav = () => {
         <>
             {historyExists && redo}
             {editBtn}
+            {layout}
         </>
     );
 

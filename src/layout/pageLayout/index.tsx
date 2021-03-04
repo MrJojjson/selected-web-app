@@ -1,19 +1,28 @@
 import { map } from 'ramda';
 import React from 'react';
+import { SystemLayoutPageState } from '../../redux/types/systemTypes';
 import { CompLayout } from '../compLayout';
 import './pageLayout.style.scss';
 
 type PageLayoutType = {
     children: JSX.Element | JSX.Element[];
     disableLayout?: boolean;
+    columns?: SystemLayoutPageState['columns'];
 };
 
-const layout = (child: JSX.Element) => <CompLayout key={child?.key}>{child}</CompLayout>;
+type LayoutType = {
+    child: JSX.Element;
+};
 
-export const PageLayout = ({ children, disableLayout = false }: PageLayoutType) => {
-    let renderChildren = Array.isArray(children) ? map((child) => layout(child), children) : layout(children);
+const layout = ({ child }: LayoutType) => <CompLayout key={child?.key}>{child}</CompLayout>;
+
+export const PageLayout = ({ children, disableLayout = false, columns }: PageLayoutType) => {
+    let renderChildren = Array.isArray(children)
+        ? map((child) => layout({ child }), children)
+        : layout({ child: children });
     if (disableLayout) {
         renderChildren = children;
     }
-    return <div className="page_layout">{renderChildren}</div>;
+
+    return <div className={`page_layout columns-${columns}`}>{renderChildren}</div>;
 };

@@ -13,10 +13,18 @@ import { PurchaseReducer } from './purchaseReducer';
 import { WhiskiesActions } from '../types/whiskyTypes';
 import { CasksReducer } from './casksReducer';
 import { CasksActions } from '../types/casksTypes';
+import { SystemReducer } from './systemReducer';
+import { SystemActions } from '../types/systemTypes';
 
 export type ThunkResult<R> = ThunkAction<R, StoreState, undefined, any>;
 
-export type StoreAction = ModalActions | AlertActions | PurchaseActions | WhiskiesActions | CasksActions;
+export type StoreAction =
+    | ModalActions
+    | AlertActions
+    | PurchaseActions
+    | WhiskiesActions
+    | CasksActions
+    | SystemActions;
 
 export const rootReducer: Reducer<StoreState, StoreAction> = combineReducers({
     purchase: PurchaseReducer,
@@ -25,4 +33,5 @@ export const rootReducer: Reducer<StoreState, StoreAction> = combineReducers({
     modal: ModalReducer,
     whiskies: WhiskiesReducer,
     casks: CasksReducer,
+    system: SystemReducer,
 });

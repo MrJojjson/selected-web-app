@@ -1,30 +1,35 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { getAuthTokenState } from '../../../../redux';
-import { casksSelected, casksToggleEdit } from '../../../../redux/actions/casksActions';
+import { getAuthTokenState, setSystemLayoutColumns } from '../../../../redux';
+import { casksRedo, casksSelected, casksToggleEdit } from '../../../../redux/actions/casksActions';
 import { getCasksState } from '../../../../redux/selectors/casksSelector';
+import { getSystemLayoutColumnsState } from '../../../../redux/selectors/systemSelector';
 import { Button } from '../../../atoms';
 import { NavbarContentTemplate } from '../navbarContentTemplate';
 
 export const CaskNav = () => {
     const dispatch = useDispatch();
-    const { selected, data, edit } = getCasksState();
+    const { selected, data, edit, history } = getCasksState();
     const token = getAuthTokenState();
+    const columns = getSystemLayoutColumnsState({ page: 'casks' });
 
     const selectedExists = selected?.length > 0;
     const dataExists = data?.length > 0;
 
     const allSelected = selected?.length === data.length;
+    const historyExists = history?.length > 0;
 
     const editBtn = (
         <Button
             mini
-            label={edit ? 'Undo' : 'Edit'}
+            label={edit ? 'Done' : 'Edit'}
             theme="highlight"
-            icon={edit ? 'redo' : 'edit'}
+            icon={edit ? 'times' : 'edit'}
             onClick={() => dispatch(casksToggleEdit())}
         />
     );
+
+    const redo = <Button mini label={'Redo'} theme="highlight" icon={'redo'} onClick={() => dispatch(casksRedo())} />;
 
     const selectAll = (
         <Button
@@ -56,13 +61,22 @@ export const CaskNav = () => {
         />
     );
 
-    const archive = (
+    let columnsNr = Number(columns);
+    let columnsCarousel = columnsNr + 1;
+    if (columnsCarousel > 4) {
+        columnsCarousel = 1;
+    }
+    const layout = (
         <Button
             mini
-            label="Archive"
-            theme="primary"
-            icon="archive"
-            onClick={() => dispatch(casksSelected({ clear: true }))}
+            label={`Columns ${columnsCarousel}`}
+            theme="highlight"
+            icon="wizards-of-the-coast"
+            onClick={() =>
+                dispatch(
+                    setSystemLayoutColumns({ page: 'casks', columns: columnsCarousel.toString() as typeof columns }),
+                )
+            }
         />
     );
 
@@ -88,15 +102,22 @@ export const CaskNav = () => {
 
     const submit = <Button mini label="Save" theme="highlight" icon="save" onClick={onSubmit} />;
 
-    const leftBar = edit && (
+    const startBar = (
         <>
-            {dataExists && selectAll}
-            {selectedExists && !allSelected && clear}
-            {selectedExists && remove}
-            {selectedExists && archive}
-            {selectedExists && submit}
+            {edit && dataExists && selectAll}
+            {edit && selectedExists && !allSelected && clear}
+            {edit && selectedExists && remove}
+            {historyExists && submit}
         </>
     );
 
-    return <NavbarContentTemplate start={leftBar} end={editBtn} />;
+    const endBar = (
+        <>
+            {historyExists && redo}
+            {editBtn}
+            {layout}
+        </>
+    );
+
+    return <NavbarContentTemplate start={startBar} end={endBar} />;
 };

@@ -47,16 +47,14 @@ export const InputList = ({
     );
     return (
         <BarLayout start={perElement ? header : barLayoutStart} overrideOpen={existsData}>
-            <ul className="input_list_form">
-                <InputListContainer
-                    data={data}
-                    edit={edit}
-                    meta={meta}
-                    description={description}
-                    perElement={perElement}
-                    {...rest}
-                />
-            </ul>
+            <InputListContainer
+                data={data}
+                edit={edit}
+                meta={meta}
+                description={description}
+                perElement={perElement}
+                {...rest}
+            />
         </BarLayout>
     );
 };
@@ -94,12 +92,10 @@ export const InputListContainer = ({
             />
         );
         return (
-            <li key={uid} className="input_list_container">
+            <>
                 {perElement && <BarElement start={heading} />}
-                <ul className="input_list_container_list">
-                    <InputListItems edit={edit} data={data} uid={uid} onBlurInput={onBlurInput} />
-                </ul>
-            </li>
+                <InputListItems edit={edit} data={data} uid={uid} onBlurInput={onBlurInput} />
+            </>
         );
     }, data);
     return <>{container}</>;
@@ -145,7 +141,7 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
         dispatch(onBlurInput({ uid, id, value }));
     };
     return (
-        <>
+        <ul className="input_list_container">
             {map(
                 ({ id, title, type, value }) => (
                     <li key={`${uid}-${id}`}>
@@ -164,6 +160,6 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
                 ),
                 data,
             )}
-        </>
+        </ul>
     );
 };

@@ -1,8 +1,11 @@
-import { append, includes, lensPath, pluck, reject, set, without } from 'ramda';
+import { append, findIndex, includes, lensPath, pluck, propEq, reject, set, without } from 'ramda';
 import {
     CasksActions,
+    CasksDataType,
     CasksState,
     CASKS_ADD_DATA,
+    CASKS_REDO,
+    CASKS_RENAME,
     CASKS_SELECTED,
     CASKS_SET_FETCH,
     CASKS_TOGGLE_EDIT,
@@ -13,12 +16,26 @@ const initialState: CasksState = {
     selected: [],
     fetch: true,
     edit: false,
+    history: [],
 };
+
+type FindDataIndex = {
+    data: CasksDataType[];
+    uid: string;
+};
+
+const findUidIndex = ({ data, uid }: FindDataIndex) => findIndex(propEq('uid', uid))(data);
 
 export const CasksReducer = (state: CasksState = initialState, action: CasksActions) => {
     const { data, selected } = state;
 
     switch (action.type) {
+        case CASKS_REDO:
+            const lastHist = state.history.pop();
+            if (lastHist === undefined) {
+                return { ...state, edit: false, history: [] };
+            }
+            return { ...state, data: lastHist, history: state.history };
         case CASKS_SELECTED:
             if (action.payload.remove) {
                 return {
@@ -52,6 +69,14 @@ export const CasksReducer = (state: CasksState = initialState, action: CasksActi
             return set(lensPath(['fetch']), action.payload.fetch, state);
         case CASKS_TOGGLE_EDIT:
             return set(lensPath(['edit']), !state.edit, state);
+        case CASKS_RENAME:
+            const index = findUidIndex({ data, uid: action?.payload.uid });
+            const deepIndex = findIndex(propEq('id', action?.payload.id))(data[index].data);
+
+            return set(lensPath(['data', index, 'data', deepIndex, 'value']), action?.payload.value, {
+                ...state,
+                history: [...state.history, data],
+            });
         default:
             return state;
     }

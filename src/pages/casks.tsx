@@ -8,6 +8,7 @@ import { PageLayout } from '../layout/pageLayout';
 import { getAuthTokenState } from '../redux';
 import { casksAddData, casksSetFetch } from '../redux/actions/casksActions';
 import { getCasksFetchState } from '../redux/selectors/casksSelector';
+import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
 import { CasksDataType } from '../redux/types/casksTypes';
 import { APICaskReturnType, CaskVars, CaskVarsType } from '../types/caskTypes';
 
@@ -15,7 +16,7 @@ export const Casks = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const fetch = getCasksFetchState();
-
+    const columns = getSystemLayoutColumnsState({ page: 'casks' });
     useEffect(() => {
         if (fetch) {
             fetchData({
@@ -51,7 +52,7 @@ export const Casks = () => {
     }, [fetch]);
 
     return (
-        <PageLayout disableLayout>
+        <PageLayout columns={columns} disableLayout>
             <AddedCasksForm key="added-casks-form" />
         </PageLayout>
     );
