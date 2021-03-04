@@ -1,29 +1,30 @@
-import { inputType } from './inputTypes';
+import { CaskType } from './caskTypes';
+import { InputVarsType } from './inputTypes';
+
+export type APIWhiskiesReturnType = WhiskyType & {
+    id?: string;
+    createdAtUtc?: string;
+    updatedAtUtc?: string;
+};
 
 export type WhiskyType = {
-    name: string;
-    distillery: string;
-    distilledDate: Date;
-    volume: number;
-    status: string;
-    recipe: string;
-    ppm: number;
-    ola: number;
-    abv: number;
-    createdAtUtc: Date;
-    updatedAtUtc: Date;
-    cask: WhiskyCaskType;
+    name?: string;
+    distillery?: string;
+    distilledDate?: string;
+    volume?: number;
+    status?: string;
+    recipe?: string;
+    ppm?: number;
+    ola?: number;
+    abv?: number;
+    cask?: {
+        id: CaskType['number'];
+    };
 };
 
-type WhiskyKeyType = keyof WhiskyType;
+export type WhiskyKeyType = keyof WhiskyType;
 
-export type WhiskyVarsType = {
-    id: WhiskyKeyType;
-    title: string;
-    type?: inputType;
-    value?: string;
-};
-
+export type WhiskyVarsType = InputVarsType<WhiskyKeyType>;
 export const WhiskyVars: WhiskyVarsType[] = [
     {
         id: 'name',
@@ -78,25 +79,6 @@ export const WhiskyVars: WhiskyVarsType[] = [
         title: 'ABV',
         type: 'number',
         value: '',
-    },
-];
-
-export type WhiskyCaskType = {
-    id: string;
-    number: string;
-};
-
-type WhiskyCaskKeyType = keyof WhiskyCaskType;
-
-type WhiskyCaskVarsType = {
-    id: WhiskyCaskKeyType;
-    title: string;
-};
-
-export const WhiskyCaskVars: WhiskyCaskVarsType[] = [
-    {
-        id: 'number',
-        title: 'Cask number',
     },
 ];
 

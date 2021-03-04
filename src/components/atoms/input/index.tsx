@@ -1,10 +1,11 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { inputAutoCompleteTypes, inputType } from '../../../types/inputTypes';
 import { themeType } from '../../../types/commonTypes';
 
 import { Text } from '../';
 import './input.style.scss';
 import cn from 'classnames';
+import { DateFormatted } from '../../../common/utils/dateFormat';
 
 export type InputType = {
     onChange?: (event: ChangeEvent<EventTarget & HTMLInputElement>) => void;
@@ -16,10 +17,9 @@ export type InputType = {
     id?: string;
     error?: string;
     theme?: themeType;
-    value?: string;
     autoComplete?: inputAutoCompleteTypes;
     required?: boolean;
-    defaultValue?: string;
+    value?: string;
     className?: string;
     disabled?: boolean;
 };
@@ -32,8 +32,22 @@ export const Input = ({
     error = '',
     className,
     disabled = false,
+    value,
     ...rest
 }: InputType) => {
+    if (rest.type === 'date') {
+        value = DateFormatted({
+            date: value,
+            options: { year: 'numeric', month: 'numeric', day: 'numeric' },
+            locale: 'sv-SE',
+        });
+        console.log('rest', rest);
+    }
+
+    const [val, setVal] = useState<string | number>(value);
+    useEffect(() => {
+        setVal(value);
+    }, [value]);
     return (
         <div
             className={cn('input_wrapper', theme, className, {
@@ -41,9 +55,10 @@ export const Input = ({
             })}
         >
             <input
-                onChange={(event) => onChange && onChange(event)}
+                onChange={({ currentTarget }) => setVal(currentTarget.value)}
                 onBlur={(event) => onBlur && onBlur(event)}
                 disabled={disabled}
+                value={val}
                 {...rest}
             />
             <label className="label" htmlFor={rest.name}>

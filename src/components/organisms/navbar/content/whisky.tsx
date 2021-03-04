@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
     getAuthTokenState,
     getWhiskiesState,
-    purchaseIncomingSelected,
+    whiskiesRedo,
     whiskiesSelected,
     whiskiesToggleEdit,
 } from '../../../../redux';
@@ -12,22 +12,26 @@ import { NavbarContentTemplate } from '../navbarContentTemplate';
 
 export const WhiskyNav = () => {
     const dispatch = useDispatch();
-    const { selected, data, edit } = getWhiskiesState();
+    const { selected, data, edit, history } = getWhiskiesState();
     const token = getAuthTokenState();
 
     const selectedExists = selected?.length > 0;
     const dataExists = data?.length > 0;
 
     const allSelected = selected?.length === data.length;
-
+    const historyExists = history?.length > 0;
     const editBtn = (
         <Button
             mini
-            label={edit ? 'Undo' : 'Edit'}
+            label={edit ? 'Done' : 'Edit'}
             theme="highlight"
-            icon={edit ? 'redo' : 'edit'}
+            icon={edit ? 'times' : 'edit'}
             onClick={() => dispatch(whiskiesToggleEdit())}
         />
+    );
+
+    const redo = (
+        <Button mini label={'Redo'} theme="highlight" icon={'redo'} onClick={() => dispatch(whiskiesRedo())} />
     );
 
     const selectAll = (
@@ -60,16 +64,6 @@ export const WhiskyNav = () => {
         />
     );
 
-    const archive = (
-        <Button
-            mini
-            label="Archive"
-            theme="primary"
-            icon="archive"
-            onClick={() => dispatch(whiskiesSelected({ clear: true }))}
-        />
-    );
-
     const onSubmit = () => {
         // map(async ({ data: addedData }) => {
         //     const data = mergeAll(map(({ id, value }) => ({ [id]: value }), addedData));
@@ -92,15 +86,21 @@ export const WhiskyNav = () => {
 
     const submit = <Button mini label="Save" theme="highlight" icon="save" onClick={onSubmit} />;
 
-    const leftBar = edit && (
+    const startBar = (
         <>
-            {dataExists && selectAll}
-            {selectedExists && !allSelected && clear}
-            {selectedExists && remove}
-            {selectedExists && archive}
-            {selectedExists && submit}
+            {edit && dataExists && selectAll}
+            {edit && selectedExists && !allSelected && clear}
+            {edit && selectedExists && remove}
+            {historyExists && submit}
         </>
     );
 
-    return <NavbarContentTemplate start={leftBar} end={editBtn} />;
+    const endBar = (
+        <>
+            {historyExists && redo}
+            {editBtn}
+        </>
+    );
+
+    return <NavbarContentTemplate start={startBar} end={endBar} />;
 };

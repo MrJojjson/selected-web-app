@@ -24,7 +24,7 @@ const navList: { path: string; comp: JSX.Element }[] = [
         comp: <CaskNav />,
     },
     {
-        path: 'whisky',
+        path: 'whiskies',
         comp: <WhiskyNav />,
     },
     {

@@ -4,7 +4,7 @@ import { PageLayout } from '../layout/pageLayout';
 
 export const Purchases = () => {
     return (
-        <PageLayout disableLayout>
+        <PageLayout>
             <NewPurchaseForm key="purchases-incoming-item" />
         </PageLayout>
     );

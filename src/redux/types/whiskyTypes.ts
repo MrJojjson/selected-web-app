@@ -1,21 +1,26 @@
-import { BarType } from '../../layout/barLayout/bar';
-import { FormsListWhiskyListItemsType } from './formsTypes';
+import { BarElementType } from '../../layout/barLayout/bar';
+import { WhiskyVarsType } from '../../types/whiskyTypes';
+import { FormsListWhiskyOnBlurType } from '../types/formsTypes';
 
 export const WHISKIES_SELECTED = 'WHISKIES_SELECTED';
 export const WHISKIES_ADD_DATA = 'WHISKIES_ADD_DATA';
 export const WHISKIES_SET_FETCH = 'WHISKIES_SET_FETCH';
 export const WHISKIES_TOGGLE_EDIT = 'WHISKIES_TOGGLE_EDIT';
 
+export const WHISKIES_RENAME = 'WHISKIES_RENAME';
+export const WHISKIES_REDO = 'WHISKIES_REDO';
+
 export type WhiskiesState = {
     data: WhiskiesDataType[];
     selected: string[];
     fetch: boolean;
     edit: boolean;
+    history: WhiskiesDataType[][];
 };
 
-export type WhiskiesDataType = Omit<BarType, 'barBtn' | 'className'> & {
-    data: FormsListWhiskyListItemsType['data'];
-    uid: FormsListWhiskyListItemsType['uid'];
+export type WhiskiesDataType = Omit<BarElementType, 'barBtn' | 'className'> & {
+    data: WhiskyVarsType[];
+    uid: string;
 };
 
 // SELECTED
@@ -56,4 +61,23 @@ export type WhiskiesToggleEditAction = {
     type: 'WHISKIES_TOGGLE_EDIT';
 };
 
-export type WhiskiesActions = WhiskiesSelectedAction | WhiskiesAddDataAction | WhiskiesSetFetchAction;
+// REDO
+export type WhiskiesRedoAction = {
+    type: 'WHISKIES_REDO';
+};
+
+// RENAME
+export type WhiskiesRenameActionType = FormsListWhiskyOnBlurType;
+
+export type WhiskiesRenameAction = {
+    type: 'WHISKIES_RENAME';
+    payload: WhiskiesRenameActionType;
+};
+
+export type WhiskiesActions =
+    | WhiskiesSelectedAction
+    | WhiskiesAddDataAction
+    | WhiskiesSetFetchAction
+    | WhiskiesToggleEditAction
+    | WhiskiesRedoAction
+    | WhiskiesRenameAction;

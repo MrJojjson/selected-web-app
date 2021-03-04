@@ -1,26 +1,15 @@
-import {
-    append,
-    findIndex,
-    includes,
-    insert,
-    lensPath,
-    map,
-    over,
-    pluck,
-    propEq,
-    reject,
-    set,
-    view,
-    without,
-} from 'ramda';
+import { append, findIndex, includes, lensPath, pluck, propEq, reject, set, without } from 'ramda';
 import { uniqueId } from '../../common/utils/uniqueId';
+import { UseApiType } from '../../types/apiTypes';
+import { CaskVars } from '../../types/caskTypes';
+import { WhiskyCaskVars } from '../../types/whiskyCaskTypes';
 import { WhiskyVars } from '../../types/whiskyTypes';
 import {
     PurchaseActions,
     PurchaseState,
-    PURCHASE_INCOMING_SELECTED,
-    PURCHASE_INCOMING_ADDED_DATA,
     PURCHASE_INCOMING_ADDED,
+    PURCHASE_INCOMING_ADDED_DATA,
+    PURCHASE_INCOMING_SELECTED,
 } from '../types/purchaseTypes';
 
 const initialState: PurchaseState = {
@@ -31,14 +20,30 @@ const initialState: PurchaseState = {
     },
 };
 
+let defaultFetch: UseApiType = {
+    endpoint: 'whiskies',
+    method: 'post',
+};
+
 export const PurchaseReducer = (state: PurchaseState = initialState, action: PurchaseActions) => {
     const { selected, added, data } = state.incoming;
 
     switch (action.type) {
         case PURCHASE_INCOMING_ADDED:
+            let incomingAddData: any[] = WhiskyCaskVars;
+            let uidPrefix = 'new-whisky-cask';
+            if (action.payload.cask) {
+                incomingAddData = CaskVars;
+                uidPrefix = 'new-cask';
+                defaultFetch.endpoint = 'casks';
+            }
+            if (action.payload.whisky) {
+                incomingAddData = WhiskyVars;
+                uidPrefix = 'new-whisky';
+            }
             return set(
                 lensPath(['incoming', 'added']),
-                append({ data: WhiskyVars, uid: uniqueId('new-whisky-') }, state.incoming.added),
+                append({ data: incomingAddData, uid: uniqueId(uidPrefix), fetch: defaultFetch }, state.incoming.added),
                 state,
             );
 

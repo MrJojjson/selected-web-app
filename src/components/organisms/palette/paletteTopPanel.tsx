@@ -19,8 +19,8 @@ const links: LinkType[] = [
         icon: 'pallet',
     },
     {
-        title: 'Whisky',
-        pathname: '/whisky',
+        title: 'Whiskies',
+        pathname: '/whiskies',
         icon: 'flask',
     },
 ];

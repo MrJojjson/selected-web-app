@@ -1,43 +1,43 @@
 import { BarLayoutType } from '../../layout/barLayout';
-import { WhiskyVarsType } from '../../types/whiskyTypes';
+import { BarHeadingType } from '../../layout/barLayout/bar';
+import { CaskKeyType } from '../../types/caskTypes';
+import { InputVarsType } from '../../types/inputTypes';
+import { WhiskyCaskVarsType } from '../../types/whiskyCaskTypes';
+import { WhiskyKeyType } from '../../types/whiskyTypes';
 
-export type FormsListWhiskyListType = FormsListWhiskyListContainerType & BarLayoutType;
+export type FormsListInputListType = FormsListInputListContainerType & BarLayoutType;
 
-export type FormsListWhiskyListContainerType = Pick<
-    FormsListWhiskyListBarType,
-    'onChangeSelect' | 'onChangeWorkingTitle' | 'edit'
+export type FormsListInputListContainerType = Pick<
+    FormsListInputListBarType,
+    'onChangeSelect' | 'edit' | 'perElement' | 'description' | 'meta'
 > &
-    Pick<FormsListWhiskyListItemsType, 'onBlurInput'> & {
-        data: FormsListWhiskyListItemsType[];
+    Pick<FormsListInputListItemsType, 'onBlurInput'> & {
+        data: FormsListInputListItemsType[];
         selected: string[];
         uid?: string;
     };
 
-type FormsListWhiskyOnBlurType = {
+export type FormsListWhiskyOnBlurType = {
     uid: string;
     id: string;
     value: string;
 };
 
-export type FormsListWhiskyListItemsType = {
-    data: WhiskyVarsType[];
+export type FormsListInputListItemsType = {
+    data: InputVarsType<CaskKeyType | WhiskyKeyType | WhiskyCaskVarsType>[];
     uid: string;
     edit?: boolean;
     onBlurInput?: ({ ...rest }: FormsListWhiskyOnBlurType) => void;
 };
 
-type FormsListWhiskyListBarOnChangeType = {
+type FormsListInputListBarOnChangeType = {
     uid: string;
 };
 
-type FormsListWhiskyListBaronChangeWorkingTitleType = {
-    event: React.ChangeEvent<EventTarget & HTMLInputElement>;
-};
-
-export type FormsListWhiskyListBarType = {
+export type FormsListInputListBarType = BarHeadingType & {
     uid: string;
     isSelected: boolean;
-    onChangeSelect: ({ uid }: FormsListWhiskyListBarOnChangeType) => void;
-    onChangeWorkingTitle: ({ event }: FormsListWhiskyListBaronChangeWorkingTitleType) => void;
+    onChangeSelect: ({ uid }: FormsListInputListBarOnChangeType) => void;
     edit?: boolean;
+    perElement?: boolean;
 };

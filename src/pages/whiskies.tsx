@@ -1,15 +1,16 @@
 import { map } from 'ramda';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { DateFormatted } from '../common/utils/dateFormat';
 import { AddedWhiskiesForm } from '../components/molecules/forms/whiskies/addedWhiskiesForm';
 import { fetchData } from '../hooks/useApi';
 import { PageLayout } from '../layout/pageLayout';
 import { getAuthTokenState, whiskiesAddData, whiskiesSetFetch } from '../redux';
 import { getWhiskiesFetchState } from '../redux/selectors/whiskiesSelector';
 import { WhiskiesDataType } from '../redux/types/whiskyTypes';
-import { WhiskyVars, WhiskyVarsType } from '../types/whiskyTypes';
+import { APIWhiskiesReturnType, WhiskyVars, WhiskyVarsType } from '../types/whiskyTypes';
 
-export const Whisky = () => {
+export const Whiskies = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const fetch = getWhiskiesFetchState();
@@ -20,22 +21,26 @@ export const Whisky = () => {
                 endpoint: 'whiskies',
                 token,
             })
-                .then((res) => {
+                .then((res: APIWhiskiesReturnType[]) => {
                     if (!res?.message) {
                         dispatch(whiskiesSetFetch({ fetch: false }));
                         const data = map((rest) => {
-                            const whisky = map(
-                                ({ id, title, type }) => ({ value: rest[id], id, title, type } as WhiskyVarsType),
+                            const { id: uid, name: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;
+
+                            const data = map(
+                                ({ id, title, type }) =>
+                                    ({ value: rest[id]?.toString(), id, title, type } as WhiskyVarsType),
                                 WhiskyVars,
                             );
 
                             const returnWhisky = {
-                                data: whisky,
-                                uid: rest.id,
-                                title: rest.name,
-                                description: rest.distillery,
-                                meta: rest.distilledDate,
+                                data,
+                                uid,
+                                title,
+                                description: `Created: ${DateFormatted({ date: createdAtUtc })}`,
+                                meta: `Updated: ${DateFormatted({ date: updatedAtUtc })}`,
                             } as WhiskiesDataType;
+
                             return returnWhisky;
                         }, res);
                         dispatch(whiskiesAddData({ data }));

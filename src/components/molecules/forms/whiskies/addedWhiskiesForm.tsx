@@ -1,20 +1,21 @@
 import { map } from 'ramda';
 import React from 'react';
 import { CompLayout } from '../../../../layout/compLayout';
-import { getWhiskiesState, whiskiesSelected } from '../../../../redux';
-import { WhiskyList } from '../lists/whiskyList';
+import { getWhiskiesState, whiskiesRename, whiskiesSelected } from '../../../../redux';
+import { InputList } from '../lists/inputList';
 
 export const AddedWhiskiesForm = () => {
     const { data, selected, edit } = getWhiskiesState();
+    console.log('data', data);
+
     const returnWhiskies = map(({ uid, data, ...rest }) => {
         return (
             <CompLayout key={uid}>
-                <WhiskyList
+                <InputList
                     uid={uid}
                     selected={selected}
                     onChangeSelect={({ uid }) => whiskiesSelected({ id: uid })}
-                    onBlurInput={(props) => console.log('props', props)}
-                    onChangeWorkingTitle={(props) => console.log('props', props)}
+                    onBlurInput={(props) => whiskiesRename({ ...props })}
                     data={[{ data, uid }]}
                     overrideOpen={false}
                     edit={edit}

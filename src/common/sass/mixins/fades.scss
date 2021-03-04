@@ -16,3 +16,20 @@
         }
     }
 }
+
+@mixin fadeOut($time: $transition-modal-speed) {
+    opacity: 0;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: $time;
+
+    @keyframes fadeInOpacity {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+}
