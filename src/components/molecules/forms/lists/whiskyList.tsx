@@ -30,18 +30,18 @@ export const WhiskyList = ({ data, overrideOpen, uid, edit, description, meta, .
     return (
         <BarLayout start={barLayoutStart} overrideOpen={existsData}>
             <ul className="whisky_list_form">
-                <WhiskyListContainer data={data} {...rest} />
+                <WhiskyListContainer data={data} edit={edit} {...rest} />
             </ul>
         </BarLayout>
     );
 };
 
-export const WhiskyListContainer = ({ data, onBlurInput }: FormsListWhiskyListContainerType) => {
+export const WhiskyListContainer = ({ data, onBlurInput, edit }: FormsListWhiskyListContainerType) => {
     const container = map(({ data = [], uid }) => {
         return (
             <li key={uid} className="whisky_list_container">
                 <ul className="whisky_list_container_list">
-                    <WhiskyListItems data={data} uid={uid} onBlurInput={onBlurInput} />
+                    <WhiskyListItems edit={edit} data={data} uid={uid} onBlurInput={onBlurInput} />
                 </ul>
             </li>
         );
@@ -73,6 +73,7 @@ export const WhiskyListBar = ({
                 name="name"
                 type="text"
                 onBlur={(event) => onChangeWorkingTitle({ event })}
+                disabled={edit === undefined ? false : !edit}
             />
         </>
     );
@@ -83,7 +84,7 @@ type OnBlurInputType = {
     id: string;
 };
 
-export const WhiskyListItems = ({ data = [], uid, onBlurInput }: FormsListWhiskyListItemsType) => {
+export const WhiskyListItems = ({ data = [], uid, onBlurInput, edit }: FormsListWhiskyListItemsType) => {
     const dispatch = useDispatch();
     const onBlur = ({ event, id }: OnBlurInputType) => {
         const { value } = event?.currentTarget;
@@ -101,6 +102,7 @@ export const WhiskyListItems = ({ data = [], uid, onBlurInput }: FormsListWhisky
                             name={id}
                             type={type}
                             onBlur={(event) => onBlur({ event, id })}
+                            disabled={edit === undefined ? false : !edit}
                         />
                     </li>
                 ),

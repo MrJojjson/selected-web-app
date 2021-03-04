@@ -22,6 +22,7 @@ type FormsListWhiskyOnBlurType = {
 export type FormsListWhiskyListItemsType = {
     data: WhiskyVarsType[];
     uid: string;
+    edit?: boolean;
     onBlurInput?: ({ ...rest }: FormsListWhiskyOnBlurType) => void;
 };
 

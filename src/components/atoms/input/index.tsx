@@ -21,18 +21,34 @@ export type InputType = {
     required?: boolean;
     defaultValue?: string;
     className?: string;
-    dataUid?: string;
+    disabled?: boolean;
 };
 
-export const Input = ({ onChange, onBlur, label, theme, error = '', dataUid, className, ...rest }: InputType) => {
+export const Input = ({
+    onChange,
+    onBlur,
+    label,
+    theme,
+    error = '',
+    className,
+    disabled = false,
+    ...rest
+}: InputType) => {
     return (
-        <div className={cn('input_wrapper', className)}>
+        <div
+            className={cn('input_wrapper', theme, className, {
+                disabled,
+            })}
+        >
             <input
                 onChange={(event) => onChange && onChange(event)}
                 onBlur={(event) => onBlur && onBlur(event)}
+                disabled={disabled}
                 {...rest}
             />
-            <label htmlFor={rest.name}>{label}</label>
+            <label className="label" htmlFor={rest.name}>
+                {label}
+            </label>
             <Text theme="secondary" className={cn('error', { error_show: error !== '' })}>
                 {error}
             </Text>
