@@ -6,13 +6,11 @@
     @include flex(flex-start, flex-start, column);
     width: 100%;
     height: auto;
-    transition: all $transition-speed;
 
     .bar_content {
         width: 100%;
         padding: 0 $default-padding / 2;
         overflow-y: hidden;
-        transition: all $transition-speed;
         opacity: 0;
         box-sizing: content-box;
     }
@@ -39,6 +37,9 @@
     }
     .end {
         @include flex(center, flex-end, row);
+        button {
+            margin-left: $default-margin;
+        }
     }
 }
 

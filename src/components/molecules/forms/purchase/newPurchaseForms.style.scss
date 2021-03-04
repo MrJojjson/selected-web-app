@@ -1,0 +1,13 @@
+@import '../../../../common/sass/mixins/flex.scss';
+@import '../../../../common/sass/metrics.scss';
+@import '../../../../common/sass/colors.scss';
+
+.new_purchase_add_buttons {
+    width: 100%;
+    @include flex(flex-start, center, row);
+    button {
+        &:not(:last-child) {
+            margin-right: $default-margin;
+        }
+    }
+}

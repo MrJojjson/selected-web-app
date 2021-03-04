@@ -6,7 +6,7 @@ import { Dashboard } from './pages/dashboard';
 import { Profile } from './pages/profile';
 import { Purchases } from './pages/purchases';
 import { Settings } from './pages/settings';
-import { Whisky } from './pages/whisky';
+import { Whiskies } from './pages/whiskies';
 import { toTypes } from './types/linkTypes';
 
 const Route = (props: { component: JSX.Element } & RouteComponentProps) => props.component;
@@ -27,8 +27,8 @@ const routeList: RouteType[] = [
         component: <Profile />,
     },
     {
-        path: '/whisky',
-        component: <Whisky />,
+        path: '/whiskies',
+        component: <Whiskies />,
     },
     {
         path: '/purchases',

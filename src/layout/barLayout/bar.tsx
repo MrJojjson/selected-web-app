@@ -30,7 +30,7 @@ export const BarHeading = ({ title, barBtn, description, meta, className }: BarH
 
 export type BarElementType = {
     start?: JSX.Element;
-    end: JSX.Element;
+    end?: JSX.Element;
     className?: string;
 };
 

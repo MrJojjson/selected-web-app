@@ -1,8 +1,5 @@
-import useAxios from 'axios-hooks';
 import { insert } from 'ramda';
-import { Header } from '../components/atoms';
-import { getAuthTokenState } from '../redux';
-import { UseApiReturn, UseApiType } from '../types/apiTypes';
+import { UseApiType } from '../types/apiTypes';
 const { SNOWPACK_PUBLIC_API_URL } = import.meta.env;
 
 // export const useApi = ({ method = 'get', endpoint, id, idPos, params, data: body }: UseApiType): UseApiReturn => {

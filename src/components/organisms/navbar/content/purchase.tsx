@@ -23,7 +23,41 @@ export const PurchaseNav = () => {
     const allSelected = selected?.length === added.length;
 
     const add = (
-        <Button mini label="Purchase" theme="highlight" icon="plus" onClick={() => dispatch(purchaseIncomingAdded())} />
+        <Button
+            mini
+            label="Purchase"
+            theme="highlight"
+            icon="plus"
+            onClick={() => dispatch(purchaseIncomingAdded({}))}
+        />
+    );
+
+    const whisky = (
+        <Button
+            mini
+            label="Whisky"
+            theme="highlight"
+            icon="plus"
+            onClick={() => dispatch(purchaseIncomingAdded({ whisky: true }))}
+        />
+    );
+    const cask = (
+        <Button
+            mini
+            label="Cask"
+            theme="highlight"
+            icon="plus"
+            onClick={() => dispatch(purchaseIncomingAdded({ cask: true }))}
+        />
+    );
+    const whiskyAndCask = (
+        <Button
+            mini
+            label="Whisky and cask"
+            theme="highlight"
+            icon="plus"
+            onClick={() => dispatch(purchaseIncomingAdded({}))}
+        />
     );
 
     const selectAll = (
@@ -67,14 +101,14 @@ export const PurchaseNav = () => {
     );
 
     const onSubmit = () => {
-        map(async ({ data: addedData }) => {
-            const data = mergeAll(map(({ id, value }) => ({ [id]: value }), addedData));
+        map(async ({ data: addedData, fetch }) => {
+            const data = mergeAll(map(({ id, value }) => ({ [(id as unknown) as string]: value }), addedData));
+            console.log('data', data);
 
             await fetchData({
-                method: 'post',
-                endpoint: 'whiskies',
                 data,
                 token,
+                ...fetch,
             })
                 .then((res) => {
                     dispatch(purchaseIncomingSelected({ all: true }));
@@ -89,15 +123,23 @@ export const PurchaseNav = () => {
 
     const submit = <Button mini label="Save" theme="highlight" icon="save" onClick={onSubmit} />;
 
-    const leftBar = (
+    const startBar = (
         <>
             {addedExists && selectAll}
             {selectedExists && !allSelected && clear}
             {selectedExists && remove}
             {selectedExists && archive}
-            {addedExists && submit}
         </>
     );
 
-    return <NavbarContentTemplate start={leftBar} end={add} />;
+    const endBar = (
+        <>
+            {addedExists && submit}
+            {!addedExists && whiskyAndCask}
+            {!addedExists && whisky}
+            {!addedExists && cask}
+        </>
+    );
+
+    return <NavbarContentTemplate start={startBar} end={endBar} />;
 };

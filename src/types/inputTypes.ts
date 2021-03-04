@@ -1,3 +1,10 @@
+export type InputVarsType<T> = {
+    id: T;
+    title: string;
+    type?: inputType;
+    value?: string;
+};
+
 export type inputType =
     | 'button'
     | 'checkbox'

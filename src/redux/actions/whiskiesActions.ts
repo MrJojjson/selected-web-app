@@ -6,6 +6,9 @@ import {
     WHISKIES_SET_FETCH,
     WhiskiesSetFetchActionType,
     WHISKIES_TOGGLE_EDIT,
+    WHISKIES_RENAME,
+    WHISKIES_REDO,
+    WhiskiesRenameActionType,
 } from '../types/whiskyTypes';
 
 export const whiskiesSelected = ({ ...props }: WhiskiesSelectedActionType) => ({
@@ -25,4 +28,13 @@ export const whiskiesSetFetch = ({ ...props }: WhiskiesSetFetchActionType) => ({
 
 export const whiskiesToggleEdit = () => ({
     type: WHISKIES_TOGGLE_EDIT,
+});
+
+export const whiskiesRedo = () => ({
+    type: WHISKIES_REDO,
+});
+
+export const whiskiesRename = ({ ...props }: WhiskiesRenameActionType) => ({
+    type: WHISKIES_RENAME,
+    payload: { ...props },
 });

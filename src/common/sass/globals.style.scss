@@ -44,11 +44,12 @@ body,
         flex: 1;
         height: 100%;
         background-color: $color-secondary;
-        overflow-y: auto;
+
         .router {
             position: relative;
             width: 100%;
             height: calc(100vh - #{$navbar-height});
+            overflow-y: auto;
         }
     }
 }

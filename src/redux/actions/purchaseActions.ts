@@ -4,10 +4,12 @@ import {
     PurchaseIncomingAddedDataActionType,
     PURCHASE_INCOMING_ADDED_DATA,
     PURCHASE_INCOMING_ADDED,
+    PurchaseIncomingAddedActionType,
 } from '../types/purchaseTypes';
 
-export const purchaseIncomingAdded = () => ({
+export const purchaseIncomingAdded = ({ ...props }: PurchaseIncomingAddedActionType) => ({
     type: PURCHASE_INCOMING_ADDED,
+    payload: { ...props },
 });
 
 export const purchaseIncomingSelected = ({ ...props }: PurchaseIncomingSelectedActionType) => ({

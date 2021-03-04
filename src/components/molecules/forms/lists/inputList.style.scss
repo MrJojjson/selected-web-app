@@ -2,14 +2,20 @@
 @import '../../../../common/sass/metrics.scss';
 @import '../../../../common/sass/colors.scss';
 
-.whisky_list_form {
+.input_list_form {
     @include flex(flex-start, flex-start, column);
 }
-.whisky_list_container {
+.input_list_container {
     width: 100%;
-    margin-top: $default-margin;
+    padding: $default-padding * 2 0;
 
-    .whisky_list_container_list {
+    .bar_element {
+        margin-bottom: $default-margin;
+    }
+    .input_list_container_heading {
+        @include flex(flex-start, flex-start, row);
+    }
+    .input_list_container_list {
         width: 100%;
         margin: 0;
         padding: 0;
@@ -18,16 +24,27 @@
         row-gap: $default-padding * 2;
         column-gap: $default-padding;
     }
+    &:not(:last-of-type) {
+        border-bottom: 1px solid $color-primary-border;
+    }
 }
-.whisky_list_bar_description {
+.input_list_bar_description {
     @include flex(center, flex-start, row);
     flex-wrap: wrap;
     width: 100%;
-    .whisky_list_selector {
+    .input_list_selector {
         margin-right: $default-margin;
     }
 }
 
-.whisky_list_selector {
+.input_list_selector {
     margin-right: $default-margin;
+    transition: all $transition-speed;
+    width: auto;
+
+    &.hide {
+        margin-right: 0px;
+        width: 0px;
+        overflow: hidden;
+    }
 }
