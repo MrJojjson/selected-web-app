@@ -3,6 +3,8 @@
 @import '../../../common/sass/mixins/flex.scss';
 
 $input-height: $height-s;
+$input-temp-height: $height-m;
+
 $label-padding: 1px $spacing-s;
 
 $label-shown-pos: ($height-s / 3);
@@ -94,5 +96,21 @@ $input-border: 1px solid $color-primary-border;
         color: $color-secondary;
         background-color: $color-secondary-background;
         border: 1px solid $color-secondary-border;
+    }
+
+    &.temp {
+        input {
+            padding-bottom: $input-temp-height / 2;
+            text-decoration: line-through;
+            color: $color-error;
+            height: $input-temp-height;
+            font-style: italic;
+        }
+        .temp_value {
+            position: absolute;
+            left: $spacing-s;
+            top: $input-temp-height / 2;
+            font-weight: bold;
+        }
     }
 }

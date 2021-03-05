@@ -22,6 +22,7 @@ export type InputType = {
     value?: string;
     className?: string;
     disabled?: boolean;
+    focusValue?: string;
 };
 
 export const Input = ({
@@ -33,6 +34,7 @@ export const Input = ({
     className,
     disabled = false,
     value,
+    focusValue,
     ...rest
 }: InputType) => {
     if (rest.type === 'date') {
@@ -43,15 +45,18 @@ export const Input = ({
             locale: 'sv-SE',
         });
     }
+    console.log('focusValue', focusValue);
 
     const [val, setVal] = useState<string | number>(value);
 
     useEffect(() => setVal(value), [value]);
 
+    const tempVal = <Text className="temp_value">{focusValue}</Text>;
     return (
         <div
             className={cn('input_wrapper', theme, className, {
                 disabled,
+                temp: focusValue,
             })}
         >
             <input
@@ -64,6 +69,7 @@ export const Input = ({
             <label className="label" htmlFor={rest.name}>
                 {label}
             </label>
+            {tempVal}
             <Text theme="secondary" className={cn('error', { error_show: error !== '' })}>
                 {error}
             </Text>

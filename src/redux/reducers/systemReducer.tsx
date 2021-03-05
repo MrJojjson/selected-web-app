@@ -1,5 +1,5 @@
 import { lensPath, set } from 'ramda';
-import { SystemActions, SystemState, SYSTEM_LAYOUT_COLUMNS } from '../types/systemTypes';
+import { SystemActions, SystemState, SYSTEM_LAYOUT_COLUMNS, SYSTEM_FOCUS } from '../types/systemTypes';
 
 const initialState: SystemState = {
     layout: {
@@ -10,6 +10,7 @@ const initialState: SystemState = {
             columns: '1',
         },
     },
+    focus: {},
 };
 
 export const SystemReducer = (state: SystemState = initialState, action: SystemActions) => {
@@ -17,6 +18,8 @@ export const SystemReducer = (state: SystemState = initialState, action: SystemA
         case SYSTEM_LAYOUT_COLUMNS:
             const { page, columns } = action?.payload;
             return set(lensPath(['layout', page, 'columns']), columns.toString(), state);
+        case SYSTEM_FOCUS:
+            return set(lensPath(['focus']), action.payload, state);
         default:
             return state;
     }

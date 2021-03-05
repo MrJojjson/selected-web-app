@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
     getAuthTokenState,
     getWhiskiesState,
+    setWhiskiesRemoteFocus,
     setSystemLayoutColumns,
     whiskiesRedo,
     whiskiesSelected,
@@ -23,7 +24,7 @@ export const WhiskyNav = () => {
     const dataExists = data?.length > 0;
 
     const allSelected = selected?.length === data.length;
-    const { data: histData, disabled } = history;
+    const { data: histData, disabled, index: histIndex } = history;
 
     const historyExists = histData?.length > 0;
 
@@ -51,11 +52,15 @@ export const WhiskyNav = () => {
     const undo = (
         <Button
             mini
+            onMouseOver={() => dispatch(setWhiskiesRemoteFocus({ data: histData[histIndex] }))}
+            onMouseLeave={() => dispatch(setWhiskiesRemoteFocus({ data: histData[histIndex], remove: true }))}
             disabled={disabled.undo}
             label={'Undo'}
             theme="highlight"
             icon="undo"
-            onClick={() => dispatch(whiskiesUndo())}
+            onClick={() => (
+                dispatch(whiskiesUndo()), dispatch(setWhiskiesRemoteFocus({ data: histData[histIndex], remove: true }))
+            )}
         />
     );
 

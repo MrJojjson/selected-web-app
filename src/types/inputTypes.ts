@@ -1,8 +1,11 @@
+import { HistoryDataType } from '../redux/types/whiskyTypes';
+
 export type InputVarsType<T> = {
     id: T;
     title: string;
     type?: inputType;
     value?: string;
+    focus?: HistoryDataType | null;
 };
 
 export type inputType =

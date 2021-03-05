@@ -10,6 +10,7 @@ export const WHISKIES_TOGGLE_EDIT = 'WHISKIES_TOGGLE_EDIT';
 export const WHISKIES_RENAME = 'WHISKIES_RENAME';
 export const WHISKIES_REDO = 'WHISKIES_REDO';
 export const WHISKIES_UNDO = 'WHISKIES_UNDO';
+export const WHISKIES_REMOTE_FOCUS = 'WHISKIES_REMOTE_FOCUS';
 
 export type HistoryDataType = {
     index?: number;
@@ -94,6 +95,17 @@ export type WhiskiesRenameAction = {
     payload: WhiskiesRenameActionType;
 };
 
+// FOCUS
+export type WhiskiesFocusActionType = {
+    data: HistoryDataType;
+    remove?: boolean;
+};
+
+export type WhiskiesFocusAction = {
+    type: 'WHISKIES_REMOTE_FOCUS';
+    payload: WhiskiesFocusActionType;
+};
+
 export type WhiskiesActions =
     | WhiskiesSelectedAction
     | WhiskiesAddDataAction
@@ -101,4 +113,5 @@ export type WhiskiesActions =
     | WhiskiesToggleEditAction
     | WhiskiesRedoAction
     | WhiskiesUndoAction
-    | WhiskiesRenameAction;
+    | WhiskiesRenameAction
+    | WhiskiesFocusAction;

@@ -141,7 +141,7 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
     return (
         <ul className="input_list_container">
             {map(
-                ({ id, title, type, value }) => (
+                ({ id, title, type, value, focus }) => (
                     <li key={`${uid}-${id}`}>
                         <Input
                             label={title}
@@ -153,6 +153,7 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
                                 event.currentTarget.value !== value && onBlur({ event, id: id?.toString() })
                             }
                             disabled={edit === undefined ? false : !edit}
+                            focusValue={focus?.value}
                         />
                     </li>
                 ),

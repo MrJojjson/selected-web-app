@@ -1,15 +1,17 @@
 import {
-    WhiskiesSelectedActionType,
     WhiskiesAddDataActionType,
-    WHISKIES_SELECTED,
-    WHISKIES_ADD_DATA,
-    WHISKIES_SET_FETCH,
-    WhiskiesSetFetchActionType,
-    WHISKIES_TOGGLE_EDIT,
-    WHISKIES_RENAME,
-    WHISKIES_REDO,
-    WHISKIES_UNDO,
+    WhiskiesFocusActionType,
     WhiskiesRenameActionType,
+    WhiskiesSelectedActionType,
+    WhiskiesSetFetchActionType,
+    WHISKIES_ADD_DATA,
+    WHISKIES_REDO,
+    WHISKIES_REMOTE_FOCUS,
+    WHISKIES_RENAME,
+    WHISKIES_SELECTED,
+    WHISKIES_SET_FETCH,
+    WHISKIES_TOGGLE_EDIT,
+    WHISKIES_UNDO,
 } from '../types/whiskyTypes';
 
 export const whiskiesSelected = ({ ...props }: WhiskiesSelectedActionType) => ({
@@ -41,5 +43,10 @@ export const whiskiesUndo = () => ({
 
 export const whiskiesRename = ({ ...props }: WhiskiesRenameActionType) => ({
     type: WHISKIES_RENAME,
+    payload: { ...props },
+});
+
+export const setWhiskiesRemoteFocus = ({ ...props }: WhiskiesFocusActionType) => ({
+    type: WHISKIES_REMOTE_FOCUS,
     payload: { ...props },
 });

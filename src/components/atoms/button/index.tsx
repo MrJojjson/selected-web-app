@@ -5,6 +5,8 @@ import './button.style.scss';
 
 export type ButtonType = Pick<TextType, 'icon' | 'direction' | 'theme' | 'className'> & {
     onClick: () => void;
+    onMouseOver?: () => void;
+    onMouseLeave?: () => void;
     label?: string;
     type?: 'submit' | 'reset';
     id?: string;
@@ -14,6 +16,8 @@ export type ButtonType = Pick<TextType, 'icon' | 'direction' | 'theme' | 'classN
 
 export const Button = ({
     onClick,
+    onMouseOver,
+    onMouseLeave,
     label,
     theme = 'primary',
     className,
@@ -26,6 +30,8 @@ export const Button = ({
     return (
         <button
             onClick={() => onClick()}
+            onMouseOver={() => onMouseOver && onMouseOver()}
+            onMouseLeave={() => onMouseLeave && onMouseLeave()}
             className={cn('button', [theme], className, {
                 mini: mini,
                 disabled,
