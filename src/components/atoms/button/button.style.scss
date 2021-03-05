@@ -70,4 +70,10 @@ $shadow-h: 5px;
     &:hover {
         border-radius: $border-radius-none;
     }
+
+    &.disabled {
+        pointer-events: none;
+        background-color: $color-disabled;
+        box-shadow: 1px 1px $color-highlight-back;
+    }
 }

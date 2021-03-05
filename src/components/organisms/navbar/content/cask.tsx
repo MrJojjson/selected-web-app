@@ -71,7 +71,7 @@ export const CaskNav = () => {
             mini
             label={`Columns ${columnsCarousel}`}
             theme="highlight"
-            icon="wizards-of-the-coast"
+            icon="columns"
             onClick={() =>
                 dispatch(
                     setSystemLayoutColumns({ page: 'casks', columns: columnsCarousel.toString() as typeof columns }),

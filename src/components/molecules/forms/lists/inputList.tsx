@@ -28,17 +28,15 @@ export const InputList = ({
 }: FormsListInputListType) => {
     const existsData = overrideOpen === undefined ? data?.length > 0 : overrideOpen;
     const barLayoutStart = (
-        <>
-            <InputListBar
-                uid={uid}
-                isSelected={uid ? includes(uid, rest.selected) : false}
-                onChangeSelect={rest.onChangeSelect}
-                edit={edit}
-                meta={meta}
-                description={description}
-                title={title}
-            />
-        </>
+        <InputListBar
+            uid={uid}
+            isSelected={uid ? includes(uid, rest.selected) : false}
+            onChangeSelect={rest.onChangeSelect}
+            edit={edit}
+            meta={meta}
+            description={description}
+            title={title}
+        />
     );
     const header = (
         <Header tag="h2" fontSize="m">
@@ -92,10 +90,10 @@ export const InputListContainer = ({
             />
         );
         return (
-            <>
+            <div key={uid}>
                 {perElement && <BarElement start={heading} />}
                 <InputListItems edit={edit} data={data} uid={uid} onBlurInput={onBlurInput} />
-            </>
+            </div>
         );
     }, data);
     return <>{container}</>;

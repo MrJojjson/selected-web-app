@@ -8,6 +8,7 @@ import {
     WHISKIES_TOGGLE_EDIT,
     WHISKIES_RENAME,
     WHISKIES_REDO,
+    WHISKIES_UNDO,
     WhiskiesRenameActionType,
 } from '../types/whiskyTypes';
 
@@ -32,6 +33,10 @@ export const whiskiesToggleEdit = () => ({
 
 export const whiskiesRedo = () => ({
     type: WHISKIES_REDO,
+});
+
+export const whiskiesUndo = () => ({
+    type: WHISKIES_UNDO,
 });
 
 export const whiskiesRename = ({ ...props }: WhiskiesRenameActionType) => ({

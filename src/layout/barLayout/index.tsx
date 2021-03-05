@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
+import { uniqueId } from '../../common/utils/uniqueId';
 import { Button } from '../../components/atoms';
 import { BarElement, BarHeadingType, BarElementType } from './bar';
 import './barLayout.style.scss';

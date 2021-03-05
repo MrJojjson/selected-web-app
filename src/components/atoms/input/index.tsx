@@ -36,17 +36,18 @@ export const Input = ({
     ...rest
 }: InputType) => {
     if (rest.type === 'date') {
+        const date = value || new Date().toISOString();
         value = DateFormatted({
-            date: value,
+            date,
             options: { year: 'numeric', month: 'numeric', day: 'numeric' },
             locale: 'sv-SE',
         });
     }
 
     const [val, setVal] = useState<string | number>(value);
-    useEffect(() => {
-        setVal(value);
-    }, [value]);
+
+    useEffect(() => setVal(value), [value]);
+
     return (
         <div
             className={cn('input_wrapper', theme, className, {

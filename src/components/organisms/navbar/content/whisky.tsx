@@ -7,6 +7,7 @@ import {
     whiskiesRedo,
     whiskiesSelected,
     whiskiesToggleEdit,
+    whiskiesUndo,
 } from '../../../../redux';
 import { getSystemLayoutColumnsState } from '../../../../redux/selectors/systemSelector';
 import { Button } from '../../../atoms';
@@ -22,7 +23,10 @@ export const WhiskyNav = () => {
     const dataExists = data?.length > 0;
 
     const allSelected = selected?.length === data.length;
-    const historyExists = history?.length > 0;
+    const { data: histData, disabled } = history;
+
+    const historyExists = histData?.length > 0;
+
     const editBtn = (
         <Button
             mini
@@ -34,7 +38,25 @@ export const WhiskyNav = () => {
     );
 
     const redo = (
-        <Button mini label={'Redo'} theme="highlight" icon={'redo'} onClick={() => dispatch(whiskiesRedo())} />
+        <Button
+            mini
+            disabled={disabled.redo}
+            label={'Redo'}
+            theme="highlight"
+            icon={'redo'}
+            onClick={() => dispatch(whiskiesRedo())}
+        />
+    );
+
+    const undo = (
+        <Button
+            mini
+            disabled={disabled.undo}
+            label={'Undo'}
+            theme="highlight"
+            icon="undo"
+            onClick={() => dispatch(whiskiesUndo())}
+        />
     );
 
     const selectAll = (
@@ -74,9 +96,9 @@ export const WhiskyNav = () => {
     const layout = (
         <Button
             mini
-            label={`Columns ${columnsCarousel}`}
+            label={`${columnsNr} -> ${columnsCarousel}`}
             theme="highlight"
-            icon="wizards-of-the-coast"
+            icon="columns"
             onClick={() =>
                 dispatch(
                     setSystemLayoutColumns({ page: 'whiskies', columns: columnsCarousel.toString() as typeof columns }),
@@ -118,6 +140,7 @@ export const WhiskyNav = () => {
 
     const endBar = (
         <>
+            {historyExists && undo}
             {historyExists && redo}
             {editBtn}
             {layout}

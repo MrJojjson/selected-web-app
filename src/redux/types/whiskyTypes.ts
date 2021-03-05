@@ -9,13 +9,28 @@ export const WHISKIES_TOGGLE_EDIT = 'WHISKIES_TOGGLE_EDIT';
 
 export const WHISKIES_RENAME = 'WHISKIES_RENAME';
 export const WHISKIES_REDO = 'WHISKIES_REDO';
+export const WHISKIES_UNDO = 'WHISKIES_UNDO';
+
+export type HistoryDataType = {
+    index?: number;
+    deepIndex?: number;
+    value?: string;
+    newValue: string;
+};
 
 export type WhiskiesState = {
     data: WhiskiesDataType[];
     selected: string[];
     fetch: boolean;
     edit: boolean;
-    history: WhiskiesDataType[][];
+    history: {
+        data: HistoryDataType[];
+        index: number | null;
+        disabled: {
+            undo: boolean;
+            redo: boolean;
+        };
+    };
 };
 
 export type WhiskiesDataType = Omit<BarElementType, 'barBtn' | 'className'> & {
@@ -66,6 +81,11 @@ export type WhiskiesRedoAction = {
     type: 'WHISKIES_REDO';
 };
 
+// UNDO
+export type WhiskiesUndoAction = {
+    type: 'WHISKIES_UNDO';
+};
+
 // RENAME
 export type WhiskiesRenameActionType = FormsListWhiskyOnBlurType;
 
@@ -80,4 +100,5 @@ export type WhiskiesActions =
     | WhiskiesSetFetchAction
     | WhiskiesToggleEditAction
     | WhiskiesRedoAction
+    | WhiskiesUndoAction
     | WhiskiesRenameAction;

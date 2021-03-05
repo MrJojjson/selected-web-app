@@ -31,6 +31,7 @@ module.exports = {
         src: 'src',
         bundle: false,
         routes: 'index.html',
+        open: 'none',
     },
     optimize: {
         minify: true,

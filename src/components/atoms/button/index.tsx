@@ -9,6 +9,7 @@ export type ButtonType = Pick<TextType, 'icon' | 'direction' | 'theme' | 'classN
     type?: 'submit' | 'reset';
     id?: string;
     mini?: boolean;
+    disabled?: boolean;
 };
 
 export const Button = ({
@@ -19,6 +20,7 @@ export const Button = ({
     mini,
     icon,
     direction = 'row',
+    disabled,
     ...rest
 }: ButtonType) => {
     return (
@@ -26,6 +28,7 @@ export const Button = ({
             onClick={() => onClick()}
             className={cn('button', [theme], className, {
                 mini: mini,
+                disabled,
             })}
             {...rest}
         >
