@@ -1,6 +1,7 @@
 @import '../../../common/sass/colors.scss';
 @import '../../../common/sass/metrics.scss';
 @import '../../../common/sass/mixins/flex.scss';
+@import '../../../common/sass/mixins/breakpoints.scss';
 
 .palette {
     @include flex(center, space-between, column);
@@ -15,19 +16,39 @@
 
     .top {
         flex: 1;
-        // border-bottom: 1px solid $color-primary-border;
-        // border-right: 1px solid $color-primary-border;
     }
     .middle {
         flex: $default-flex;
         padding: $default-padding;
         box-sizing: border-box;
-        // border-bottom: 1px solid $color-primary-border;
-        // border-right: 1px solid $color-primary-border;
     }
     .bottom {
         @include flex(center, center, column);
         flex: 0.5;
         border-top: 1px solid $color-divider;
+    }
+}
+
+.palette_hamburger_menu {
+    display: none;
+}
+
+@include mobile-breakpoint {
+    .palette {
+        flex: 0.8;
+        position: fixed;
+        width: 75%;
+        z-index: $z-index-shirt;
+        overflow-y: auto;
+        box-shadow: 0px 0px 0px 0px transparent;
+        transition: all $transition-speed;
+        left: -75%;
+        &.open_mobile {
+            box-shadow: 5px 0px 10px 5px $color-secondary-shadow;
+            left: 0;
+        }
+    }
+    .palette_hamburger_menu {
+        display: flex;
     }
 }

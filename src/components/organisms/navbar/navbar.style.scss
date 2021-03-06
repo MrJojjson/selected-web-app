@@ -1,6 +1,9 @@
 @import '../../../common/sass/colors.scss';
 @import '../../../common/sass/metrics.scss';
 @import '../../../common/sass/mixins/flex.scss';
+@import '../../../common/sass/mixins/fades.scss';
+
+@import '../../../common/sass/mixins/breakpoints.scss';
 
 header {
     @include flex(center, flex-start, row);
@@ -28,6 +31,32 @@ header {
         * {
             &:not(:last-of-type) {
                 margin-right: $default-margin;
+            }
+        }
+    }
+}
+
+@include mobile-breakpoint {
+    header {
+        overflow: auto;
+        .navbar_content_template {
+            .start {
+                @include flex(center, flex-start, row);
+                width: 100%;
+                margin-right: $default-margin;
+                align-self: flex-start;
+                width: 100%;
+            }
+            .end {
+                @include flex(center, flex-end, row);
+                align-self: flex-end;
+                width: 100%;
+            }
+
+            * {
+                &:not(:last-of-type) {
+                    margin-right: $default-margin;
+                }
             }
         }
     }

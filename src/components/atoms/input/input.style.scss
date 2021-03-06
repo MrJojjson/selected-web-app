@@ -28,7 +28,7 @@ $input-border: 1px solid $color-primary-border;
         box-sizing: border-box;
         width: 100%;
         font-size: $font-size-m;
-
+        background-color: $color-white;
         &:not(:placeholder-shown) + label {
             transition: all $transition-speed;
             position: absolute;

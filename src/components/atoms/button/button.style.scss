@@ -18,10 +18,7 @@ $shadow-h: 5px;
         color: $color-primary;
         background-color: $color-primary-background;
         box-shadow: $shadow-h $shadow-h $color-primary-background-back;
-        &:active {
-            // transform: translateY($active-size);
-            box-shadow: 0px 0px $color-primary-background-back;
-        }
+
         .icon {
             path {
                 fill: $color-primary;
@@ -50,17 +47,16 @@ $shadow-h: 5px;
         .text {
             color: $color-secondary;
         }
-        &:active {
-            transform: translate(5px, 5px);
-            box-shadow: 0px 0px $color-highlight-back;
-        }
         .icon {
             path {
                 fill: $color-secondary;
             }
         }
     }
-
+    &:active {
+        transform: translate(5px, 5px);
+        box-shadow: 0px 0px transparent;
+    }
     &.mini {
         border-radius: $border-radius-s;
         padding: $spacing-xxs $spacing-xs;

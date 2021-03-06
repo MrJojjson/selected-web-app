@@ -25,10 +25,14 @@ const links: LinkType[] = [
     },
 ];
 
-export const PaletteTopPanel = () => {
+type PaletteTopPanelType = {
+    onClick: () => void;
+};
+
+export const PaletteTopPanel = ({ onClick }: PaletteTopPanelType) => {
     return (
         <div className="top">
-            <LinkList links={links} />
+            <LinkList links={links} onClick={onClick} />
         </div>
     );
 };

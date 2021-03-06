@@ -45,8 +45,6 @@ export const Input = ({
             locale: 'sv-SE',
         });
     }
-    console.log('focusValue', focusValue);
-
     const [val, setVal] = useState<string | number>(value);
 
     useEffect(() => setVal(value), [value]);

@@ -6,6 +6,7 @@ export type InputVarsType<T> = {
     type?: inputType;
     value?: string;
     focus?: HistoryDataType | null;
+    belonging?: string;
 };
 
 export type inputType =

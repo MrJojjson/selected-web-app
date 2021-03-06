@@ -1,13 +1,33 @@
 @import '../../../../common/sass/mixins/flex.scss';
+
+@import '../../../../common/sass/mixins/breakpoints.scss';
 @import '../../../../common/sass/metrics.scss';
 @import '../../../../common/sass/colors.scss';
 
 .new_purchase_add_buttons {
     width: 100%;
-    @include flex(flex-start, center, row);
+    @include flex(flex-start, flex-end, row);
+    flex-wrap: wrap;
     button {
         &:not(:last-child) {
             margin-right: $default-margin;
+        }
+    }
+}
+
+@include mobile-breakpoint {
+    .new_purchase_add_buttons {
+        width: 100%;
+        @include flex(flex-start, space-between, row);
+        button {
+            &:first-child {
+                width: 100%;
+                margin: 0 0 $default-margin 0;
+            }
+            &:not(:first-child) {
+                width: 45%;
+                margin: 0;
+            }
         }
     }
 }

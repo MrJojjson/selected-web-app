@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useWindowSize } from '../../../../hooks/useWindowSize';
 import {
     getAuthTokenState,
     getWhiskiesState,
@@ -25,13 +26,13 @@ export const WhiskyNav = () => {
 
     const allSelected = selected?.length === data.length;
     const { data: histData, disabled, index: histIndex } = history;
-
+    const { mobile } = useWindowSize();
     const historyExists = histData?.length > 0;
 
     const editBtn = (
         <Button
             mini
-            label={edit ? 'Done' : 'Edit'}
+            label={mobile ? '' : edit ? 'Done' : 'Edit'}
             theme="highlight"
             icon={edit ? 'times' : 'edit'}
             onClick={() => dispatch(whiskiesToggleEdit())}
@@ -42,7 +43,7 @@ export const WhiskyNav = () => {
         <Button
             mini
             disabled={disabled.redo}
-            label={'Redo'}
+            label={mobile ? '' : 'Redo'}
             theme="highlight"
             icon={'redo'}
             onClick={() => dispatch(whiskiesRedo())}
@@ -55,7 +56,7 @@ export const WhiskyNav = () => {
             onMouseOver={() => dispatch(setWhiskiesRemoteFocus({ data: histData[histIndex] }))}
             onMouseLeave={() => dispatch(setWhiskiesRemoteFocus({ data: histData[histIndex], remove: true }))}
             disabled={disabled.undo}
-            label={'Undo'}
+            label={mobile ? '' : 'Undo'}
             theme="highlight"
             icon="undo"
             onClick={() => (
@@ -67,7 +68,7 @@ export const WhiskyNav = () => {
     const selectAll = (
         <Button
             mini
-            label={allSelected ? 'Deselect all' : 'Select all'}
+            label={mobile ? '' : allSelected ? 'Deselect all' : 'Select all'}
             theme="secondary"
             icon={allSelected ? 'minus-square' : 'plus-square'}
             onClick={() => dispatch(whiskiesSelected({ all: !allSelected }))}
@@ -77,7 +78,7 @@ export const WhiskyNav = () => {
     const remove = (
         <Button
             mini
-            label="Remove"
+            label={mobile ? '' : 'Remove'}
             theme="secondary"
             icon="trash"
             onClick={() => dispatch(whiskiesSelected({ remove: true }))}
@@ -87,7 +88,7 @@ export const WhiskyNav = () => {
     const clear = (
         <Button
             mini
-            label="Clear selected"
+            label={mobile ? '' : 'Clear selected'}
             theme="primary"
             icon="minus-square"
             onClick={() => dispatch(whiskiesSelected({ clear: true }))}
@@ -132,23 +133,23 @@ export const WhiskyNav = () => {
         // }, added);
     };
 
-    const submit = <Button mini label="Save" theme="highlight" icon="save" onClick={onSubmit} />;
+    const submit = <Button mini label={mobile ? '' : 'Save'} theme="highlight" icon="save" onClick={onSubmit} />;
 
     const startBar = (
         <>
             {edit && dataExists && selectAll}
             {edit && selectedExists && !allSelected && clear}
             {edit && selectedExists && remove}
-            {historyExists && submit}
+            {!disabled.undo && historyExists && submit}
         </>
     );
 
     const endBar = (
         <>
-            {historyExists && undo}
-            {historyExists && redo}
+            {edit && historyExists && undo}
+            {edit && historyExists && redo}
             {editBtn}
-            {layout}
+            {!mobile && layout}
         </>
     );
 
