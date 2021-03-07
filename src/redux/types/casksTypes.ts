@@ -1,6 +1,7 @@
 import { BarElementType, BarHeadingType } from '../../layout/barLayout/bar';
 import { CaskVarsType } from '../../types/caskTypes';
 import { FormsListWhiskyOnBlurType } from './formsTypes';
+import { HistoryDataType } from './whiskyTypes';
 
 export const CASKS_SELECTED = 'CASKS_SELECTED';
 export const CASKS_ADD_DATA = 'CASKS_ADD_DATA';
@@ -8,13 +9,22 @@ export const CASKS_SET_FETCH = 'CASKS_SET_FETCH';
 export const CASKS_TOGGLE_EDIT = 'CASKS_TOGGLE_EDIT';
 export const CASKS_RENAME = 'CASKS_RENAME';
 export const CASKS_REDO = 'CASKS_REDO';
+export const CASKS_UNDO = 'CASKS_UNDO';
+export const CASKS_REMOTE_FOCUS = 'CASKS_REMOTE_FOCUS';
 
 export type CasksState = {
     data: CasksDataType[];
     selected: string[];
     fetch: boolean;
     edit: boolean;
-    history: CasksDataType[][];
+    history: {
+        data: HistoryDataType[];
+        index: number | null;
+        disabled: {
+            undo: boolean;
+            redo: boolean;
+        };
+    };
 };
 
 export type CasksDataType = Omit<BarElementType, 'className'> &
@@ -66,6 +76,11 @@ export type CasksRedoAction = {
     type: 'CASKS_REDO';
 };
 
+// UNDO
+export type CasksUndoAction = {
+    type: 'CASKS_UNDO';
+};
+
 // RENAME
 export type CasksRenameActionType = FormsListWhiskyOnBlurType;
 
@@ -74,10 +89,23 @@ export type CasksRenameAction = {
     payload: CasksRenameActionType;
 };
 
+// FOCUS
+export type CasksFocusActionType = {
+    data: HistoryDataType;
+    remove?: boolean;
+};
+
+export type CasksFocusAction = {
+    type: 'CASKS_REMOTE_FOCUS';
+    payload: CasksFocusActionType;
+};
+
 export type CasksActions =
     | CasksSelectedAction
     | CasksAddDataAction
     | CasksSetFetchAction
     | CasksToggleEditAction
     | CasksRedoAction
-    | CasksRenameAction;
+    | CasksUndoAction
+    | CasksRenameAction
+    | CasksFocusAction;

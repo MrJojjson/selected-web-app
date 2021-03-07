@@ -16,7 +16,8 @@ export type HistoryDataType = {
     index?: number;
     deepIndex?: number;
     value?: string;
-    newValue: string;
+    newValue?: string;
+    initiator?: string;
 };
 
 export type WhiskiesState = {
@@ -99,6 +100,7 @@ export type WhiskiesRenameAction = {
 export type WhiskiesFocusActionType = {
     data: HistoryDataType;
     remove?: boolean;
+    initiator?: 'undo' | 'redo';
 };
 
 export type WhiskiesFocusAction = {

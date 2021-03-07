@@ -50,6 +50,7 @@ export const Input = ({
     useEffect(() => setVal(value), [value]);
 
     const tempVal = <Text className="temp_value">{focusValue}</Text>;
+
     return (
         <div
             className={cn('input_wrapper', theme, className, {

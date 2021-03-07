@@ -152,6 +152,9 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
                     </li>
                 ) : null;
 
+                const { value: fValue, newValue: fNewValue, initiator: fInitiator } = focus || {};
+                const focusValue = fInitiator === 'undo' ? fValue : fNewValue;
+
                 return (
                     <Fragment key={uniqueId('fragment')}>
                         {returnLineBreak}
@@ -166,7 +169,7 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
                                     event.currentTarget.value !== value && onBlur({ event, id: id?.toString() })
                                 }
                                 disabled={edit === undefined ? false : !edit}
-                                focusValue={focus?.value}
+                                focusValue={focusValue}
                             />
                         </li>
                     </Fragment>
