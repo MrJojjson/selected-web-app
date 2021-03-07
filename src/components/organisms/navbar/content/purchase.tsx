@@ -2,10 +2,10 @@ import { map, mergeAll } from 'ramda';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchData } from '../../../../hooks/useApi';
+import { useWindowSize } from '../../../../hooks/useWindowSize';
 import {
     getAuthTokenState,
     getPurchaseIncomingState,
-    purchaseIncomingAdded,
     purchaseIncomingSelected,
     whiskiesSetFetch,
 } from '../../../../redux';
@@ -21,44 +21,6 @@ export const PurchaseNav = () => {
     const addedExists = added?.length > 0;
 
     const allSelected = selected?.length === added.length;
-
-    const add = (
-        <Button
-            mini
-            label="Purchase"
-            theme="highlight"
-            icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded({}))}
-        />
-    );
-
-    const whisky = (
-        <Button
-            mini
-            label="Whisky"
-            theme="highlight"
-            icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded({ whisky: true }))}
-        />
-    );
-    const cask = (
-        <Button
-            mini
-            label="Cask"
-            theme="highlight"
-            icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded({ cask: true }))}
-        />
-    );
-    const whiskyAndCask = (
-        <Button
-            mini
-            label="Whisky and cask"
-            theme="highlight"
-            icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded({}))}
-        />
-    );
 
     const selectAll = (
         <Button
@@ -90,16 +52,6 @@ export const PurchaseNav = () => {
         />
     );
 
-    const archive = (
-        <Button
-            mini
-            label="Archive"
-            theme="primary"
-            icon="archive"
-            onClick={() => dispatch(purchaseIncomingSelected({ clear: true }))}
-        />
-    );
-
     const onSubmit = () => {
         map(async ({ data: addedData, fetch }) => {
             const data = mergeAll(map(({ id, value }) => ({ [(id as unknown) as string]: value }), addedData));
@@ -127,18 +79,10 @@ export const PurchaseNav = () => {
             {addedExists && selectAll}
             {selectedExists && !allSelected && clear}
             {selectedExists && remove}
-            {selectedExists && archive}
         </>
     );
 
-    const endBar = (
-        <>
-            {addedExists && submit}
-            {!addedExists && whiskyAndCask}
-            {!addedExists && whisky}
-            {!addedExists && cask}
-        </>
-    );
+    const endBar = <>{addedExists && submit}</>;
 
     return <NavbarContentTemplate start={startBar} end={endBar} />;
 };

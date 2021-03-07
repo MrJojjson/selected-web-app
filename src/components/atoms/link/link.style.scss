@@ -22,13 +22,15 @@
     }
 }
 
-.reach_link .active {
-    transition: all $transition-speed;
-    pointer-events: none;
-    cursor: default;
-    .link {
-        @include styleLink();
-        font-weight: $font-weight-bold;
+.reach_link {
+    &.active {
+        transition: all $transition-speed;
+        pointer-events: none;
+        cursor: default;
+        .link {
+            @include styleLink();
+            font-weight: $font-weight-bold;
+        }
     }
 }
 

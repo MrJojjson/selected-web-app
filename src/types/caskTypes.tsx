@@ -24,23 +24,27 @@ export const CaskVars: CaskVarsType[] = [
         title: 'Cask number',
         type: 'text',
         value: '',
+        belonging: 'cask',
     },
     {
         id: 'type',
         title: 'Material',
         type: 'text',
         value: '',
+        belonging: 'cask',
     },
     {
         id: 'size',
         title: 'Volume in liter',
         type: 'number',
         value: '',
+        belonging: 'cask',
     },
     {
         id: 'base',
         title: 'Usage',
         type: 'text',
         value: '',
+        belonging: 'cask',
     },
 ];

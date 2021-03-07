@@ -1,6 +1,7 @@
 @import '../../../../common/sass/mixins/flex.scss';
 @import '../../../../common/sass/metrics.scss';
 @import '../../../../common/sass/colors.scss';
+@import '../../../../common/sass/mixins/breakpoints.scss';
 
 .input_list_form {
     @include flex(flex-start, flex-start, column);
@@ -11,6 +12,13 @@
     @include flex(flex-start, flex-start, row);
     flex-wrap: wrap;
     li {
+        &.line_break {
+            width: 100%;
+            flex-basis: 100%;
+            .p {
+                text-transform: capitalize;
+            }
+        }
         &:not(:last-of-type) {
             margin: 0 $default-margin $default-margin 0;
         }
@@ -42,5 +50,19 @@
         width: 0px;
         height: 0px;
         overflow: hidden;
+    }
+}
+
+@include mobile-breakpoint {
+    .input_list_container {
+        padding: $default-padding 0;
+        @include flex(flex-start, flex-start, column);
+        li {
+            width: 100%;
+
+            &:not(:last-of-type) {
+                margin: 0 0 $default-margin 0;
+            }
+        }
     }
 }

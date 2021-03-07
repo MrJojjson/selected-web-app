@@ -1,10 +1,11 @@
-import { includes, map } from 'ramda';
-import React from 'react';
+import { addIndex, includes, map } from 'ramda';
+import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { BarLayout } from '../../../../layout/barLayout';
 import {
     FormsListInputListBarType,
     FormsListInputListContainerType,
+    FormsListInputListItemDataType,
     FormsListInputListItemsType,
     FormsListInputListType,
 } from '../../../../redux/types/formsTypes';
@@ -14,6 +15,8 @@ import './inputList.style.scss';
 import cn from 'classnames';
 import { BarElement } from '../../../../layout/barLayout/bar';
 import { DateFormatted } from '../../../../common/utils/dateFormat';
+import { InputVarsType } from '../../../../types/inputTypes';
+import { uniqueId } from '../../../../common/utils/uniqueId';
 
 export const InputList = ({
     data,
@@ -90,10 +93,10 @@ export const InputListContainer = ({
             />
         );
         return (
-            <div key={uid}>
+            <li key={uid}>
                 {perElement && <BarElement start={heading} />}
                 <InputListItems edit={edit} data={data} uid={uid} onBlurInput={onBlurInput} />
-            </div>
+            </li>
         );
     }, data);
     return <>{container}</>;
@@ -140,25 +143,38 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
     };
     return (
         <ul className="input_list_container">
-            {map(
-                ({ id, title, type, value, focus }) => (
-                    <li key={`${uid}-${id}`}>
-                        <Input
-                            label={title}
-                            placeholder={title}
-                            value={value}
-                            name={id?.toString()}
-                            type={type}
-                            onBlur={(event) =>
-                                event.currentTarget.value !== value && onBlur({ event, id: id?.toString() })
-                            }
-                            disabled={edit === undefined ? false : !edit}
-                            focusValue={focus?.value}
-                        />
+            {addIndex(map)(({ id, title, type, value, focus, belonging }: FormsListInputListItemDataType, index) => {
+                const lineBreak = belonging !== data[index - 1]?.belonging;
+
+                const returnLineBreak = lineBreak ? (
+                    <li key={`${uniqueId('line-break')}-before-${id}`} className="line_break">
+                        <Text fontSize="m">{belonging}</Text>
                     </li>
-                ),
-                data,
-            )}
+                ) : null;
+
+                const { value: fValue, newValue: fNewValue, initiator: fInitiator } = focus || {};
+                const focusValue = fInitiator === 'undo' ? fValue : fNewValue;
+
+                return (
+                    <Fragment key={uniqueId('fragment')}>
+                        {returnLineBreak}
+                        <li key={`${uid}-${id}`}>
+                            <Input
+                                label={title}
+                                placeholder={title}
+                                value={value}
+                                name={id?.toString()}
+                                type={type}
+                                onBlur={(event) =>
+                                    event.currentTarget.value !== value && onBlur({ event, id: id?.toString() })
+                                }
+                                disabled={edit === undefined ? false : !edit}
+                                focusValue={focusValue}
+                            />
+                        </li>
+                    </Fragment>
+                );
+            }, data)}
         </ul>
     );
 };

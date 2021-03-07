@@ -133,12 +133,16 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                 },
             });
         case WHISKIES_REMOTE_FOCUS:
-            const { remove } = action?.payload;
+            const { remove, initiator = 'undo' } = action?.payload;
             const { index: focusIndex, deepIndex: foxusDeepIndex } = action?.payload?.data || {};
             if (remove) {
                 return set(lensPath(['data', focusIndex, 'data', foxusDeepIndex, 'focus']), null, state);
             }
-            return set(lensPath(['data', focusIndex, 'data', foxusDeepIndex, 'focus']), action?.payload?.data, state);
+            return set(
+                lensPath(['data', focusIndex, 'data', foxusDeepIndex, 'focus']),
+                { ...action?.payload?.data, initiator },
+                state,
+            );
         default:
             return state;
     }

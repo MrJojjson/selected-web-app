@@ -1,6 +1,7 @@
 @import '../../common/sass/colors.scss';
 @import '../../common/sass/metrics.scss';
 @import '../../common/sass/mixins/flex.scss';
+@import '../../common/sass/mixins/breakpoints.scss';
 
 .bar_layout {
     @include flex(flex-start, flex-start, column);
@@ -64,7 +65,6 @@
         }
     }
     button {
-        // width: 100%;
         &:not(:last-of-type) {
             margin-right: $default-margin;
         }
@@ -77,5 +77,24 @@
     }
     .right {
         @include flex(center, flex-end, row);
+    }
+}
+
+@include mobile-breakpoint {
+    .bar_element {
+        width: 100%;
+        @include flex(flex-start, flex-start, row);
+        .start {
+            @include flex(flex-start, flex-start, column);
+            *:nth-child(n) {
+                margin: 0 0 $default-margin / 4 0;
+            }
+        }
+        .end {
+            @include flex(center, flex-end, row);
+            button {
+                margin-left: $default-margin / 4;
+            }
+        }
     }
 }

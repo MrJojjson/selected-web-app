@@ -45,13 +45,12 @@ export const Input = ({
             locale: 'sv-SE',
         });
     }
-    console.log('focusValue', focusValue);
-
     const [val, setVal] = useState<string | number>(value);
 
     useEffect(() => setVal(value), [value]);
 
     const tempVal = <Text className="temp_value">{focusValue}</Text>;
+
     return (
         <div
             className={cn('input_wrapper', theme, className, {

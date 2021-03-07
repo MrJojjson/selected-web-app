@@ -1,22 +1,32 @@
-import { append, findIndex, includes, lensPath, pluck, propEq, reject, set, without } from 'ramda';
+import { append, findIndex, includes, lensPath, pluck, propEq, reject, set, view, without } from 'ramda';
 import {
     CasksActions,
     CasksDataType,
     CasksState,
     CASKS_ADD_DATA,
     CASKS_REDO,
+    CASKS_REMOTE_FOCUS,
     CASKS_RENAME,
     CASKS_SELECTED,
     CASKS_SET_FETCH,
     CASKS_TOGGLE_EDIT,
+    CASKS_UNDO,
 } from '../types/casksTypes';
+import { HistoryDataType } from '../types/whiskyTypes';
 
 const initialState: CasksState = {
     data: [],
     selected: [],
     fetch: true,
     edit: false,
-    history: [],
+    history: {
+        data: [],
+        index: null,
+        disabled: {
+            undo: true,
+            redo: true,
+        },
+    },
 };
 
 type FindDataIndex = {
@@ -27,15 +37,46 @@ type FindDataIndex = {
 const findUidIndex = ({ data, uid }: FindDataIndex) => findIndex(propEq('uid', uid))(data);
 
 export const CasksReducer = (state: CasksState = initialState, action: CasksActions) => {
-    const { data, selected } = state;
-
+    const { data, selected, history } = state;
+    const historyDataLength = history?.data.length;
+    const historyIndex = history?.index;
     switch (action.type) {
         case CASKS_REDO:
-            const lastHist = state.history.pop();
-            if (lastHist === undefined) {
-                return { ...state, edit: false, history: [] };
-            }
-            return { ...state, data: lastHist, history: state.history };
+            const { index: redoIndex, deepIndex: redoDeepIndex, newValue: redoNewValue } = history?.data[
+                historyIndex
+            ] as HistoryDataType;
+
+            const redoHistoryLens = lensPath(['data', redoIndex, 'data', redoDeepIndex, 'value']);
+
+            return set(redoHistoryLens, redoNewValue, {
+                ...state,
+                history: {
+                    ...state.history,
+                    index: historyIndex >= historyDataLength - 1 ? historyDataLength - 1 : historyIndex + 1,
+                    disabled: {
+                        redo: historyIndex === historyDataLength - 1,
+                        undo: false,
+                    },
+                },
+            });
+        case CASKS_UNDO:
+            const { index: undoIndex, deepIndex: undoDeepIndex, value: undoValue } = history?.data[
+                historyIndex
+            ] as HistoryDataType;
+
+            const undoHistoryLens = lensPath(['data', undoIndex, 'data', undoDeepIndex, 'value']);
+
+            return set(undoHistoryLens, undoValue, {
+                ...state,
+                history: {
+                    ...state.history,
+                    index: historyIndex ? historyIndex - 1 : 0,
+                    disabled: {
+                        redo: false,
+                        undo: historyIndex === 0,
+                    },
+                },
+            });
         case CASKS_SELECTED:
             if (action.payload.remove) {
                 return {
@@ -73,10 +114,31 @@ export const CasksReducer = (state: CasksState = initialState, action: CasksActi
             const index = findUidIndex({ data, uid: action?.payload.uid });
             const deepIndex = findIndex(propEq('id', action?.payload.id))(data[index].data);
 
-            return set(lensPath(['data', index, 'data', deepIndex, 'value']), action?.payload.value, {
+            const lens = lensPath(['data', index, 'data', deepIndex, 'value']);
+            const hist: HistoryDataType = {
+                index,
+                deepIndex,
+                value: view(lens, state),
+                newValue: action?.payload.value,
+            };
+            return set(lens, action?.payload.value, {
                 ...state,
-                history: [...state.history, data],
+                history: {
+                    data: append(hist, history.data),
+                    index: historyDataLength,
+                    disabled: {
+                        undo: false,
+                        redo: true,
+                    },
+                },
             });
+        case CASKS_REMOTE_FOCUS:
+            const { remove } = action?.payload;
+            const { index: focusIndex, deepIndex: foxusDeepIndex } = action?.payload?.data || {};
+            if (remove) {
+                return set(lensPath(['data', focusIndex, 'data', foxusDeepIndex, 'focus']), null, state);
+            }
+            return set(lensPath(['data', focusIndex, 'data', foxusDeepIndex, 'focus']), action?.payload?.data, state);
         default:
             return state;
     }

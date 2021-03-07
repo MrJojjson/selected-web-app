@@ -37,9 +37,9 @@ export const BarLayout = ({ children, overrideOpen, start }: BarLayoutType) => {
             })}
         >
             <BarElement end={barBtn} start={start} />
-            <div ref={barContentRef} className="bar_content">
+            <ul ref={barContentRef} className="bar_content">
                 {children}
-            </div>
+            </ul>
         </div>
     );
 };

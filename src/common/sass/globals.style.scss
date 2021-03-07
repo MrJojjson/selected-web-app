@@ -2,6 +2,7 @@
 @import './colors.scss';
 
 @import './mixins/flex.scss';
+@import './mixins/breakpoints.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
@@ -32,7 +33,6 @@ html,
 body,
 #root {
     @include flex(flex-start, flex-start, row);
-
     margin: 0;
     padding: 0;
     min-height: 100vh;

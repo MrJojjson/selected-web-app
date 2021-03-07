@@ -1,6 +1,7 @@
 @import '../../common/sass/colors.scss';
 @import '../../common/sass/metrics.scss';
 @import '../../common/sass/mixins/flex.scss';
+@import '../../common/sass/mixins/breakpoints.scss';
 
 .page_layout {
     @include flex(flex-start, space-between, row);
@@ -15,7 +16,7 @@
         width: 100%;
         .input_list_container {
             li {
-                width: 22.5%;
+                width: 21.5%;
             }
         }
     }
@@ -62,6 +63,24 @@
         .input_list_container {
             li {
                 width: 100%;
+            }
+        }
+    }
+}
+
+@include mobile-breakpoint {
+    .page_layout {
+        @include flex(flex-start, flex-start, column);
+
+        &.columns-1 > *,
+        &.columns-2 > *,
+        &.columns-3 > *,
+        &.columns-4 > * {
+            width: 100%;
+            .input_list_container {
+                li {
+                    width: 100%;
+                }
             }
         }
     }

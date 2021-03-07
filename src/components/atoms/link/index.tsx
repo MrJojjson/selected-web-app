@@ -16,7 +16,7 @@ export type LinkType = Omit<TextType, 'children'> & {
 };
 
 const isActive = ({ isCurrent }) => {
-    return isCurrent ? { className: `active` } : {};
+    return isCurrent ? { className: `reach_link  active` } : {};
 };
 
 export const Link = ({ pathname, hash, query, title, className, ...rest }: LinkType) => {
@@ -49,13 +49,14 @@ export type ListType = {
     links: LinkType[];
     className?: string;
     mini?: boolean;
+    onClick?: () => void;
 };
 
-export const LinkList = ({ links = [], className, mini }: ListType) => {
+export const LinkList = ({ links = [], className, mini, onClick }: ListType) => {
     const linkList = map(
         (props) => (
             <li key={props.pathname}>
-                <Link direction="column" {...props} />
+                <Link direction="column" onClick={onClick} {...props} />
             </li>
         ),
         links,

@@ -9,6 +9,9 @@ import {
     CasksRenameActionType,
     CASKS_RENAME,
     CASKS_REDO,
+    CASKS_UNDO,
+    CasksFocusActionType,
+    CASKS_REMOTE_FOCUS,
 } from '../types/casksTypes';
 
 export const casksSelected = ({ ...props }: CasksSelectedActionType) => ({
@@ -34,7 +37,16 @@ export const casksRedo = () => ({
     type: CASKS_REDO,
 });
 
+export const casksUndo = () => ({
+    type: CASKS_UNDO,
+});
+
 export const casksRename = ({ ...props }: CasksRenameActionType) => ({
     type: CASKS_RENAME,
+    payload: { ...props },
+});
+
+export const setCasksRemoteFocus = ({ ...props }: CasksFocusActionType) => ({
+    type: CASKS_REMOTE_FOCUS,
     payload: { ...props },
 });
