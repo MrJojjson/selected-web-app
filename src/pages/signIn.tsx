@@ -1,11 +1,11 @@
 import React from 'react';
-import { UserForm } from '../components/molecules/forms/profile/userForm';
+import { Auth } from '../components/molecules/auth';
 import { PageLayout } from '../layout/pageLayout';
 
-export const Profile = () => {
+export const SignIn = () => {
     return (
         <PageLayout>
-            <UserForm />
+            <Auth key="sign-in-auth" />
         </PageLayout>
     );
 };

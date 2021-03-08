@@ -1,4 +1,4 @@
-import { map, mergeAll } from 'ramda';
+import { isEmpty, lensPath, map, mergeAll, set } from 'ramda';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchData } from '../../../../hooks/useApi';
@@ -9,6 +9,10 @@ import {
     purchaseIncomingSelected,
     whiskiesSetFetch,
 } from '../../../../redux';
+import { PurchaseIncomingAddedState } from '../../../../redux/types/purchaseTypes';
+import { UseApiType } from '../../../../types/apiTypes';
+import { CaskType, APICaskReturnType } from '../../../../types/caskTypes';
+import { WhiskyType, APIWhiskiesReturnType } from '../../../../types/whiskyTypes';
 import { Button } from '../../../atoms';
 import { NavbarContentTemplate } from '../navbarContentTemplate';
 
@@ -52,23 +56,65 @@ export const PurchaseNav = () => {
         />
     );
 
-    const onSubmit = () => {
-        map(async ({ data: addedData, fetch }) => {
-            const data = mergeAll(map(({ id, value }) => ({ [(id as unknown) as string]: value }), addedData));
+    const postWhisky = async (data: WhiskyType, fetch: UseApiType): Promise<APIWhiskiesReturnType> => {
+        return await fetchData({
+            data,
+            token,
+            ...fetch,
+        })
+            .then((res) => res)
+            .catch((err) => console.log('err', err));
+    };
 
-            await fetchData({
-                data,
-                token,
-                ...fetch,
-            })
-                .then((res) => {
-                    dispatch(purchaseIncomingSelected({ all: true }));
-                    dispatch(whiskiesSetFetch({ fetch: true }));
-                    setTimeout(() => {
-                        dispatch(purchaseIncomingSelected({ remove: true }));
-                    }, 2500);
-                })
-                .catch((err) => console.log('err', err));
+    const postCask = async (data: CaskType, fetch: UseApiType): Promise<APICaskReturnType> => {
+        return await fetchData({
+            data,
+            token,
+            ...fetch,
+        })
+            .then((res) => res)
+            .catch((err) => console.log('err', err));
+    };
+
+    const resetIncomingPurchaseFields = () => {
+        dispatch(purchaseIncomingSelected({ all: true }));
+        dispatch(whiskiesSetFetch({ fetch: true }));
+        setTimeout(() => {
+            dispatch(purchaseIncomingSelected({ remove: true }));
+        }, 2500);
+    };
+
+    const onSubmit = () => {
+        map(async ({ data: addedData, fetch, preFetch }) => {
+            let whisky = mergeAll(
+                map(({ id, value, belonging }) => {
+                    if (belonging === 'whisky') {
+                        return { [(id as unknown) as string]: value };
+                    }
+                }, addedData),
+            ) as WhiskyType;
+
+            const cask = mergeAll(
+                map(({ id, value, belonging }) => {
+                    if (belonging === 'cask') {
+                        return { [(id as unknown) as string]: value };
+                    }
+                }, addedData),
+            ) as CaskType;
+
+            if (!isEmpty(whisky) && !isEmpty(cask) && !isEmpty(preFetch)) {
+                return postCask(cask, preFetch).then(async ({ id }) => {
+                    whisky = set(lensPath(['cask', 'id']), id, whisky);
+                    await postWhisky(whisky, fetch);
+                    resetIncomingPurchaseFields();
+                });
+            }
+            if (!isEmpty(whisky)) {
+                return postWhisky(whisky, fetch).then(async () => resetIncomingPurchaseFields());
+            }
+            if (!isEmpty(cask)) {
+                return postCask(cask, fetch).then(async () => resetIncomingPurchaseFields());
+            }
         }, added);
     };
 

@@ -10,7 +10,7 @@ export type ApiEndpointTypes = 'users' | 'authenticate' | 'casks' | 'whiskies' |
 export type ApiMethodTypes = 'get' | 'post' | 'put' | 'delete';
 
 export type UseApiType = {
-    endpoint: ApiEndpointTypes | ApiEndpointTypes[];
+    endpoint?: ApiEndpointTypes | ApiEndpointTypes[];
     id?: string;
     idPos?: number;
     method?: ApiMethodTypes;

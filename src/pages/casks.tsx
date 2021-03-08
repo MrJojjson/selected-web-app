@@ -34,6 +34,16 @@ export const Casks = () => {
                                 CaskVars,
                             );
 
+                            if (rest?.whisky) {
+                                data.push({
+                                    id: 'whisky',
+                                    title: 'Whisky name',
+                                    type: 'text',
+                                    value: rest?.whisky?.name,
+                                    belonging: 'whisky',
+                                });
+                            }
+
                             const returnCasks = {
                                 data,
                                 uid,

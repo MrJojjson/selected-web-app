@@ -1,0 +1,29 @@
+@import '../../../common/sass/mixins/flex.scss';
+@import '../../../common/sass/metrics.scss';
+@import '../../../common/sass/colors.scss';
+@import '../../../common/sass/mixins/breakpoints.scss';
+
+.auth_form {
+    @include flex(center, center, column);
+    width: 100%;
+    height: calc(100vh - #{$default-padding * 4});
+    .input_wrapper {
+        margin-bottom: $default-margin;
+        width: 25vw;
+    }
+    button {
+        width: 20vw;
+    }
+}
+
+@include mobile-breakpoint {
+    .auth_form {
+        .input_wrapper {
+            margin-bottom: $default-margin;
+            width: 80%;
+        }
+        button {
+            width: 80%;
+        }
+    }
+}

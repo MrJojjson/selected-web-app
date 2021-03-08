@@ -1,4 +1,5 @@
 import { InputVarsType } from './inputTypes';
+import { WhiskyType } from './whiskyTypes';
 
 export type APICaskReturnType = CaskType & {
     id?: string;
@@ -11,7 +12,11 @@ export type CaskType = {
     type?: string;
     size?: number;
     base?: string;
-    whisky?: string;
+    id?: string;
+    whisky?: {
+        id?: WhiskyType['id'];
+        name?: WhiskyType['name'];
+    };
 };
 
 export type CaskKeyType = keyof CaskType;

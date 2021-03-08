@@ -1,11 +1,20 @@
-import { AuthStateType, AUTH_LOGGED_IN_STATE } from '../types/authTypes';
+import {
+    AuthChangeUserDataType,
+    AuthStateType,
+    AUTH_LOGGED_IN_STATE,
+    AUTH_CHANGE_USER_DATA,
+    AuthChangeUserType,
+} from '../types/authTypes';
 
-type SetLoginStateType = Pick<AuthStateType, 'user' | 'token'>;
-
-export const authSetLoggedIn = ({ user, token }: SetLoginStateType) => ({
+export const authSetLoggedIn = ({ user, token }: AuthStateType) => ({
     type: AUTH_LOGGED_IN_STATE,
     payload: {
         user,
         token,
     },
+});
+
+export const authChangeUserData = ({ ...props }: AuthChangeUserType) => ({
+    type: AUTH_CHANGE_USER_DATA,
+    payload: { ...props },
 });

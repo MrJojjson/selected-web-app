@@ -10,9 +10,6 @@ import './newPurchaseForms.style.scss';
 export const NewPurchaseForm = () => {
     const added = getPurchaseIncomingAddedState();
     const selected = getPurchaseIncomingSelectedState();
-    if (added?.length <= 0) {
-        return null;
-    }
 
     return (
         <InputList

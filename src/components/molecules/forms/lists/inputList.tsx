@@ -141,13 +141,14 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
         const { value } = event?.currentTarget;
         dispatch(onBlurInput({ uid, id, value }));
     };
+
     return (
         <ul className="input_list_container">
             {addIndex(map)(({ id, title, type, value, focus, belonging }: FormsListInputListItemDataType, index) => {
                 const lineBreak = belonging !== data[index - 1]?.belonging;
 
                 const returnLineBreak = lineBreak ? (
-                    <li key={`${uniqueId('line-break')}-before-${id}`} className="line_break">
+                    <li className="line_break">
                         <Text fontSize="m">{belonging}</Text>
                     </li>
                 ) : null;
@@ -156,9 +157,9 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
                 const focusValue = fInitiator === 'undo' ? fValue : fNewValue;
 
                 return (
-                    <Fragment key={uniqueId('fragment')}>
+                    <Fragment key={`${uid}-${id}`}>
                         {returnLineBreak}
-                        <li key={`${uid}-${id}`}>
+                        <li>
                             <Input
                                 label={title}
                                 placeholder={title}

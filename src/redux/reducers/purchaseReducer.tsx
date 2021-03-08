@@ -20,30 +20,39 @@ const initialState: PurchaseState = {
     },
 };
 
-let defaultFetch: UseApiType = {
-    endpoint: 'whiskies',
-    method: 'post',
-};
-
 export const PurchaseReducer = (state: PurchaseState = initialState, action: PurchaseActions) => {
     const { selected, added, data } = state.incoming;
 
     switch (action.type) {
         case PURCHASE_INCOMING_ADDED:
-            let incomingAddData: any[] = WhiskyCaskVars;
-            let uidPrefix = 'new-whisky-cask';
+            let incomingAddData: any[] = [];
+            let uidPrefix = '';
+
+            let fetch: UseApiType = {
+                endpoint: 'whiskies',
+                method: 'post',
+            };
+            let preFetch: UseApiType = {};
+
+            if (action.payload.whiskyWithCask) {
+                incomingAddData = WhiskyCaskVars;
+                uidPrefix = 'new-whisky-cask';
+                preFetch.endpoint = 'casks';
+                preFetch.method = 'post';
+            }
             if (action.payload.cask) {
                 incomingAddData = CaskVars;
                 uidPrefix = 'new-cask';
-                defaultFetch.endpoint = 'casks';
+                fetch.endpoint = 'casks';
             }
             if (action.payload.whisky) {
                 incomingAddData = WhiskyVars;
                 uidPrefix = 'new-whisky';
             }
+
             return set(
                 lensPath(['incoming', 'added']),
-                append({ data: incomingAddData, uid: uniqueId(uidPrefix), fetch: defaultFetch }, state.incoming.added),
+                append({ data: incomingAddData, uid: uniqueId(uidPrefix), fetch, preFetch }, state.incoming.added),
                 state,
             );
 

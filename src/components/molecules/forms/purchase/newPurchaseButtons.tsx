@@ -32,7 +32,7 @@ export const NewPurchaseButtons = () => {
             label="Whisky and cask"
             theme="primary"
             icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded({}))}
+            onClick={() => dispatch(purchaseIncomingAdded({ whiskyWithCask: true }))}
         />
     );
 

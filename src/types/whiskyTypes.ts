@@ -17,8 +17,10 @@ export type WhiskyType = {
     ppm?: number;
     ola?: number;
     abv?: number;
+    id?: string;
     cask?: {
-        id: CaskType['number'];
+        id?: CaskType['id'];
+        number?: CaskType['number'];
     };
 };
 

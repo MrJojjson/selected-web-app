@@ -1,0 +1,26 @@
+@import '../../../../common/sass/mixins/flex.scss';
+@import '../../../../common/sass/metrics.scss';
+@import '../../../../common/sass/colors.scss';
+@import '../../../../common/sass/mixins/breakpoints.scss';
+
+.user_form {
+    @include flex(flex-start, flex-start, row);
+    width: 100%;
+    padding: $default-padding 0;
+    .input_wrapper {
+        &:not(:last-of-type) {
+            margin-right: $default-margin;
+        }
+    }
+}
+
+@include mobile-breakpoint {
+    .user_form {
+        @include flex(flex-start, flex-start, column);
+        .input_wrapper {
+            &:not(:last-of-type) {
+                margin-right: 0;
+            }
+        }
+    }
+}

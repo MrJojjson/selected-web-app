@@ -28,11 +28,18 @@ export const Whiskies = () => {
                         const data = map((rest) => {
                             const { id: uid, name: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;
 
-                            const data = map(
-                                ({ id, title, type }) =>
-                                    ({ value: rest[id]?.toString(), id, title, type } as WhiskyVarsType),
-                                WhiskyVars,
-                            );
+                            const data = map(({ id, title, type }) => {
+                                return { value: rest[id]?.toString(), id, title, type } as WhiskyVarsType;
+                            }, WhiskyVars);
+
+                            rest?.cask &&
+                                data.push({
+                                    id: 'cask',
+                                    title: 'Cask name',
+                                    type: 'text',
+                                    value: rest?.cask?.number,
+                                    belonging: 'cask',
+                                });
 
                             const returnWhisky = {
                                 data,

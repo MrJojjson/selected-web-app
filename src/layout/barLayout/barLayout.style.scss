@@ -39,6 +39,7 @@
     }
     .end {
         @include flex(center, flex-end, row);
+        margin-left: auto;
         button {
             margin-left: $default-margin;
         }

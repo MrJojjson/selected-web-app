@@ -10,6 +10,7 @@ export const PURCHASE_INCOMING_ADDED_DATA = 'PURCHASE_INCOMING_ADDED_DATA';
 
 export type PurchaseIncomingAddedState = {
     fetch: UseApiType;
+    preFetch?: UseApiType | null;
     data: InputVarsType<WhiskyCaskVarsType | WhiskyVarsType | CaskVarsType>[];
     uid: string;
 };
@@ -28,6 +29,7 @@ export type PurchaseState = {
 export type PurchaseIncomingAddedActionType = {
     cask?: boolean;
     whisky?: boolean;
+    whiskyWithCask?: boolean;
 };
 
 export type PurchaseIncomingAddedAction = {

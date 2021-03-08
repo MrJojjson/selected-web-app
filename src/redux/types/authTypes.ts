@@ -1,4 +1,5 @@
 export const AUTH_LOGGED_IN_STATE = 'AUTH_LOGGED_IN_STATE';
+export const AUTH_CHANGE_USER_DATA = 'AUTH_CHANGE_USER_DATA';
 
 export type AuthUserType = {
     firstName: string;
@@ -17,4 +18,14 @@ export type AuthSetLoggedInStateType = {
     payload: AuthStateType;
 };
 
-export type AuthActions = AuthSetLoggedInStateType;
+export type AuthChangeUserType = {
+    type: keyof Omit<AuthUserType, 'id'>;
+    value: string;
+};
+
+export type AuthChangeUserDataType = {
+    type: 'AUTH_CHANGE_USER_DATA';
+    payload: AuthChangeUserType;
+};
+
+export type AuthActions = AuthSetLoggedInStateType | AuthChangeUserDataType;
