@@ -1,7 +1,10 @@
+import cn from 'classnames';
 import { addIndex, includes, map } from 'ramda';
 import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
+import { DateFormatted } from '../../../../common/utils/dateFormat';
 import { BarLayout } from '../../../../layout/barLayout';
+import { BarElement } from '../../../../layout/barLayout/bar';
 import {
     FormsListInputListBarType,
     FormsListInputListContainerType,
@@ -12,11 +15,6 @@ import {
 import { Header, Input, Text } from '../../../atoms';
 import { Selector } from '../../../atoms/selectors';
 import './inputList.style.scss';
-import cn from 'classnames';
-import { BarElement } from '../../../../layout/barLayout/bar';
-import { DateFormatted } from '../../../../common/utils/dateFormat';
-import { InputVarsType } from '../../../../types/inputTypes';
-import { uniqueId } from '../../../../common/utils/uniqueId';
 
 export const InputList = ({
     data,
@@ -144,38 +142,41 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
 
     return (
         <ul className="input_list_container">
-            {addIndex(map)(({ id, title, type, value, focus, belonging }: FormsListInputListItemDataType, index) => {
-                const lineBreak = belonging !== data[index - 1]?.belonging;
+            {addIndex(map)(
+                ({ id, title, type, value, focus, belonging, disabled }: FormsListInputListItemDataType, index) => {
+                    const lineBreak = belonging !== data[index - 1]?.belonging;
 
-                const returnLineBreak = lineBreak ? (
-                    <li className="line_break">
-                        <Text fontSize="m">{belonging}</Text>
-                    </li>
-                ) : null;
-
-                const { value: fValue, newValue: fNewValue, initiator: fInitiator } = focus || {};
-                const focusValue = fInitiator === 'undo' ? fValue : fNewValue;
-
-                return (
-                    <Fragment key={`${uid}-${id}`}>
-                        {returnLineBreak}
-                        <li>
-                            <Input
-                                label={title}
-                                placeholder={title}
-                                value={value}
-                                name={id?.toString()}
-                                type={type}
-                                onBlur={(event) =>
-                                    event.currentTarget.value !== value && onBlur({ event, id: id?.toString() })
-                                }
-                                disabled={edit === undefined ? false : !edit}
-                                focusValue={focusValue}
-                            />
+                    const returnLineBreak = lineBreak ? (
+                        <li className="line_break">
+                            <Text fontSize="m">{belonging}</Text>
                         </li>
-                    </Fragment>
-                );
-            }, data)}
+                    ) : null;
+
+                    const { value: fValue, newValue: fNewValue, initiator: fInitiator } = focus || {};
+                    const focusValue = fInitiator === 'undo' ? fValue : fNewValue;
+
+                    return (
+                        <Fragment key={`${uid}-${id}`}>
+                            {returnLineBreak}
+                            <li>
+                                <Input
+                                    label={title}
+                                    placeholder={title}
+                                    value={value}
+                                    name={id?.toString()}
+                                    type={type}
+                                    onBlur={(event) =>
+                                        event.currentTarget.value !== value && onBlur({ event, id: id?.toString() })
+                                    }
+                                    disabled={disabled === undefined ? !edit : disabled}
+                                    focusValue={focusValue}
+                                />
+                            </li>
+                        </Fragment>
+                    );
+                },
+                data,
+            )}
         </ul>
     );
 };

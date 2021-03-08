@@ -1,0 +1,16 @@
+@import '../../../common/sass/colors.scss';
+@import '../../../common/sass/metrics.scss';
+@import '../../../common/sass/mixins/flex.scss';
+@import '../../../common/sass/mixins/fades.scss';
+
+@import '../../../common/sass/mixins/breakpoints.scss';
+
+.sort_bar {
+    @include flex(center, flex-start, row);
+    width: 100%;
+    padding: $default-padding;
+
+    .dropdown:not(:last-of-type) {
+        margin-right: $default-margin;
+    }
+}
