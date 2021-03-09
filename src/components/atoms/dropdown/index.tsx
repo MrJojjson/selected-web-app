@@ -4,7 +4,6 @@ import './dropdown.style.scss';
 
 export type DropdownType = {
     options: DropdownOptionType[];
-    id: string;
     label: string;
     defaultValue?: string;
     onOptionChange: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -15,7 +14,7 @@ export type DropdownOptionType = {
     value: string;
 };
 
-export const Dropdown = ({ options, id, label, defaultValue, onOptionChange }: DropdownType) => {
+export const Dropdown = ({ options, label, defaultValue, onOptionChange }: DropdownType) => {
     const [value, setValue] = useState<string>(defaultValue);
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -25,8 +24,8 @@ export const Dropdown = ({ options, id, label, defaultValue, onOptionChange }: D
 
     return (
         <span className="dropdown">
-            <label htmlFor={id}>{label}</label>
-            <select name={id} id={id} value={value} onChange={handleChange}>
+            <label htmlFor={label}>{label}</label>
+            <select name={label} id={label} value={value} onChange={handleChange}>
                 {map(({ value, label }) => {
                     return (
                         <option key={value} value={value}>

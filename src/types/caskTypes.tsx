@@ -53,3 +53,25 @@ export const CaskVars: CaskVarsType[] = [
         belonging: 'cask',
     },
 ];
+
+export type ApiCaskKeyType = keyof APICaskReturnType;
+
+export type ApiCaskVarsType = InputVarsType<ApiCaskKeyType>;
+
+export const ApiCaskVars: ApiCaskVarsType[] = [
+    ...CaskVars,
+    {
+        id: 'createdAtUtc',
+        title: 'Created at',
+        type: 'date',
+        value: '',
+        belonging: 'cask',
+    },
+    {
+        id: 'updatedAtUtc',
+        title: 'Updated at',
+        type: 'date',
+        value: '',
+        belonging: 'cask',
+    },
+];

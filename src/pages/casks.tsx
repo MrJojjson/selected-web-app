@@ -3,14 +3,16 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { DateFormatted } from '../common/utils/dateFormat';
 import { AddedCasksForm } from '../components/molecules/forms/casks/addedCasksForm';
+import { SortBar } from '../components/organisms/bars/sortBar';
 import { fetchData } from '../hooks/useApi';
+import { CompLayout } from '../layout/compLayout';
 import { PageLayout } from '../layout/pageLayout';
 import { getAuthTokenState } from '../redux';
 import { casksAddData, casksSetFetch } from '../redux/actions/casksActions';
 import { getCasksFetchState } from '../redux/selectors/casksSelector';
 import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
 import { CasksDataType } from '../redux/types/casksTypes';
-import { APICaskReturnType, CaskVars, CaskVarsType } from '../types/caskTypes';
+import { APICaskReturnType, ApiCaskVars, ApiCaskVarsType, CaskVars, CaskVarsType } from '../types/caskTypes';
 
 export const Casks = () => {
     const dispatch = useDispatch();
@@ -29,10 +31,13 @@ export const Casks = () => {
                         const data = map((rest) => {
                             const { id: uid, number: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;
 
-                            const data = map(
-                                ({ id, title, type }) => ({ value: rest[id], id, title, type } as CaskVarsType),
-                                CaskVars,
-                            );
+                            const data = map(({ id, title, type }) => {
+                                let whisky = { value: rest[id]?.toString(), id, title, type } as ApiCaskVarsType;
+                                if (id === 'createdAtUtc' || id === 'updatedAtUtc') {
+                                    whisky.disabled = true;
+                                }
+                                return whisky;
+                            }, ApiCaskVars);
 
                             if (rest?.whisky) {
                                 data.push({
@@ -62,8 +67,13 @@ export const Casks = () => {
     }, [fetch]);
 
     return (
-        <PageLayout columns={columns} disableLayout>
-            <AddedCasksForm key="added-casks-form" />
-        </PageLayout>
+        <>
+            <CompLayout key="added-casks-sort-bar">
+                <SortBar id="casks" />
+            </CompLayout>
+            <PageLayout columns={columns} disableLayout>
+                <AddedCasksForm key="added-casks-form" />
+            </PageLayout>
+        </>
     );
 };

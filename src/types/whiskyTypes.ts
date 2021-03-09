@@ -1,12 +1,6 @@
 import { CaskType } from './caskTypes';
 import { InputVarsType } from './inputTypes';
 
-export type APIWhiskiesReturnType = WhiskyType & {
-    id?: string;
-    createdAtUtc?: string;
-    updatedAtUtc?: string;
-};
-
 export type WhiskyType = {
     name?: string;
     distillery?: string;
@@ -27,6 +21,7 @@ export type WhiskyType = {
 export type WhiskyKeyType = keyof WhiskyType;
 
 export type WhiskyVarsType = InputVarsType<WhiskyKeyType>;
+
 export const WhiskyVars: WhiskyVarsType[] = [
     {
         id: 'name',
@@ -93,30 +88,58 @@ export const WhiskyVars: WhiskyVarsType[] = [
     },
 ];
 
-export type RerackType = {
-    sourceId: string;
-    sourceName: string;
-    volume: number;
+export type APIWhiskiesReturnType = WhiskyType & {
+    id?: string;
+    createdAtUtc?: string;
+    updatedAtUtc?: string;
 };
 
-type RerackKeysType = keyof RerackType;
+export type ApiWhiskyKeyType = keyof APIWhiskiesReturnType;
 
-type RerackVarsType = {
-    id: RerackKeysType;
-    title: string;
-};
+export type ApiWhiskyVarsType = InputVarsType<ApiWhiskyKeyType>;
 
-export const ReracksVars: RerackVarsType[] = [
+export const ApiWhiskyVars: ApiWhiskyVarsType[] = [
+    ...WhiskyVars,
     {
-        id: 'sourceId',
-        title: 'Source id',
+        id: 'createdAtUtc',
+        title: 'Created at',
+        type: 'date',
+        value: '',
+        belonging: 'whisky',
     },
     {
-        id: 'sourceName',
-        title: 'Source name',
-    },
-    {
-        id: 'volume',
-        title: 'Volume',
+        id: 'updatedAtUtc',
+        title: 'Updated at',
+        type: 'date',
+        value: '',
+        belonging: 'whisky',
     },
 ];
+
+// export type RerackType = {
+//     sourceId: string;
+//     sourceName: string;
+//     volume: number;
+// };
+
+// type RerackKeysType = keyof RerackType;
+
+// type RerackVarsType = {
+//     id: RerackKeysType;
+//     title: string;
+// };
+
+// export const ReracksVars: RerackVarsType[] = [
+//     {
+//         id: 'sourceId',
+//         title: 'Source id',
+//     },
+//     {
+//         id: 'sourceName',
+//         title: 'Source name',
+//     },
+//     {
+//         id: 'volume',
+//         title: 'Volume',
+//     },
+// ];

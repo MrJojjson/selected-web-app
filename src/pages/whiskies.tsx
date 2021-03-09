@@ -3,19 +3,28 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { DateFormatted } from '../common/utils/dateFormat';
 import { AddedWhiskiesForm } from '../components/molecules/forms/whiskies/addedWhiskiesForm';
+import { SortBar } from '../components/organisms/bars/sortBar';
 import { fetchData } from '../hooks/useApi';
+import { CompLayout } from '../layout/compLayout';
 import { PageLayout } from '../layout/pageLayout';
 import { getAuthTokenState, whiskiesAddData, whiskiesSetFetch } from '../redux';
 import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
 import { getWhiskiesFetchState } from '../redux/selectors/whiskiesSelector';
 import { WhiskiesDataType } from '../redux/types/whiskyTypes';
-import { APIWhiskiesReturnType, WhiskyVars, WhiskyVarsType } from '../types/whiskyTypes';
+import {
+    APIWhiskiesReturnType,
+    ApiWhiskyVars,
+    ApiWhiskyVarsType,
+    WhiskyVars,
+    WhiskyVarsType,
+} from '../types/whiskyTypes';
 
 export const Whiskies = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const fetch = getWhiskiesFetchState();
     const columns = getSystemLayoutColumnsState({ page: 'whiskies' });
+
     useEffect(() => {
         if (fetch) {
             fetchData({
@@ -29,10 +38,14 @@ export const Whiskies = () => {
                             const { id: uid, name: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;
 
                             const data = map(({ id, title, type }) => {
-                                return { value: rest[id]?.toString(), id, title, type } as WhiskyVarsType;
-                            }, WhiskyVars);
+                                let whisky = { value: rest[id]?.toString(), id, title, type } as ApiWhiskyVarsType;
+                                if (id === 'createdAtUtc' || id === 'updatedAtUtc') {
+                                    whisky.disabled = true;
+                                }
+                                return whisky;
+                            }, ApiWhiskyVars);
 
-                            rest?.cask &&
+                            if (rest?.cask) {
                                 data.push({
                                     id: 'cask',
                                     title: 'Cask name',
@@ -40,6 +53,7 @@ export const Whiskies = () => {
                                     value: rest?.cask?.number,
                                     belonging: 'cask',
                                 });
+                            }
 
                             const returnWhisky = {
                                 data,
@@ -59,8 +73,13 @@ export const Whiskies = () => {
     }, [fetch]);
 
     return (
-        <PageLayout columns={columns} disableLayout>
-            <AddedWhiskiesForm key="added-whiskies-form" />
-        </PageLayout>
+        <>
+            <CompLayout key="added-whiskies-sort-bar">
+                <SortBar id="whiskies" />
+            </CompLayout>
+            <PageLayout columns={columns} disableLayout>
+                <AddedWhiskiesForm key="added-whiskies-form" />
+            </PageLayout>
+        </>
     );
 };
