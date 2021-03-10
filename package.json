@@ -14,6 +14,7 @@
         "start:dev": "cp -v .env.NODE_ENV.local .env && snowpack dev",
         "start:prod": "cp -v .env.NODE_ENV .env && snowpack dev",
         "clean:build": "rm -rf ./build",
+        "build:vercel": "snowpack build",
         "deploy": "yarn build:prod && gh-pages -d build"
     },
     "devDependencies": {
