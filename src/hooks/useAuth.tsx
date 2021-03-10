@@ -8,8 +8,8 @@ export const useAuth = () => {
     const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
         setLoading(true);
-        const token = JSON.parse(localStorage.getItem('token') || '');
-        const user = JSON.parse(localStorage.getItem('user') || '');
+        const token = JSON.parse(localStorage.getItem('token'));
+        const user = JSON.parse(localStorage.getItem('user'));
 
         if (!token || !user) {
             console.log('>>> SIGNED OUT <<<');

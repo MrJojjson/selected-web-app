@@ -23,13 +23,13 @@ export type FormsListWhiskyOnBlurType = {
     value: string;
 };
 
-export type FormsListInputListItemDataType = InputVarsType<CaskKeyType | WhiskyKeyType | WhiskyCaskVarsType>;
+export type FormsListInputListItemDataType = InputVarsType;
 
 export type FormsListInputListItemsType = {
     data: FormsListInputListItemDataType[];
     uid: string;
     edit?: boolean;
-    onBlurInput?: ({ ...rest }: FormsListWhiskyOnBlurType) => void;
+    onBlurInput?: (props: FormsListWhiskyOnBlurType) => void;
 };
 
 type FormsListInputListBarOnChangeType = {
@@ -39,7 +39,7 @@ type FormsListInputListBarOnChangeType = {
 export type FormsListInputListBarType = BarHeadingType & {
     uid: string;
     isSelected: boolean;
-    onChangeSelect: ({ uid }: FormsListInputListBarOnChangeType) => void;
+    onChangeSelect: (props: FormsListInputListBarOnChangeType) => void;
     edit?: boolean;
     perElement?: boolean;
 };
