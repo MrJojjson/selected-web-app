@@ -18,26 +18,27 @@ library.add(fas);
 export const App = () => {
     const { loading, loggedIn } = useAuth();
 
-    if (loading) {
-        return <Text>LOADING!!!</Text>;
-    } else if (loggedIn) {
-        return (
-            <>
-                <Palette />
-                <div className="content">
-                    <Navbar />
-                    <Router className="router">{...appRoutes}</Router>
-                </div>
-                <AlertBase />
-                <ModalBase />
-            </>
-        );
-    }
+    // if (loading) {
+    //     return <Text>LOADING!!!</Text>;
+    // }
+    // else if (loggedIn) {
     return (
-        <div className="content">
-            <PageLayout>
-                <Auth key="auth" />
-            </PageLayout>
-        </div>
+        <>
+            <Palette />
+            <div className="content">
+                <Navbar />
+                <Router className="router">{...appRoutes}</Router>
+            </div>
+            <AlertBase />
+            <ModalBase />
+        </>
     );
+    // }
+    // return (
+    //     <div className="content">
+    //         <PageLayout>
+    //             <Auth key="auth" />
+    //         </PageLayout>
+    //     </div>
+    // );
 };
