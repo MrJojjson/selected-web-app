@@ -16,7 +16,7 @@ config.autoAddCss = false;
 library.add(fas);
 
 export const App = () => {
-    const { loading, loggedIn } = useAuth();
+    // const { loading, loggedIn } = useAuth();
 
     // if (loading) {
     //     return <Text>LOADING!!!</Text>;
