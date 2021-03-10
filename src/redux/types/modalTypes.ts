@@ -1,6 +1,6 @@
 export const MODAL_TOGGLE = 'MODAL_TOGGLE';
 
-export type ModalStateContentType = 'signup' | 'login' | 'menu' | 'undefined';
+export type ModalStateContentType = 'signup' | 'login' | 'filter' | 'sort' | 'undefined';
 
 export type ModalState = {
     open: boolean;

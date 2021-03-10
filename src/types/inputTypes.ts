@@ -1,7 +1,7 @@
 import { HistoryDataType } from '../redux/types/whiskyTypes';
 
-export type InputVarsType<T> = {
-    id: T;
+export type InputVarsType = {
+    id: string;
     title: string;
     type?: inputType;
     value?: string;
@@ -9,6 +9,15 @@ export type InputVarsType<T> = {
     belonging?: string;
     disabled?: boolean;
 };
+// export type InputVarsType<T> = {
+//     id: T;
+//     title: string;
+//     type?: inputType;
+//     value?: string;
+//     focus?: HistoryDataType | null;
+//     belonging?: string;
+//     disabled?: boolean;
+// };
 
 export type inputType =
     | 'button'

@@ -1,0 +1,53 @@
+@import '../../../common/sass/colors.scss';
+@import '../../../common/sass/metrics.scss';
+@import '../../../common/sass/mixins/flex.scss';
+
+.slider {
+    width: 100%;
+    .slider_min_value,
+    .slider_max_value {
+        width: 100%;
+        position: relative;
+        .slider_value {
+            white-space: nowrap;
+        }
+    }
+    .slider-inputs {
+        @include flex(flex-start, flex-start, column);
+        margin: $default-padding / 2 0;
+        width: 100%;
+        background-color: $color-secondary;
+        border-radius: $border-radius-xs;
+        position: relative;
+        height: $height-s;
+        input {
+            -webkit-appearance: none;
+            height: 100%;
+            outline: none;
+            opacity: 0.7;
+            margin: 0;
+            background-color: transparent;
+            width: 100%;
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: $height-xs;
+                height: $height-xs;
+                background: $color-highlight;
+                cursor: pointer;
+                border-radius: $border-radius-xs;
+                z-index: 3000;
+            }
+
+            &::-moz-range-thumb {
+                width: $height-xs;
+                height: $height-xs;
+                background: $color-highlight;
+                cursor: pointer;
+                border-radius: $border-radius-xs;
+                z-index: 3000;
+            }
+        }
+    }
+}

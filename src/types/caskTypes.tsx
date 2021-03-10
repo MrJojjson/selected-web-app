@@ -21,7 +21,7 @@ export type CaskType = {
 
 export type CaskKeyType = keyof CaskType;
 
-export type CaskVarsType = InputVarsType<CaskKeyType>;
+export type CaskVarsType = InputVarsType;
 
 export const CaskVars: CaskVarsType[] = [
     {
@@ -56,7 +56,7 @@ export const CaskVars: CaskVarsType[] = [
 
 export type ApiCaskKeyType = keyof APICaskReturnType;
 
-export type ApiCaskVarsType = InputVarsType<ApiCaskKeyType>;
+export type ApiCaskVarsType = InputVarsType;
 
 export const ApiCaskVars: ApiCaskVarsType[] = [
     ...CaskVars,

@@ -7,7 +7,6 @@ import './common/sass/globals.style.scss';
 import { Text } from './components/atoms';
 import { AlertBase, ModalBase } from './components/molecules';
 import { Auth } from './components/molecules/auth';
-import { UserForm } from './components/molecules/forms/profile/userForm';
 import { Navbar, Palette } from './components/organisms';
 import { useAuth } from './hooks/useAuth';
 import { PageLayout } from './layout/pageLayout';

@@ -20,7 +20,7 @@ export type WhiskyType = {
 
 export type WhiskyKeyType = keyof WhiskyType;
 
-export type WhiskyVarsType = InputVarsType<WhiskyKeyType>;
+export type WhiskyVarsType = InputVarsType;
 
 export const WhiskyVars: WhiskyVarsType[] = [
     {
@@ -96,7 +96,7 @@ export type APIWhiskiesReturnType = WhiskyType & {
 
 export type ApiWhiskyKeyType = keyof APIWhiskiesReturnType;
 
-export type ApiWhiskyVarsType = InputVarsType<ApiWhiskyKeyType>;
+export type ApiWhiskyVarsType = InputVarsType;
 
 export const ApiWhiskyVars: ApiWhiskyVarsType[] = [
     ...WhiskyVars,

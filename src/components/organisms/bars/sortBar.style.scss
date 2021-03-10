@@ -14,3 +14,27 @@
         margin-right: $default-margin;
     }
 }
+
+.filter_bar_modal {
+    @include flex(flex-start, flex-start, column);
+    width: 100%;
+    width: 40vw;
+    height: 100%;
+    .filter_bar_wrapper {
+        @include flex(flex-start, flex-start, column);
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: $default-margin;
+        .filter_bar_list_header {
+            margin-bottom: $default-margin / 2;
+        }
+        .filter_bar_list {
+            @include flex(flex-start, flex-start, row);
+            flex-wrap: wrap;
+            width: 100%;
+            li {
+                margin: 0 $default-margin $default-margin 0;
+            }
+        }
+    }
+}

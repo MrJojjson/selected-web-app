@@ -1,0 +1,34 @@
+@import '../../../common/sass/colors.scss';
+@import '../../../common/sass/metrics.scss';
+@import '../../../common/sass/mixins/flex.scss';
+
+$shadow-h: 5px;
+$shadow-active-h: 0.5px;
+$shadow-hover-h: 2.5px;
+
+.chip {
+    border-radius: $border-radius-s;
+    padding: $spacing-xxs $spacing-xs;
+    height: $height-s;
+    box-sizing: border-box;
+    border: none;
+    background-color: $color-secondary;
+    box-shadow: $shadow-h $shadow-h $color-highlight-back;
+    cursor: pointer;
+    transition: all $transition-speed;
+    .chip_label {
+        color: $color-primary;
+    }
+    &:hover {
+        box-shadow: $shadow-hover-h $shadow-hover-h $color-highlight-back;
+    }
+    &.active {
+        box-shadow: $shadow-active-h $shadow-active-h $color-secondary-background-back;
+        .chip_label {
+            color: $color-primary;
+        }
+        &:hover {
+            box-shadow: $shadow-hover-h $shadow-hover-h $color-highlight-back;
+        }
+    }
+}
