@@ -3,7 +3,7 @@ import { NewPurchaseButtons } from '../components/molecules/forms/purchase/newPu
 import { NewPurchaseForm } from '../components/molecules/forms/purchase/newPurchaseForm';
 import { PageLayout } from '../layout/pageLayout';
 
-export const Purchases = () => {
+const Purchases = () => {
     return (
         <PageLayout>
             <NewPurchaseButtons key="purchases-incoming-buttons" />
@@ -11,3 +11,5 @@ export const Purchases = () => {
         </PageLayout>
     );
 };
+
+export default Purchases;

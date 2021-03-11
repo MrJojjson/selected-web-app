@@ -15,7 +15,7 @@ import { getWhiskiesFetchState } from '../redux/selectors/whiskiesSelector';
 import { WhiskiesDataType } from '../redux/types/whiskyTypes';
 import { APIWhiskiesReturnType, ApiWhiskyVars, ApiWhiskyVarsType } from '../types/whiskyTypes';
 
-export const Whiskies = () => {
+const Whiskies = () => {
     const [loading, setLoading] = useState<boolean>();
     const dispatch = useDispatch();
     const token = getAuthTokenState();
@@ -88,3 +88,5 @@ export const Whiskies = () => {
         </>
     );
 };
+
+export default Whiskies;

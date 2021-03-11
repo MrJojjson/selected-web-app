@@ -14,7 +14,7 @@ import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
 import { CasksDataType } from '../redux/types/casksTypes';
 import { APICaskReturnType, ApiCaskVars, ApiCaskVarsType, CaskVars, CaskVarsType } from '../types/caskTypes';
 
-export const Casks = () => {
+const Casks = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const fetch = getCasksFetchState();
@@ -77,3 +77,5 @@ export const Casks = () => {
         </>
     );
 };
+
+export default Casks;
