@@ -1,12 +1,10 @@
 import cn from 'classnames';
-import React, { lazy, Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import { getAuthLoggedInState } from '../../../redux/selectors/authSelectors';
-
-const PaletteLinks = lazy(() => import('./paletteLinks'));
-const PaletteSystem = lazy(() => import('./paletteSystem'));
-
+import { Hamburger } from '../../atoms';
 import './palette.style.scss';
-import { Hamburger, LoadingIndicator } from '../../atoms';
+import PaletteLinks from './paletteLinks';
+import PaletteSystem from './paletteSystem';
 
 const Palette = () => {
     const loggedIn = getAuthLoggedInState();
@@ -20,10 +18,8 @@ const Palette = () => {
                     open_mobile: mobileOpen,
                 })}
             >
-                <Suspense fallback={<LoadingIndicator />}>
-                    <PaletteLinks onClick={() => setMobileOpen(false)} />
-                    <PaletteSystem />
-                </Suspense>
+                <PaletteLinks onClick={() => setMobileOpen(false)} />
+                <PaletteSystem />
             </aside>
             <Hamburger
                 className="palette_hamburger_menu"

@@ -5,6 +5,7 @@
     "homepage": "https://selected-web-app.vercel.app",
     "private": true,
     "scripts": {
+        "analyze": "source-map-explorer build/index.js",
         "prettier": "prettier --write 'src/**/*.{ts,tsx,mdx}' --ignore-path .gitignore",
         "clean": "rm -rf dist",
         "test": "jest",
@@ -33,7 +34,8 @@
         "global": "^4.4.0",
         "prettier": "^2.2.1",
         "ramda": "^0.27.1",
-        "snowpack": "^3.0.11"
+        "snowpack": "^3.0.11",
+        "source-map-explorer": "^2.5.2"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.34",
