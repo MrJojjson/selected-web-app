@@ -12,7 +12,7 @@
 module.exports = {
     mount: {
         // directory name: 'build directory'
-        src: '/dist',
+        src: '/',
         public: '/',
     },
     routes: [
