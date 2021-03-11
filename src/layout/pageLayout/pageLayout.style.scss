@@ -1,6 +1,8 @@
 @import '../../common/sass/colors.scss';
 @import '../../common/sass/metrics.scss';
 @import '../../common/sass/mixins/flex.scss';
+@import '../../common/sass/mixins/fades.scss';
+
 @import '../../common/sass/mixins/breakpoints.scss';
 
 .page_layout {
@@ -11,7 +13,7 @@
     padding: $default-padding;
     box-sizing: border-box;
     border-radius: $default-border-radius;
-
+    @include fadeIn();
     &.columns-1 > * {
         width: 100%;
         .input_list_container {

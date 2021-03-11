@@ -5,7 +5,6 @@
     "homepage": "https://selected-web-app.vercel.app",
     "private": true,
     "scripts": {
-        "analyze": "source-map-explorer 'build/*.js'",
         "prettier": "prettier --write 'src/**/*.{ts,tsx,mdx}' --ignore-path .gitignore",
         "clean": "rm -rf dist",
         "test": "jest",
@@ -22,7 +21,6 @@
     "devDependencies": {
         "@types/classnames": "^2.2.11",
         "@types/ramda": "^0.27.38",
-        "@types/reach__router": "^1.3.7",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.0",
         "@types/react-redux": "^7.1.16",
@@ -35,14 +33,12 @@
         "global": "^4.4.0",
         "prettier": "^2.2.1",
         "ramda": "^0.27.1",
-        "snowpack": "^3.0.11",
-        "webpack-bundle-analyzer": "^4.4.0"
+        "snowpack": "^3.0.11"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.34",
         "@fortawesome/free-solid-svg-icons": "^5.15.2",
         "@fortawesome/react-fontawesome": "^0.1.14",
-        "@reach/router": "^1.3.4",
         "@snowpack/plugin-dotenv": "^2.0.5",
         "@snowpack/plugin-optimize": "^0.2.13",
         "@snowpack/plugin-react-refresh": "^2.4.0",
@@ -59,7 +55,6 @@
         "react-router-dom": "^5.2.0",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
-        "source-map-explorer": "^2.5.2",
         "typescript": "^4.1.3"
     }
 }

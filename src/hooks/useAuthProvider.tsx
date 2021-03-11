@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, useHistory, useLocation } from 'react-router-dom';
-import SignIn from '../pages/signIn';
+import { LoadingIndicator } from '../components/atoms';
 import { authSetLoggedIn, getAuthState } from '../redux';
+const SignIn = lazy(() => import('../pages/signIn'));
 
 export const AuthProvider = ({ children }: any) => {
     const dispatch = useDispatch();
@@ -21,5 +22,9 @@ export const AuthProvider = ({ children }: any) => {
         }
     }, []);
 
-    return auth?.token ? children : <Route key="sign-in" path="/signIn" render={() => <SignIn />} />;
+    return (
+        <Suspense fallback={<LoadingIndicator />}>
+            {auth?.token ? children : <Route key="sign-in" path="/signIn" render={() => <SignIn />} />}
+        </Suspense>
+    );
 };

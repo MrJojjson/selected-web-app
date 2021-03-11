@@ -16,7 +16,6 @@ import { WhiskiesDataType } from '../redux/types/whiskyTypes';
 import { APIWhiskiesReturnType, ApiWhiskyVars, ApiWhiskyVarsType } from '../types/whiskyTypes';
 
 const Whiskies = () => {
-    const [loading, setLoading] = useState<boolean>();
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const fetch = getWhiskiesFetchState();
@@ -24,8 +23,6 @@ const Whiskies = () => {
 
     useEffect(() => {
         if (fetch) {
-            setLoading(true);
-
             fetchData({
                 endpoint: 'whiskies',
                 token,
@@ -65,16 +62,11 @@ const Whiskies = () => {
                             return returnWhisky;
                         }, res);
                         dispatch(whiskiesAddData({ data }));
-                        setLoading(false);
                     }
                 })
                 .catch((err) => console.log('err', err));
         }
     }, [fetch]);
-
-    if (loading) {
-        return <Text>Loading</Text>;
-    }
 
     return (
         <>

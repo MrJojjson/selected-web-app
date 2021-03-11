@@ -1,6 +1,6 @@
 @import '../metrics.scss';
 
-@mixin fadeIn($time: $transition-modal-speed) {
+@mixin fadeIn($time: $transition-speed) {
     opacity: 1;
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;
@@ -17,7 +17,7 @@
     }
 }
 
-@mixin fadeOut($time: $transition-modal-speed) {
+@mixin fadeOut($time: $transition-speed) {
     opacity: 0;
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;
