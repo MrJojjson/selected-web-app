@@ -15,10 +15,12 @@ const links: LinkType[] = [
     },
 ];
 
-export const PaletteBottomPanel = () => {
+const PaletteSystem = () => {
     return (
         <div className="bottom">
             <LinkList links={links} mini />
         </div>
     );
 };
+
+export default PaletteSystem;

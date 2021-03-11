@@ -9,13 +9,13 @@ $color-error: rgba(237, 155, 147, 1);
 $color-alert: rgba(237, 209, 147, 1);
 
 $color-primary-shadow: rgba(178, 190, 195, 1);
-$color-secondary-shadow: #4a4a4a;
+$color-secondary-shadow: rgba(45, 52, 54, 0.25);
 
 $color-overlay: rgba(126, 131, 131, 0.5);
 $color-disabled: rgba(45, 52, 54, 0.25);
 
 $color-primary-background: rgba(255, 255, 255, 1);
-$color-secondary-background: rgba(45, 52, 54, 1);
+$color-secondary-background: $color-primary;
 
 $color-primary-background-back: rgba(0, 0, 0);
 $color-secondary-background-back: rgba(44, 62, 80, 0.5);

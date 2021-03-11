@@ -4,9 +4,10 @@
 @import '../../../common/sass/mixins/breakpoints.scss';
 
 .palette {
+    position: relative;
     @include flex(center, space-between, column);
     height: 100%;
-    flex: 0.1;
+    width: $palette-width;
     background-color: $color-secondary-background;
     .top,
     .middle,
@@ -15,12 +16,7 @@
     }
 
     .top {
-        flex: 1;
-    }
-    .middle {
         flex: $default-flex;
-        padding: $default-padding;
-        box-sizing: border-box;
     }
     .bottom {
         @include flex(center, center, column);

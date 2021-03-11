@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { BarElement } from '../../../../layout/barLayout/bar';
+import Dashboard from '../../../../pages/dashboard';
 import { purchaseIncomingSelected } from '../../../../redux';
 import { Button } from '../../../atoms';
 
-export const DashboardNav = () => {
+const DashboardNav = () => {
     const dispatch = useDispatch();
 
     const test = (
@@ -19,3 +20,5 @@ export const DashboardNav = () => {
 
     return <BarElement end={test} />;
 };
+
+export default Dashboard;

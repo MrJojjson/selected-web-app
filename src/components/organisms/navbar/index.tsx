@@ -1,48 +1,75 @@
-import { useLocation } from '@reach/router';
-import React from 'react';
-import { PurchaseNav } from '../../organisms/navbar/content/purchase';
-import './navbar.style.scss';
-import { Location } from '@reach/router';
+import { useLocation } from 'react-router-dom';
 import { find, includes } from 'ramda';
-import { DashboardNav } from './content/dashboard';
-import { CaskNav } from './content/cask';
-import { WhiskyNav } from './content/whisky';
-import { ProfileNav } from './content/profile';
-import { SettingseNav } from './content/settings';
+import React, { lazy, Suspense } from 'react';
+const DashboardNav = lazy(() => import('./content/dashboard'));
+const CaskNav = lazy(() => import('./content/cask'));
+const WhiskyNav = lazy(() => import('./content/whisky'));
+const ProfileNav = lazy(() => import('./content/profile'));
+const SettingseNav = lazy(() => import('./content/settings'));
+const PurchaseNav = lazy(() => import('./content/purchase'));
+
+import { LoadingIndicator } from '../../atoms/loading';
+
+import './navbar.style.scss';
 
 const navList: { path: string; comp: JSX.Element }[] = [
     {
         path: 'dashboard',
-        comp: <DashboardNav />,
+        comp: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <DashboardNav />
+            </Suspense>
+        ),
     },
     {
         path: 'purchases',
-        comp: <PurchaseNav />,
+        comp: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <PurchaseNav />
+            </Suspense>
+        ),
     },
     {
         path: 'cask',
-        comp: <CaskNav />,
+        comp: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <CaskNav />
+            </Suspense>
+        ),
     },
     {
         path: 'whiskies',
-        comp: <WhiskyNav />,
+        comp: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <WhiskyNav />
+            </Suspense>
+        ),
     },
     {
         path: 'profile',
-        comp: <ProfileNav />,
+        comp: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <ProfileNav />
+            </Suspense>
+        ),
     },
     {
         path: 'settings',
-        comp: <SettingseNav />,
+        comp: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <SettingseNav />
+            </Suspense>
+        ),
     },
 ];
 
-export const Navbar = () => {
-    return (
-        <header id="navbar">
-            <Location>
-                {({ location }) => find(({ path }) => includes(path, location?.pathname), navList)?.comp}
-            </Location>
-        </header>
-    );
+const Navbar = () => {
+    const { pathname } = useLocation();
+    const { comp } = find(({ path }) => {
+        return includes(path, pathname);
+    }, navList);
+
+    return <header id="navbar">{comp}</header>;
 };
+
+export default Navbar;

@@ -1,41 +1,37 @@
 import cn from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { getAuthLoggedInState } from '../../../redux/selectors/authSelectors';
-import { PaletteBottomPanel } from './paletteBottomPanel';
-import { PaletteMiddlePanel } from './paletteMiddlePanel';
-import { PaletteTopPanel } from './paletteTopPanel';
+
+const PaletteLinks = lazy(() => import('./paletteLinks'));
+const PaletteSystem = lazy(() => import('./paletteSystem'));
 
 import './palette.style.scss';
-import { Hamburger } from '../../atoms';
-import { Location } from '@reach/router';
+import { Hamburger, LoadingIndicator } from '../../atoms';
 
-export const Palette = () => {
+const Palette = () => {
     const loggedIn = getAuthLoggedInState();
     const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
     return (
-        <Location>
-            {({ location }) => {
-                return (
-                    <>
-                        <aside
-                            className={cn('palette', {
-                                logged_in: loggedIn,
-                                open_mobile: mobileOpen,
-                            })}
-                        >
-                            <PaletteTopPanel onClick={() => setMobileOpen(false)} />
-                            <PaletteMiddlePanel />
-                            <PaletteBottomPanel />
-                        </aside>
-                        <Hamburger
-                            className="palette_hamburger_menu"
-                            onClick={() => setMobileOpen(!mobileOpen)}
-                            open={mobileOpen}
-                        />
-                    </>
-                );
-            }}
-        </Location>
+        <>
+            <aside
+                className={cn('palette', {
+                    logged_in: loggedIn,
+                    open_mobile: mobileOpen,
+                })}
+            >
+                <Suspense fallback={<LoadingIndicator />}>
+                    <PaletteLinks onClick={() => setMobileOpen(false)} />
+                    <PaletteSystem />
+                </Suspense>
+            </aside>
+            <Hamburger
+                className="palette_hamburger_menu"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                open={mobileOpen}
+            />
+        </>
     );
 };
+
+export default Palette;

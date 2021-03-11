@@ -9,7 +9,7 @@ import {
 import { getCasksState } from '../../../../redux/selectors/casksSelector';
 import { EditBar } from '../../bars/editBar';
 
-export const CaskNav = () => (
+const CaskNav = () => (
     <EditBar
         page="casks"
         state={getCasksState()}
@@ -20,3 +20,5 @@ export const CaskNav = () => (
         onSelected={casksSelected}
     />
 );
+
+export default CaskNav;

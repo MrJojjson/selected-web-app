@@ -16,7 +16,7 @@ import { WhiskyType, APIWhiskiesReturnType } from '../../../../types/whiskyTypes
 import { Button } from '../../../atoms';
 import { NavbarContentTemplate } from '../navbarContentTemplate';
 
-export const PurchaseNav = () => {
+const PurchaseNav = () => {
     const dispatch = useDispatch();
     const { selected, added } = getPurchaseIncomingState();
     const token = getAuthTokenState();
@@ -132,3 +132,5 @@ export const PurchaseNav = () => {
 
     return <NavbarContentTemplate start={startBar} end={endBar} />;
 };
+
+export default PurchaseNav;

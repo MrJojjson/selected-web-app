@@ -9,22 +9,23 @@ const Profile = lazy(() => import('./pages/profile'));
 const Purchases = lazy(() => import('./pages/purchases'));
 const Settings = lazy(() => import('./pages/settings'));
 const Whiskies = lazy(() => import('./pages/whiskies'));
+import { LoadingIndicator } from './components/atoms/loading';
 
 type RouteType = { component: JSX.Element; path: toTypes };
 
 const routeList: RouteType[] = [
     {
-        path: '/',
+        path: '/dashboard',
         component: (
-            <Suspense fallback={<>Loading...</>}>
-                <Dashboard />{' '}
+            <Suspense fallback={<LoadingIndicator />}>
+                <Dashboard />
             </Suspense>
         ),
     },
     {
         path: '/settings',
         component: (
-            <Suspense fallback={<>Loading...</>}>
+            <Suspense fallback={<LoadingIndicator />}>
                 <Settings />
             </Suspense>
         ),
@@ -32,7 +33,7 @@ const routeList: RouteType[] = [
     {
         path: '/profile',
         component: (
-            <Suspense fallback={<>Loading...</>}>
+            <Suspense fallback={<LoadingIndicator />}>
                 <Profile />
             </Suspense>
         ),
@@ -40,7 +41,7 @@ const routeList: RouteType[] = [
     {
         path: '/whiskies',
         component: (
-            <Suspense fallback={<>Loading...</>}>
+            <Suspense fallback={<LoadingIndicator />}>
                 <Whiskies />
             </Suspense>
         ),
@@ -48,7 +49,7 @@ const routeList: RouteType[] = [
     {
         path: '/purchases',
         component: (
-            <Suspense fallback={<>Loading...</>}>
+            <Suspense fallback={<LoadingIndicator />}>
                 <Purchases />
             </Suspense>
         ),
@@ -56,7 +57,7 @@ const routeList: RouteType[] = [
     {
         path: '/casks',
         component: (
-            <Suspense fallback={<>Loading...</>}>
+            <Suspense fallback={<LoadingIndicator />}>
                 <Casks />
             </Suspense>
         ),
@@ -68,4 +69,5 @@ const routes = map(
 
     routeList,
 );
+
 export default routes;

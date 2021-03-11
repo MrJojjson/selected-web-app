@@ -5,7 +5,7 @@ import './palette.style.scss';
 const links: LinkType[] = [
     {
         title: 'Dasboard',
-        pathname: '/',
+        pathname: '/dashboard',
         icon: 'columns',
     },
     {
@@ -25,14 +25,16 @@ const links: LinkType[] = [
     },
 ];
 
-type PaletteTopPanelType = {
+type PaletteLinksType = {
     onClick: () => void;
 };
 
-export const PaletteTopPanel = ({ onClick }: PaletteTopPanelType) => {
+const PaletteLinks = ({ onClick }: PaletteLinksType) => {
     return (
         <div className="top">
             <LinkList links={links} onClick={onClick} />
         </div>
     );
 };
+
+export default PaletteLinks;

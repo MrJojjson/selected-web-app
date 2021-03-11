@@ -1,53 +1,44 @@
 @import '../../../common/sass/colors.scss';
 @import '../../../common/sass/metrics.scss';
 
-$background: #fff;
-$size: $height-m;
+.loading_spinner {
+    display: inline-block;
 
-.spinner {
     position: absolute;
-    top: calc(50% - #{$size / 2});
-    left: calc(50% - #{$size / 2});
-    width: $size;
-    height: $size;
-    animation: spinner 0.75s linear infinite;
-    z-index: 1000;
-
-    span {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-    }
-
-    .spinner_inner__1 {
-        background: linear-gradient(
-            to right,
-            rgba($color-highlight, 0) 0%,
-            rgba($color-highlight, 0) 50%,
-            $color-highlight 51%
-        );
-    }
-
-    .spinner_inner__2 {
-        background: linear-gradient(to top, rgba($background, 0) 0%, $background 100%);
-    }
-
-    .spinner_inner__3 {
-        $offset: $size * 0.1;
-        top: $offset;
-        left: $offset;
-        width: $size - ($offset * 2);
-        height: $size - ($offset * 2);
-        background: $background;
-    }
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
 }
-
-@keyframes spinner {
+.loading_spinner div {
+    display: inline-block;
+    position: absolute;
+    left: 4px;
+    width: 8px;
+    background: $color-highlight;
+    animation: loading_spinner 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.loading_spinner div:nth-child(1) {
+    left: 4px;
+    animation-delay: -0.24s;
+}
+.loading_spinner div:nth-child(2) {
+    left: 16px;
+    animation-delay: -0.12s;
+}
+.loading_spinner div:nth-child(3) {
+    left: 28px;
+    animation-delay: 0;
+}
+@keyframes loading_spinner {
     0% {
-        transform: rotate(0deg);
+        top: 8px;
+        height: 32px;
     }
+    50%,
     100% {
-        transform: rotate(360deg);
+        top: 24px;
+        height: 16px;
     }
 }

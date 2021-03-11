@@ -4,7 +4,7 @@ import { BarElement } from '../../../../layout/barLayout/bar';
 import { purchaseIncomingSelected } from '../../../../redux';
 import { Button } from '../../../atoms';
 
-export const SettingseNav = () => {
+const SettingseNav = () => {
     const dispatch = useDispatch();
 
     const test = (
@@ -19,3 +19,5 @@ export const SettingseNav = () => {
 
     return <BarElement end={test} />;
 };
+
+export default SettingseNav;

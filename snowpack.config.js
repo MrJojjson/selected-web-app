@@ -1,31 +1,11 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
-// Example: snowpack.config.js
-// The added "@type" comment will enable TypeScript type information via VSCode, etc.
-// const httpProxy = require('http-proxy');
-// const authProxy = httpProxy.createServer({ target: process.env.SNOWPACK_PUBLIC_AUTH_URL });
-// const serverProxy = httpProxy.createServer({ target: process.env.SNOWPACK_PUBLIC_SERVER_URL });
-
 /** @type {import("snowpack").SnowpackUserConfig } */
 
-// eslint-disable-next-line no-undef
 module.exports = {
     mount: {
-        // directory name: 'build directory'
         src: '/',
         public: '/',
     },
-    routes: [
-        { match: 'routes', src: '.*', dest: '/index.html' },
-        // {
-        //     src: '/graphql/auth',
-        //     dest: (req, res) => authProxy.web(req, res),
-        // },
-        // {
-        //     src: '/graphql',
-        //     dest: (req, res) => serverProxy.web(req, res),
-        // },
-    ],
+    routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
     devOptions: {
         port: 3000,
         src: 'src',

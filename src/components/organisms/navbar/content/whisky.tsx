@@ -9,7 +9,7 @@ import {
 } from '../../../../redux';
 import { EditBar } from '../../bars/editBar';
 
-export const WhiskyNav = () => (
+const WhiskyNav = () => (
     <EditBar
         page="whiskies"
         state={getWhiskiesState()}
@@ -20,3 +20,5 @@ export const WhiskyNav = () => (
         onSelected={whiskiesSelected}
     />
 );
+
+export default WhiskyNav;

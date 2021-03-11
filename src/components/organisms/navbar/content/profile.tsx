@@ -6,7 +6,7 @@ import { authSetLoggedIn } from '../../../../redux';
 import { Button } from '../../../atoms';
 import { Redirect } from 'react-router-dom';
 
-export const ProfileNav = () => {
+const ProfileNav = () => {
     const dispatch = useDispatch();
 
     const onSignOut = () => {
@@ -19,3 +19,5 @@ export const ProfileNav = () => {
 
     return <BarElement end={signOut} />;
 };
+
+export default ProfileNav;

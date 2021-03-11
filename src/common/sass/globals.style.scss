@@ -38,17 +38,13 @@ body,
     height: 100%;
     width: 100%;
     .content {
+        position: relative;
         @include flex(flex-start, flex-start, column);
         width: 100%;
         flex: 1;
-        height: 100%;
         background-color: $color-secondary;
-
-        .router {
-            position: relative;
-            width: 100%;
-            height: calc(100vh - #{$navbar-height});
-            overflow-y: auto;
-        }
+        height: 100vh;
+        overflow-y: auto;
+        padding-top: $navbar-height;
     }
 }
