@@ -33,6 +33,9 @@ module.exports = {
         routes: 'index.html',
         open: 'none',
     },
+    buildOptions: {
+        baseUrl: '/',
+    },
     optimize: {
         minify: true,
         bundle: true,
