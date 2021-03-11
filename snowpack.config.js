@@ -31,9 +31,6 @@ module.exports = {
         [
             'snowpack-plugin-terser',
             {
-                /**
-                 * @see Plugin Options below
-                 */
                 terserOptions: {
                     compress: {
                         arguments: true,
@@ -41,6 +38,12 @@ module.exports = {
                         unsafe_arrows: true,
                     },
                 },
+            },
+        ],
+        [
+            '@snowpack/plugin-optimize',
+            {
+                /* see options below */
             },
         ],
     ],
