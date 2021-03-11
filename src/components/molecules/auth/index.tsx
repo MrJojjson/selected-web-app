@@ -4,7 +4,8 @@ import { fetchData } from '../../../hooks/useApi';
 import { authSetLoggedIn } from '../../../redux';
 import { Button, Input } from '../../atoms';
 import './auth.style.scss';
-import { navigate } from '@reach/router';
+// import { navigate } from '@reach/router';
+import { Redirect } from 'react-router-dom';
 
 type SignInDataType = {
     username: string;
@@ -25,7 +26,8 @@ export const Auth = () => {
         });
         const { token = null, user = null } = data || {};
         if (token && user) {
-            navigate('/');
+            // navigate('/');
+            <Redirect to="/" />;
         }
         dispatch(authSetLoggedIn({ token, user }));
     };

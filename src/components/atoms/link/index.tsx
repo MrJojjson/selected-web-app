@@ -1,10 +1,11 @@
-import { Link as ReachLink } from '@reach/router';
+// import { Link as ReachLink } from '@reach/router';
 import { map } from 'ramda';
 import React from 'react';
 import './link.style.scss';
 import { toTypes } from '../../../types/linkTypes';
 import { Text, TextType } from '../text';
 import cn from 'classnames';
+import { Link as ReactLink } from 'react-router-dom';
 
 export type LinkType = Omit<TextType, 'children'> & {
     pathname: toTypes;
@@ -27,11 +28,11 @@ export const Link = ({ pathname, hash, query, title, className, ...rest }: LinkT
         pathname += `#${hash}`;
     }
     return (
-        <ReachLink to={to} getProps={isActive}>
+        <ReactLink to={to}>
             <Text className="link" theme="secondary" tag="span" oneLine={true} {...rest}>
                 {title}
             </Text>
-        </ReachLink>
+        </ReactLink>
     );
 };
 

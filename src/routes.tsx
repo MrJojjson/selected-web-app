@@ -8,10 +8,11 @@ import { Purchases } from './pages/purchases';
 import { Settings } from './pages/settings';
 import { Whiskies } from './pages/whiskies';
 import { toTypes } from './types/linkTypes';
+import { Route } from 'react-router-dom';
 
-const Route = (props: { component: JSX.Element } & RouteComponentProps) => props.component;
+// const Route = (props: { component: JSX.Element } & RouteComponentProps) => props.component;
 
-type RouteType = { component: JSX.Element; path: toTypes } & Omit<RouteComponentProps, 'path'>;
+type RouteType = { component: JSX.Element; path: toTypes };
 
 const routeList: RouteType[] = [
     {
@@ -40,5 +41,5 @@ const routeList: RouteType[] = [
     },
 ];
 
-const routes = map((route) => <Route key={route.path} {...route} />, routeList);
+const routes = map(({ path, component }) => <Route key={path} path={path} render={() => component} />, routeList);
 export default routes;

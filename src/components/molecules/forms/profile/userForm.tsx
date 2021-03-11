@@ -6,7 +6,7 @@ import { Header, Input } from '../../../atoms';
 import './userForm.style.scss';
 
 export const UserForm = () => {
-    const { firstName = '', lastName = '', username = '', id } = getAuthUserState();
+    const { firstName = '', lastName = '', username = '', id } = getAuthUserState() || {};
     const dispatch = useDispatch();
 
     return (

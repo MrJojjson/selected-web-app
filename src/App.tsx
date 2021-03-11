@@ -1,7 +1,6 @@
 import { config, library } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@reach/router';
 import React from 'react';
 import './common/sass/globals.style.scss';
 import { Text } from './components/atoms';
@@ -12,6 +11,7 @@ import { Navbar, Palette } from './components/organisms';
 import { PageLayout } from './layout/pageLayout';
 import appRoutes from './routes';
 config.autoAddCss = false;
+import { HashRouter as Router } from 'react-router-dom';
 
 library.add(fas);
 
@@ -23,15 +23,15 @@ export const App = () => {
     // }
     // else if (loggedIn) {
     return (
-        <>
+        <Router>
             <Palette />
             <div className="content">
                 <Navbar />
-                <Router className="router">{...appRoutes}</Router>
+                {...appRoutes}
             </div>
             <AlertBase />
             <ModalBase />
-        </>
+        </Router>
     );
     // }
     // return (

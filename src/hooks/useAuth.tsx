@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authSetLoggedIn, getAuthState } from '../redux';
-import { navigate } from '@reach/router';
+// import { navigate } from '@reach/router';
+import { Redirect } from 'react-router-dom';
+
 export const useAuth = () => {
     const dispatch = useDispatch();
     const auth = getAuthState();
@@ -14,13 +16,15 @@ export const useAuth = () => {
         if (!token || !user) {
             console.log('>>> SIGNED OUT <<<');
             setLoading(false);
-            navigate('/signIn');
+            // navigate('/signIn');
+            <Redirect to="signIn" />;
         } else if (token && user) {
             console.log('>>> SIGNED IN <<<');
             dispatch(authSetLoggedIn({ token, user }));
             setLoading(false);
             if (window?.location?.pathname === '/signIn') {
-                navigate('/');
+                // navigate('/');
+                <Redirect to="/" />;
             }
         }
     }, []);
