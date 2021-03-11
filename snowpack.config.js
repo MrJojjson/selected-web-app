@@ -40,11 +40,5 @@ module.exports = {
                 },
             },
         ],
-        [
-            '@snowpack/plugin-optimize',
-            {
-                /* see options below */
-            },
-        ],
     ],
 };
