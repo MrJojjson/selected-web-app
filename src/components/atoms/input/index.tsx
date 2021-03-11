@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { inputAutoCompleteTypes, inputType } from '../../../types/inputTypes';
 import { themeType } from '../../../types/commonTypes';
-
-import { Text } from '../';
-import './input.style.scss';
 import cn from 'classnames';
 import { DateFormatted } from '../../../common/utils/dateFormat';
+import { Text } from '../';
+
+import './input.scss';
 
 export type InputType = {
     onChange?: (event: ChangeEvent<EventTarget & HTMLInputElement>) => void;

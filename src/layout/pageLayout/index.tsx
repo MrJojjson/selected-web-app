@@ -2,7 +2,7 @@ import { map } from 'ramda';
 import React from 'react';
 import { SystemLayoutPageState } from '../../redux/types/systemTypes';
 import { CompLayout } from '../compLayout';
-import './pageLayout.style.scss';
+import './pageLayout.scss';
 
 type PageLayoutType = {
     children: JSX.Element | JSX.Element[];
