@@ -2,6 +2,7 @@
     "name": "selected-api-react",
     "version": "0.0.1",
     "main": "src/index.tsx",
+    "homepage": "https://selected-web-app.vercel.app",
     "private": true,
     "scripts": {
         "prettier": "prettier --write 'src/**/*.{ts,tsx,mdx}' --ignore-path .gitignore",

@@ -13,7 +13,7 @@ export const ProfileNav = () => {
         navigate('/signIn');
     };
 
-    const signOut = <Button mini label="Sign out" theme="secondary" icon="sign-out-alt" onClick={onSignOut} />;
+    const signOut = <Button mini label="Sign out" theme="secondary" icon="sign-out-alt" onClick={() => onSignOut()} />;
 
     return <BarElement end={signOut} />;
 };
