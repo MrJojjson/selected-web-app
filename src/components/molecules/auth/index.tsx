@@ -4,7 +4,10 @@ import { fetchData } from '../../../hooks/useApi';
 import { authSetLoggedIn } from '../../../redux';
 import { Button, Input } from '../../atoms';
 import './auth.style.scss';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
+// const { SNOWPACK_PUBLIC_FAKE_AUTH_USERNAME, SNOWPACK_PUBLIC_FAKE_AUTH_PASSWORD, SNOWPACK_PUBLIC_FAKE_AUTH_TOKEN } =
+//     process?.env || {};
 
 type SignInDataType = {
     username: string;
@@ -13,36 +16,37 @@ type SignInDataType = {
 
 export const Auth = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const [signInData, setSignInData] = useState<SignInDataType>({
         username: '',
         password: '',
     });
     const onSignIn = async () => {
         const { username, password } = signInData;
-        if (
-            username === process.env.SNOWPACK_PUBLIC_FAKE_AUTH_USERNAME &&
-            password === process.env.SNOWPACK_PUBLIC_FAKE_AUTH_PASSWORD
-        ) {
-            <Redirect to="/" />;
-            dispatch(
-                authSetLoggedIn({
-                    token: process.env.SNOWPACK_PUBLIC_FAKE_AUTH_TOKEN,
-                    user: { username, firstName: '', lastName: '', id: 'fake' },
-                }),
-            );
-        } else {
-            const data = await fetchData({
-                method: 'post',
-                endpoint: ['users', 'authenticate'],
-                data: { ...signInData },
-            });
-            const { token = null, user = null } = data || {};
+        // if (username === SNOWPACK_PUBLIC_FAKE_AUTH_USERNAME && password === SNOWPACK_PUBLIC_FAKE_AUTH_PASSWORD) {
+        //     <Redirect to="/" />;
+        //     dispatch(
+        //         authSetLoggedIn({
+        //             token: SNOWPACK_PUBLIC_FAKE_AUTH_TOKEN,
+        //             user: { username, firstName: '', lastName: '', id: 'fake' },
+        //         }),
+        //     );
+        // } else {
+        const data = await fetchData({
+            method: 'post',
+            endpoint: ['users', 'authenticate'],
+            data: { ...signInData },
+        });
+        const { token = null, user = null } = data || {};
+        dispatch(authSetLoggedIn({ token, user }));
 
-            if (token && user) {
-                <Redirect to="/" />;
-            }
-            dispatch(authSetLoggedIn({ token, user }));
+        if (token && user) {
+            localStorage.setItem('token', JSON.stringify(token));
+            localStorage.setItem('user', JSON.stringify(user));
+            history.go(0);
         }
+        // }
     };
 
     return (

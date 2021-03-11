@@ -65,9 +65,10 @@ const navList: { path: string; comp: JSX.Element }[] = [
 
 const Navbar = () => {
     const { pathname } = useLocation();
-    const { comp } = find(({ path }) => {
-        return includes(path, pathname);
-    }, navList);
+    const { comp } =
+        find(({ path }) => {
+            return includes(path, pathname);
+        }, navList) || {};
 
     return <header id="navbar">{comp}</header>;
 };

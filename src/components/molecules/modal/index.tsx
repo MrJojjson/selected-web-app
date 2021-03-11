@@ -2,9 +2,7 @@ import cn from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Portal } from '../../../hooks/usePortal';
-import { useWindowSize } from '../../../hooks/useWindowSize';
 import { modalToggleOpen } from '../../../redux/actions/modalActions';
-import { getAuthLoggedInState } from '../../../redux/selectors/authSelectors';
 import { getModalContentTypeState, getModalOpenState } from '../../../redux/selectors/modalSelector';
 import { ModalStateContentType } from '../../../redux/types/modalTypes';
 import { Hamburger } from '../../atoms/hamburger';
@@ -17,14 +15,15 @@ export type ModalType = {
 };
 
 export const setModal = ({ content, id, fromId }: ModalType) => {
+    const modalRoot = document.getElementById(id);
+    if (!modalRoot) return null;
     const open = getModalOpenState();
     const contentType = getModalContentTypeState();
     if (fromId !== contentType) return null;
-    const modalRoot = document.getElementById(id);
     if (!open) {
         return <Portal target={modalRoot}></Portal>;
     }
-    modalRoot.classList.add('new');
+    modalRoot?.classList?.add('new');
 
     return <Portal target={modalRoot}>{content}</Portal>;
 };
@@ -44,11 +43,9 @@ const setModalFocus = (inputs: HTMLInputElement[]) => {
     }
 };
 
-export const ModalBase = () => {
+const ModalBase = () => {
     const open = getModalOpenState();
-    const loggedIn = getAuthLoggedInState();
     const contentType = getModalContentTypeState();
-    const { mobile } = useWindowSize();
     const dispatch = useDispatch();
     const modalContentRef = useRef<any | null>(null);
     const [width, setWidth] = useState<number>(0);
@@ -63,7 +60,6 @@ export const ModalBase = () => {
             typeof width === 'number' && setWidth(width);
         }
     }, [contentType]);
-
     return (
         <div
             id="modal"
@@ -74,7 +70,7 @@ export const ModalBase = () => {
         >
             <Hamburger
                 className={cn('header_close', {
-                    header_close__hide: contentType === 'menu',
+                    header_close__hide: contentType === 'login',
                 })}
                 open={open}
                 onClick={() => dispatch(modalToggleOpen({ override: false, contentType: 'undefined' }))}
@@ -83,3 +79,5 @@ export const ModalBase = () => {
         </div>
     );
 };
+
+export default ModalBase;

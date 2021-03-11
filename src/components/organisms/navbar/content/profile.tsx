@@ -1,18 +1,17 @@
 // import { navigate } from '@reach/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { BarElement } from '../../../../layout/barLayout/bar';
-import { authSetLoggedIn } from '../../../../redux';
 import { Button } from '../../../atoms';
-import { Redirect } from 'react-router-dom';
 
 const ProfileNav = () => {
     const dispatch = useDispatch();
-
+    const history = useHistory();
     const onSignOut = () => {
-        dispatch(authSetLoggedIn({ token: null, user: null }));
-        // navigate('/signIn');
-        <Redirect to="signIn" />;
+        localStorage.setItem('token', null);
+        localStorage.setItem('user', null);
+        history.go(0);
     };
 
     const signOut = <Button mini label="Sign out" theme="secondary" icon="sign-out-alt" onClick={() => onSignOut()} />;

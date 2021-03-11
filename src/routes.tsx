@@ -64,10 +64,8 @@ const routeList: RouteType[] = [
     },
 ];
 
-const routes = map(
-    ({ path, component }) => <Route key={path} path={path} render={() => component} />,
-
-    routeList,
-);
+const routes = map(({ path, component }) => {
+    return <Route key={path} path={path} render={() => component} />;
+}, routeList);
 
 export default routes;
