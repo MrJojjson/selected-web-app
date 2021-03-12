@@ -14,6 +14,7 @@ import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
 import { getWhiskiesFetchState } from '../redux/selectors/whiskiesSelector';
 import { WhiskiesDataType } from '../redux/types/whiskyTypes';
 import { APIWhiskiesReturnType, ApiWhiskyVars, ApiWhiskyVarsType } from '../types/whiskyTypes';
+import './pages.style.scss';
 
 const Whiskies = () => {
     const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const Whiskies = () => {
 
     return (
         <>
-            <CompLayout key="added-whiskies-sort-bar">
+            <CompLayout key="added-whiskies-sort-bar" className="whiskies_sort_filter_bar">
                 <SortBar id="whiskies" />
                 <FilterBar id="whiskies" />
             </CompLayout>

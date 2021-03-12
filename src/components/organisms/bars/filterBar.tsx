@@ -111,6 +111,20 @@ const returnFilterWithDate = ({ id, values, queryType, onQuerySearch }: FilterOp
 const getMaxValue = (list: string[]) => reduce(max, -Infinity, list) as number;
 const getMinValue = (list: string[]) => reduce(min, Infinity, list) as number;
 
+const sortValues = (nextValue: string, postValue: string) => {
+    const modNextValue = nextValue?.replace(/\s/g, '')?.toLowerCase();
+    const modPostValue = postValue?.replace(/\s/g, '')?.toLowerCase();
+
+    if (modPostValue < modNextValue) {
+        return 1;
+    }
+    if (modPostValue > modNextValue) {
+        return -1;
+    }
+
+    return 0;
+};
+
 export const FilterBar = ({ id }: FilterBarType) => {
     const { data } = getSpecificState({ page: id }) as WhiskiesState | CasksState;
     const [filterOptions, setFilterOptions] = useState<FilterOptionsType[]>([]);
@@ -125,6 +139,9 @@ export const FilterBar = ({ id }: FilterBarType) => {
         if (values?.length <= 0) {
             return null;
         }
+
+        values.sort(sortValues);
+
         let returnValues: JSX.Element | JSX.Element[] = [];
         if (type === 'number') {
             returnValues = returnFilterWithNumbers({ id, values, onQuerySearch });

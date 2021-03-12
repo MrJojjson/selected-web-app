@@ -61,7 +61,9 @@ const routeList: RouteType[] = [
         path: '/casks',
         component: (
             <Suspense fallback={<LoadingIndicator />}>
-                <Casks />
+                <QueryProvider id="casks">
+                    <Casks />
+                </QueryProvider>
             </Suspense>
         ),
     },
