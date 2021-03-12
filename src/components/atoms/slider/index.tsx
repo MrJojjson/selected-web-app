@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import { Text } from '../text';
 import './slider.style.scss';
 
+type OnMouseCaptureType = {
+    value: string[];
+    base?: boolean;
+};
+
 type SliderType = {
     min: number;
     max: number;
-    onMouseUpCapture: (value: string) => void;
+    onMouseUpCapture: (props: OnMouseCaptureType) => void;
     defaultMaxValue?: number;
     defaultMinValue?: number;
 };
@@ -31,7 +36,12 @@ export const Slider = ({ min, max, onMouseUpCapture, defaultMaxValue, defaultMin
                     min={min}
                     max={max}
                     value={minValue}
-                    onMouseUpCapture={({ currentTarget }) => onMouseUpCapture(currentTarget.value)}
+                    onMouseUpCapture={({ currentTarget }) =>
+                        onMouseUpCapture({
+                            value: [currentTarget.value, maxValue.toString()],
+                            base: Number(currentTarget.value) <= min && maxValue >= max,
+                        })
+                    }
                     onChange={({ currentTarget }) => onChangeMinValue(Number(currentTarget?.value))}
                 />
                 <input
@@ -39,7 +49,12 @@ export const Slider = ({ min, max, onMouseUpCapture, defaultMaxValue, defaultMin
                     min={min}
                     max={max}
                     value={maxValue}
-                    onMouseUpCapture={({ currentTarget }) => onMouseUpCapture(currentTarget.value)}
+                    onMouseUpCapture={({ currentTarget }) =>
+                        onMouseUpCapture({
+                            value: [minValue.toString(), currentTarget.value],
+                            base: Number(currentTarget.value) >= max && minValue <= min,
+                        })
+                    }
                     onChange={({ currentTarget }) => onChangeMaxValue(Number(currentTarget?.value))}
                 />
             </div>

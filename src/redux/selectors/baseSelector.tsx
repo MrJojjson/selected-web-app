@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
-import { StoreState } from '../storeState';
+import { StoreState, StoreStateField } from '../storeState';
 
 export const getState = () => useSelector((state: StoreState): StoreState => state);
 
 type GetSpecificStateType = {
-    page: keyof StoreState;
+    page: StoreStateField;
 };
 export const getSpecificState = ({ page }: GetSpecificStateType) =>
-    useSelector((state: StoreState): StoreState[typeof page] => state[page]);
+    useSelector((state: StoreState): StoreState[StoreStateField] => state[page] as StoreState[StoreStateField]);

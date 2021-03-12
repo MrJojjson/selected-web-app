@@ -1,15 +1,18 @@
-import { find, map, propEq } from 'ramda';
+import { filter, find, includes, isEmpty, map, propEq, reject } from 'ramda';
 import React from 'react';
+import { DateFormatted } from '../../../../common/utils/dateFormat';
+import { useQuery } from '../../../../hooks/useQuery';
 import { CompLayout } from '../../../../layout/compLayout';
 import { getWhiskiesState, whiskiesRename, whiskiesSelected } from '../../../../redux';
 import { getSystemSortState } from '../../../../redux/selectors/systemSelector';
 import { WhiskiesDataType } from '../../../../redux/types/whiskyTypes';
-import { ApiWhiskyVarsType, WhiskyVarsType } from '../../../../types/whiskyTypes';
+import { ApiWhiskyVarsType } from '../../../../types/whiskyTypes';
 import { InputList } from '../lists/inputList';
 
 export const AddedWhiskiesForm = () => {
     const { data, selected, edit } = getWhiskiesState();
     const { type, order } = getSystemSortState({ page: 'whiskies' });
+    const { queryType, query } = useQuery({});
 
     const diff = ({ data: nextData }: WhiskiesDataType, { data: postData }: WhiskiesDataType) => {
         const { value: nextValue } = find(propEq('id', type))(nextData) as ApiWhiskyVarsType;
@@ -30,6 +33,31 @@ export const AddedWhiskiesForm = () => {
     };
     const sortedData = data.sort(diff) || data;
 
+    const filteredData = !isEmpty(queryType)
+        ? reject(({ data }) => {
+              const exists =
+                  filter(({ id, value, type }) => {
+                      queryType?.filter;
+                      if (queryType['filter'][id]) {
+                          if (type === 'date') {
+                              const year = DateFormatted({ date: value, options: { year: 'numeric' } });
+                              return includes(year, queryType[id]);
+                          }
+                          if (value && type === 'number' && queryType[id]?.length >= 2) {
+                              const min = Number(queryType[id][0]);
+                              const max = Number(queryType[id][1]);
+                              const nrValue = Number(value);
+                              return nrValue >= min && nrValue <= max;
+                          }
+                          return includes(value, queryType[id]);
+                      }
+                      return false;
+                  }, data).length > 0;
+
+              return !exists;
+          }, sortedData)
+        : sortedData;
+
     const returnWhiskies = map(({ uid, data, ...rest }) => {
         return (
             <CompLayout key={uid}>
@@ -45,6 +73,6 @@ export const AddedWhiskiesForm = () => {
                 />
             </CompLayout>
         );
-    }, sortedData);
+    }, filteredData);
     return <>{returnWhiskies}</>;
 };
