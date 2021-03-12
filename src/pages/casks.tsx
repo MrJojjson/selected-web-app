@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { DateFormatted } from '../common/utils/dateFormat';
 import { AddedCasksForm } from '../components/molecules/forms/casks/addedCasksForm';
+import { FilterBar } from '../components/organisms/bars/filterBar';
 import { SortBar } from '../components/organisms/bars/sortBar';
 import { fetchData } from '../hooks/useApi';
 import { CompLayout } from '../layout/compLayout';
@@ -68,8 +69,9 @@ const Casks = () => {
 
     return (
         <>
-            <CompLayout key="added-casks-sort-bar">
+            <CompLayout key="added-casks-sort-bar" className="whiskies_sort_filter_bar">
                 <SortBar id="casks" />
+                <FilterBar id="casks" />
             </CompLayout>
             <PageLayout columns={columns} disableLayout>
                 <AddedCasksForm key="added-casks-form" />

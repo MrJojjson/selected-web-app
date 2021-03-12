@@ -57,13 +57,17 @@ const ModalBase = () => {
             ) as HTMLInputElement[];
             setModalFocus(inputsInModal);
             const { width } = modalContentRef.current?.firstChild?.getBoundingClientRect() || {};
-            typeof width === 'number' && setWidth(width);
+            typeof width === 'number' && setWidth(width + 80);
+            if (!open) {
+                setWidth(0);
+            }
         }
-    }, [contentType]);
+    }, [contentType, open]);
+
     return (
         <div
             id="modal"
-            style={{ width: `${width + 80}px` }}
+            style={{ width: `${width}px` }}
             className={cn('modal', {
                 active: open,
             })}

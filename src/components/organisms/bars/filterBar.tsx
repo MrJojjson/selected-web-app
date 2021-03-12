@@ -1,19 +1,22 @@
-import { findIndex, identity, includes, map, max, min, propEq, reduce, sortBy } from 'ramda';
+import { ParsedQuery } from 'query-string';
+import { findIndex, includes, map, max, min, propEq, reduce } from 'ramda';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { DateFormatted } from '../../../common/utils/dateFormat';
+import { OnQuerySearchType, useQuery } from '../../../hooks/useQuery';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { modalToggleOpen } from '../../../redux';
 import { getSpecificState } from '../../../redux/selectors/baseSelector';
-import { StoreState } from '../../../redux/storeState';
-import { SystemSortType } from '../../../redux/types/systemTypes';
-import { Button, Header, Text } from '../../atoms';
+import { StoreStateField } from '../../../redux/storeState';
+import { CasksState } from '../../../redux/types/casksTypes';
+import { WhiskiesState } from '../../../redux/types/whiskyTypes';
+import { Button, Header } from '../../atoms';
 import { Chip } from '../../atoms/chip';
 import { Slider } from '../../atoms/slider';
 import { setModal } from '../../molecules';
 
 type FilterBarType = {
-    id: keyof SystemSortType;
+    id: StoreStateField;
 };
 
 type FilterOptionsType = {
@@ -23,83 +26,129 @@ type FilterOptionsType = {
     title: string;
 };
 
+type FilterOptionsChange = Pick<FilterOptionsType, 'values' | 'id'> & {
+    queryType?: ParsedQuery<string>;
+    onQuerySearch: (props: OnQuerySearchType) => void;
+};
+
+const generetateFilterOptions = ({ data }) => {
+    let filterOpt: FilterOptionsType[] = [];
+
+    map(
+        ({ data }) =>
+            map(({ value, id, title, type }) => {
+                if (value !== undefined && value !== null) {
+                    const index = findIndex(propEq('id', id))(filterOpt);
+                    if (index === -1) {
+                        filterOpt = [...filterOpt, { id, type, title, values: [value] }];
+                    } else if (index >= 0 && filterOpt[index] && !includes(value, filterOpt[index]?.values)) {
+                        filterOpt[index].values = [...filterOpt[index].values, value];
+                    }
+                }
+            }, data),
+        data,
+    );
+    return filterOpt;
+};
+
+const returnFilterWithText = ({ id, values, queryType, onQuerySearch }: FilterOptionsChange) => {
+    const textFilters = map((value) => {
+        const active = includes(value, queryType[id] || []);
+        return (
+            <li key={`${id}-${value}`}>
+                <Chip label={value} onClick={() => onQuerySearch({ key: id, value })} active={active} />
+            </li>
+        );
+    }, values);
+    return textFilters;
+};
+
+const returnFilterWithNumbers = ({ id, values, onQuerySearch }: FilterOptionsChange) => {
+    const max = getMaxValue(values);
+    const min = getMinValue(values);
+    return (
+        <Slider
+            min={min}
+            max={max}
+            onMouseUpCapture={({ value, base }) => {
+                return onQuerySearch({ key: id, valueArray: value, remove: base });
+            }}
+            defaultMinValue={min}
+            defaultMaxValue={max}
+        />
+    );
+};
+
+const returnFilterWithDate = ({ id, values, queryType, onQuerySearch }: FilterOptionsChange) => {
+    let newDates = [];
+
+    map((value) => {
+        if (value !== undefined && value !== null) {
+            const year = DateFormatted({ date: value, options: { year: 'numeric' } });
+
+            const index = findIndex(propEq('id', year))(newDates);
+
+            if (index === -1) {
+                newDates = [...newDates, { id: year, values: [value] }];
+            } else if (index >= 0 && newDates[index]) {
+                newDates[index].values = [...newDates[index].values, value];
+            }
+        }
+    }, values);
+
+    const dates = map(({ id: uid, values }) => {
+        const active = includes(uid as string, queryType[id] || []);
+        return (
+            <li key={`${id}-${uid}`}>
+                <Chip label={uid} active={active} onClick={() => onQuerySearch({ key: id, value: uid })} />
+            </li>
+        );
+    }, newDates);
+
+    return dates;
+};
+
 const getMaxValue = (list: string[]) => reduce(max, -Infinity, list) as number;
 const getMinValue = (list: string[]) => reduce(min, Infinity, list) as number;
 
+const sortValues = (nextValue: string, postValue: string) => {
+    const modNextValue = nextValue?.replace(/\s/g, '')?.toLowerCase();
+    const modPostValue = postValue?.replace(/\s/g, '')?.toLowerCase();
+
+    if (modPostValue < modNextValue) {
+        return 1;
+    }
+    if (modPostValue > modNextValue) {
+        return -1;
+    }
+
+    return 0;
+};
+
 export const FilterBar = ({ id }: FilterBarType) => {
-    const { data } = getSpecificState({ page: id }) as StoreState[typeof id];
+    const { data } = getSpecificState({ page: id }) as WhiskiesState | CasksState;
     const [filterOptions, setFilterOptions] = useState<FilterOptionsType[]>([]);
+    const { queryType, onQuerySearch } = useQuery({ storageKey: id, type: 'filter' });
+    const { mobile } = useWindowSize();
+
     const dispatch = useDispatch();
 
-    const { mobile } = useWindowSize();
-    useEffect(() => {
-        let filterOpt: FilterOptionsType[] = [];
-        map(
-            ({ data }) =>
-                map(({ value, id, title, type }) => {
-                    if (value !== undefined && value !== null) {
-                        const index = findIndex(propEq('id', id))(filterOpt);
-                        if (index === -1) {
-                            filterOpt = [...filterOpt, { id, type, title, values: [value] }];
-                        } else if (index >= 0 && filterOpt[index] && !includes(value, filterOpt[index]?.values)) {
-                            filterOpt[index].values = [...filterOpt[index].values, value];
-                        }
-                    }
-                }, data),
-            data,
-        );
-        setFilterOptions(filterOpt);
-    }, [data]);
+    useEffect(() => setFilterOptions(generetateFilterOptions({ data })), [data]);
 
     const returnFilters = map(({ id, title, type, values }) => {
         if (values?.length <= 0) {
             return null;
         }
+
+        values.sort(sortValues);
+
         let returnValues: JSX.Element | JSX.Element[] = [];
         if (type === 'number') {
-            const max = getMaxValue(values);
-            const min = getMinValue(values);
-            returnValues = (
-                <Slider
-                    min={min}
-                    max={max}
-                    onMouseUpCapture={(value) => console.log('value', value)}
-                    defaultMinValue={min}
-                    defaultMaxValue={max}
-                />
-            );
+            returnValues = returnFilterWithNumbers({ id, values, onQuerySearch });
         } else if (type === 'date') {
-            let newDates = [];
-
-            map((value) => {
-                if (value !== undefined && value !== null) {
-                    const year = DateFormatted({ date: value, options: { year: 'numeric' } });
-
-                    const index = findIndex(propEq('id', year))(newDates);
-
-                    if (index === -1) {
-                        newDates = [...newDates, { id: year, values: [value] }];
-                    } else if (index >= 0 && newDates[index]) {
-                        newDates[index].values = [...newDates[index].values, value];
-                    }
-                }
-            }, values);
-
-            returnValues = map(({ id, values }) => {
-                return (
-                    <li key={`${id}-${id}`}>
-                        <Chip label={id} onClick={() => console.log('clicked chip')} />
-                    </li>
-                );
-            }, newDates);
+            returnValues = returnFilterWithDate({ id, values, queryType, onQuerySearch });
         } else {
-            returnValues = map((value) => {
-                return (
-                    <li key={`${id}-${value}`}>
-                        <Chip label={value} onClick={() => console.log('clicked chip')} active={type === 'text'} />
-                    </li>
-                );
-            }, values);
+            returnValues = returnFilterWithText({ id, values, queryType, onQuerySearch });
         }
 
         return (
@@ -111,6 +160,7 @@ export const FilterBar = ({ id }: FilterBarType) => {
             </div>
         );
     }, filterOptions);
+
     return (
         <div className="filter_bar">
             <Button

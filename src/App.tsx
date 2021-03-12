@@ -8,7 +8,7 @@ import { AlertBase } from './components/molecules';
 import ModalBase from './components/molecules/modal';
 import Navbar from './components/organisms/navbar';
 import Palette from './components/organisms/palette';
-import { AuthProvider } from './hooks/useAuthProvider';
+import { AuthProvider } from './providers/AuthProvider';
 import appRoutes from './routes';
 
 config.autoAddCss = false;

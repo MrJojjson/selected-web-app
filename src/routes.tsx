@@ -10,6 +10,7 @@ const Purchases = lazy(() => import('./pages/purchases'));
 const Settings = lazy(() => import('./pages/settings'));
 const Whiskies = lazy(() => import('./pages/whiskies'));
 import { LoadingIndicator } from './components/atoms/loading';
+import { QueryProvider } from './providers/QueryProvider';
 
 type RouteType = { component: JSX.Element; path: toTypes };
 
@@ -42,7 +43,9 @@ const routeList: RouteType[] = [
         path: '/whiskies',
         component: (
             <Suspense fallback={<LoadingIndicator />}>
-                <Whiskies />
+                <QueryProvider id="whiskies">
+                    <Whiskies />
+                </QueryProvider>
             </Suspense>
         ),
     },
@@ -58,7 +61,9 @@ const routeList: RouteType[] = [
         path: '/casks',
         component: (
             <Suspense fallback={<LoadingIndicator />}>
-                <Casks />
+                <QueryProvider id="casks">
+                    <Casks />
+                </QueryProvider>
             </Suspense>
         ),
     },
