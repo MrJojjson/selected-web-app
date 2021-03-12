@@ -1,5 +1,5 @@
 import { lensPath, set } from 'ramda';
-import { SystemActions, SystemState, SYSTEM_FOCUS, SYSTEM_LAYOUT_COLUMNS, SYSTEM_SORT } from '../types/systemTypes';
+import { SystemActions, SystemState, SYSTEM_FOCUS, SYSTEM_LAYOUT_COLUMNS } from '../types/systemTypes';
 
 const initialState: SystemState = {
     layout: {
@@ -11,16 +11,6 @@ const initialState: SystemState = {
         },
     },
     focus: {},
-    sort: {
-        whiskies: {
-            type: 'distilledDate',
-            order: 'ascend',
-        },
-        casks: {
-            type: 'number',
-            order: 'descend',
-        },
-    },
 };
 
 export const SystemReducer = (state: SystemState = initialState, action: SystemActions) => {
@@ -30,9 +20,6 @@ export const SystemReducer = (state: SystemState = initialState, action: SystemA
             return set(lensPath(['layout', page, 'columns']), columns.toString(), state);
         case SYSTEM_FOCUS:
             return set(lensPath(['focus']), action.payload, state);
-        case SYSTEM_SORT:
-            const { type, value, order } = action?.payload;
-            return set(lensPath(['sort', type, order ? 'order' : 'type']), order || value, state);
         default:
             return state;
     }

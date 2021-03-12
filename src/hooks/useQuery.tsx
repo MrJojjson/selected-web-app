@@ -56,7 +56,7 @@ export const useQuery = ({ storageKey, type }: UseQueryTpe): UseQueryReturnType 
             } else {
                 searchKey = value;
                 if (parsedSearchType['order'] === undefined) {
-                    parsedSearchType['order'] = 'descend';
+                    parsedSearchType['order'] = 'ascend';
                 }
             }
         }

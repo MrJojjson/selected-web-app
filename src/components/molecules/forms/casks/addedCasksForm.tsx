@@ -4,7 +4,7 @@ import { DateFormatted } from '../../../../common/utils/dateFormat';
 import { useQuery } from '../../../../hooks/useQuery';
 import { CompLayout } from '../../../../layout/compLayout';
 import { casksRename, casksSelected } from '../../../../redux/actions/casksActions';
-import { getCasksState } from '../../../../redux/selectors/casksSelector';
+import { getCasksExpandAllState, getCasksState } from '../../../../redux/selectors/casksSelector';
 import { CasksDataType } from '../../../../redux/types/casksTypes';
 import { ApiCaskVarsType } from '../../../../types/caskTypes';
 import { InputList } from '../lists/inputList';
@@ -12,6 +12,7 @@ import { InputList } from '../lists/inputList';
 export const AddedCasksForm = () => {
     const { data, selected, edit } = getCasksState();
     const { query } = useQuery({});
+    const expandAll = getCasksExpandAllState();
     const { filter: queryFilters, sort: querySort } = query || {};
 
     const diff = ({ data: nextData }: CasksDataType, { data: postData }: CasksDataType) => {
@@ -70,7 +71,7 @@ export const AddedCasksForm = () => {
                     onChangeSelect={({ uid }) => casksSelected({ id: uid })}
                     onBlurInput={(props) => casksRename({ ...props })}
                     data={[{ data, uid }]}
-                    overrideOpen={false}
+                    overrideOpen={expandAll}
                     edit={edit}
                     {...rest}
                 />

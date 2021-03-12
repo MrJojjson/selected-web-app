@@ -4,6 +4,7 @@ import {
     CasksDataType,
     CasksState,
     CASKS_ADD_DATA,
+    CASKS_EXPAND_ALL,
     CASKS_REDO,
     CASKS_REMOTE_FOCUS,
     CASKS_RENAME,
@@ -19,6 +20,7 @@ const initialState: CasksState = {
     selected: [],
     fetch: true,
     edit: false,
+    expandAll: false,
     history: {
         data: [],
         index: null,
@@ -139,6 +141,8 @@ export const CasksReducer = (state: CasksState = initialState, action: CasksActi
                 return set(lensPath(['data', focusIndex, 'data', foxusDeepIndex, 'focus']), null, state);
             }
             return set(lensPath(['data', focusIndex, 'data', foxusDeepIndex, 'focus']), action?.payload?.data, state);
+        case CASKS_EXPAND_ALL:
+            return set(lensPath(['expandAll']), !state.expandAll, state);
         default:
             return state;
     }

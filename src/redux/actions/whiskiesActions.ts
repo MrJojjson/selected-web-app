@@ -5,6 +5,7 @@ import {
     WhiskiesSelectedActionType,
     WhiskiesSetFetchActionType,
     WHISKIES_ADD_DATA,
+    WHISKIES_EXPAND_ALL,
     WHISKIES_REDO,
     WHISKIES_REMOTE_FOCUS,
     WHISKIES_RENAME,
@@ -49,4 +50,8 @@ export const whiskiesRename = ({ ...props }: WhiskiesRenameActionType) => ({
 export const setWhiskiesRemoteFocus = ({ ...props }: WhiskiesFocusActionType) => ({
     type: WHISKIES_REMOTE_FOCUS,
     payload: { ...props },
+});
+
+export const whiskiesExpandAll = () => ({
+    type: WHISKIES_EXPAND_ALL,
 });

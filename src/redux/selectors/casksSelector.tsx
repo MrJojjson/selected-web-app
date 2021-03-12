@@ -11,3 +11,5 @@ export const getCasksAddState = () => getCasksState()?.data;
 export const getCasksFetchState = () => getCasksState()?.fetch;
 
 export const getCasksEditState = () => getCasksState()?.edit;
+
+export const getCasksExpandAllState = () => getCasksState()?.expandAll;

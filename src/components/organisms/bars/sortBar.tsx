@@ -1,15 +1,14 @@
-import { isEmpty, map } from 'ramda';
+import { map } from 'ramda';
 import React from 'react';
 import { useQuery } from '../../../hooks/useQuery';
-import { getSystemSortState } from '../../../redux/selectors/systemSelector';
-import { SystemSortType } from '../../../redux/types/systemTypes';
+import { StoreStateField } from '../../../redux/storeState';
 import { ApiCaskVars } from '../../../types/caskTypes';
 import { ApiWhiskyVars } from '../../../types/whiskyTypes';
 import { Dropdown, DropdownOptionType, DropdownType } from '../../atoms';
 import './sortBar.style.scss';
 
 type SortBarType = {
-    id: keyof SystemSortType;
+    id: StoreStateField;
 };
 
 const defaultValueOption: DropdownOptionType = {
@@ -19,12 +18,12 @@ const defaultValueOption: DropdownOptionType = {
 
 const sortOrderOptions = [
     {
-        value: 'descend',
-        label: 'Descend',
-    },
-    {
         value: 'ascend',
         label: 'Ascend',
+    },
+    {
+        value: 'descend',
+        label: 'Descend',
     },
 ];
 

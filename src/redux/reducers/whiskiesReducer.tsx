@@ -5,6 +5,7 @@ import {
     WhiskiesDataType,
     WhiskiesState,
     WHISKIES_ADD_DATA,
+    WHISKIES_EXPAND_ALL,
     WHISKIES_REDO,
     WHISKIES_REMOTE_FOCUS,
     WHISKIES_RENAME,
@@ -19,6 +20,7 @@ const initialState: WhiskiesState = {
     selected: [],
     fetch: true,
     edit: false,
+    expandAll: false,
     history: {
         data: [],
         index: null,
@@ -143,6 +145,8 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                 { ...action?.payload?.data, initiator },
                 state,
             );
+        case WHISKIES_EXPAND_ALL:
+            return set(lensPath(['expandAll']), !state.expandAll, state);
         default:
             return state;
     }

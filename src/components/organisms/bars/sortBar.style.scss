@@ -8,7 +8,6 @@
 .sort_bar {
     @include flex(center, flex-start, row);
     width: 100%;
-    padding: $default-padding;
 
     .dropdown:not(:last-of-type) {
         margin-right: $default-margin;

@@ -11,6 +11,7 @@ export const WHISKIES_RENAME = 'WHISKIES_RENAME';
 export const WHISKIES_REDO = 'WHISKIES_REDO';
 export const WHISKIES_UNDO = 'WHISKIES_UNDO';
 export const WHISKIES_REMOTE_FOCUS = 'WHISKIES_REMOTE_FOCUS';
+export const WHISKIES_EXPAND_ALL = 'WHISKIES_EXPAND_ALL';
 
 export type HistoryDataType = {
     index?: number;
@@ -25,6 +26,7 @@ export type WhiskiesState = {
     selected: string[];
     fetch: boolean;
     edit: boolean;
+    expandAll: boolean;
     history: {
         data: HistoryDataType[];
         index: number | null;
@@ -108,6 +110,11 @@ export type WhiskiesFocusAction = {
     payload: WhiskiesFocusActionType;
 };
 
+// EXPAND ALL
+export type WhiskiesToggleExpandAllAction = {
+    type: 'WHISKIES_EXPAND_ALL';
+};
+
 export type WhiskiesActions =
     | WhiskiesSelectedAction
     | WhiskiesAddDataAction
@@ -116,4 +123,5 @@ export type WhiskiesActions =
     | WhiskiesRedoAction
     | WhiskiesUndoAction
     | WhiskiesRenameAction
-    | WhiskiesFocusAction;
+    | WhiskiesFocusAction
+    | WhiskiesToggleExpandAllAction;

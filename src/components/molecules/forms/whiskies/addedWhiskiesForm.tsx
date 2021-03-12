@@ -3,7 +3,7 @@ import React from 'react';
 import { DateFormatted } from '../../../../common/utils/dateFormat';
 import { useQuery } from '../../../../hooks/useQuery';
 import { CompLayout } from '../../../../layout/compLayout';
-import { getWhiskiesState, whiskiesRename, whiskiesSelected } from '../../../../redux';
+import { getWhiskiesExpandAllState, getWhiskiesState, whiskiesRename, whiskiesSelected } from '../../../../redux';
 import { WhiskiesDataType } from '../../../../redux/types/whiskyTypes';
 import { ApiWhiskyVarsType } from '../../../../types/whiskyTypes';
 import { InputList } from '../lists/inputList';
@@ -12,7 +12,7 @@ export const AddedWhiskiesForm = () => {
     const { data, selected, edit } = getWhiskiesState();
     const { query } = useQuery({});
     const { filter: queryFilters, sort: querySort } = query || {};
-
+    const expandAll = getWhiskiesExpandAllState();
     const diff = ({ data: nextData }: WhiskiesDataType, { data: postData }: WhiskiesDataType) => {
         const { by, order } = querySort || {};
         const { value: nextValue } = find(propEq('id', by))(nextData) as ApiWhiskyVarsType;
@@ -69,7 +69,7 @@ export const AddedWhiskiesForm = () => {
                     onChangeSelect={({ uid }) => whiskiesSelected({ id: uid })}
                     onBlurInput={(props) => whiskiesRename({ ...props })}
                     data={[{ data, uid }]}
-                    overrideOpen={false}
+                    overrideOpen={expandAll}
                     edit={edit}
                     {...rest}
                 />

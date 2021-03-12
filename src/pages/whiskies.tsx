@@ -2,24 +2,25 @@ import { map } from 'ramda';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { DateFormatted } from '../common/utils/dateFormat';
-import { Text } from '../components/atoms';
+import { Button, Text } from '../components/atoms';
 import { AddedWhiskiesForm } from '../components/molecules/forms/whiskies/addedWhiskiesForm';
 import { FilterBar } from '../components/organisms/bars/filterBar';
 import { SortBar } from '../components/organisms/bars/sortBar';
 import { fetchData } from '../hooks/useApi';
+import { BarElement } from '../layout/barLayout/bar';
 import { CompLayout } from '../layout/compLayout';
 import { PageLayout } from '../layout/pageLayout';
-import { getAuthTokenState, whiskiesAddData, whiskiesSetFetch } from '../redux';
+import { getAuthTokenState, whiskiesAddData, whiskiesExpandAll, whiskiesSetFetch } from '../redux';
 import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
-import { getWhiskiesFetchState } from '../redux/selectors/whiskiesSelector';
+import { getWhiskiesFetchState, getWhiskiesExpandAllState } from '../redux/selectors/whiskiesSelector';
 import { WhiskiesDataType } from '../redux/types/whiskyTypes';
 import { APIWhiskiesReturnType, ApiWhiskyVars, ApiWhiskyVarsType } from '../types/whiskyTypes';
-import './pages.style.scss';
 
 const Whiskies = () => {
     const dispatch = useDispatch();
     const token = getAuthTokenState();
     const fetch = getWhiskiesFetchState();
+    const expandAll = getWhiskiesExpandAllState();
     const columns = getSystemLayoutColumnsState({ page: 'whiskies' });
 
     useEffect(() => {
@@ -69,11 +70,27 @@ const Whiskies = () => {
         }
     }, [fetch]);
 
+    const expandAllBtn = (
+        <Button
+            mini
+            label="Expand All"
+            icon={expandAll ? 'chevron-up' : 'chevron-down'}
+            onClick={() => dispatch(whiskiesExpandAll())}
+        />
+    );
+
     return (
         <>
-            <CompLayout key="added-whiskies-sort-bar" className="whiskies_sort_filter_bar">
-                <SortBar id="whiskies" />
-                <FilterBar id="whiskies" />
+            <CompLayout key="added-whiskies-sort-bar" className="sort_filter_bar">
+                <BarElement
+                    start={<SortBar id="whiskies" />}
+                    end={
+                        <>
+                            <FilterBar id="whiskies" />
+                            {expandAllBtn}
+                        </>
+                    }
+                />
             </CompLayout>
             <PageLayout columns={columns} disableLayout>
                 <AddedWhiskiesForm key="added-whiskies-form" />

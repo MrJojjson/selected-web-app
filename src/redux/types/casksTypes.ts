@@ -11,12 +11,14 @@ export const CASKS_RENAME = 'CASKS_RENAME';
 export const CASKS_REDO = 'CASKS_REDO';
 export const CASKS_UNDO = 'CASKS_UNDO';
 export const CASKS_REMOTE_FOCUS = 'CASKS_REMOTE_FOCUS';
+export const CASKS_EXPAND_ALL = 'CASKS_EXPAND_ALL';
 
 export type CasksState = {
     data: CasksDataType[];
     selected: string[];
     fetch: boolean;
     edit: boolean;
+    expandAll: boolean;
     history: {
         data: HistoryDataType[];
         index: number | null;
@@ -100,6 +102,11 @@ export type CasksFocusAction = {
     payload: CasksFocusActionType;
 };
 
+// EXPAND ALL
+export type CasksToggleExpandAllAction = {
+    type: 'CASKS_EXPAND_ALL';
+};
+
 export type CasksActions =
     | CasksSelectedAction
     | CasksAddDataAction
@@ -108,4 +115,5 @@ export type CasksActions =
     | CasksRedoAction
     | CasksUndoAction
     | CasksRenameAction
-    | CasksFocusAction;
+    | CasksFocusAction
+    | CasksToggleExpandAllAction;
