@@ -9,6 +9,9 @@ const Profile = lazy(() => import('./pages/profile'));
 const Purchases = lazy(() => import('./pages/purchases'));
 const Settings = lazy(() => import('./pages/settings'));
 const Whiskies = lazy(() => import('./pages/whiskies'));
+const Rerack = lazy(() => import('./pages/rerack'));
+const Events = lazy(() => import('./pages/events'));
+
 import { LoadingIndicator } from './components/atoms/loading';
 import { QueryProvider } from './providers/QueryProvider';
 
@@ -64,6 +67,22 @@ const routeList: RouteType[] = [
                 <QueryProvider id="casks">
                     <Casks />
                 </QueryProvider>
+            </Suspense>
+        ),
+    },
+    {
+        path: '/rerack',
+        component: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <Rerack />
+            </Suspense>
+        ),
+    },
+    {
+        path: '/events',
+        component: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <Events />
             </Suspense>
         ),
     },

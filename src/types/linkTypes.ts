@@ -5,6 +5,8 @@ export type toTypes =
     | '/settings'
     | '/profile'
     | '/casks'
+    | '/rerack'
+    | '/events'
     | '/whiskies'
     | '/purchases'
     | '/signIn';

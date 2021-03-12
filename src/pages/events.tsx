@@ -2,12 +2,12 @@ import React from 'react';
 import { Text } from '../components/atoms';
 import { PageLayout } from '../layout/pageLayout';
 
-const Settings = () => {
+const Events = () => {
     return (
         <PageLayout>
-            <Text key="settings-text">Settings</Text>
+            <Text key="events-text">Events</Text>
         </PageLayout>
     );
 };
 
-export default Settings;
+export default Events;

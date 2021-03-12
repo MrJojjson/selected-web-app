@@ -2,12 +2,12 @@ import React from 'react';
 import { Text } from '../components/atoms';
 import { PageLayout } from '../layout/pageLayout';
 
-const Settings = () => {
+const Rerack = () => {
     return (
         <PageLayout>
-            <Text key="settings-text">Settings</Text>
+            <Text key="rerack-text">Rerack</Text>
         </PageLayout>
     );
 };
 
-export default Settings;
+export default Rerack;

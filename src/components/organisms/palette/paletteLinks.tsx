@@ -23,6 +23,16 @@ const links: LinkType[] = [
         pathname: '/whiskies',
         icon: 'flask',
     },
+    {
+        title: 'Rerack',
+        pathname: '/rerack',
+        icon: 'divide',
+    },
+    {
+        title: 'Events',
+        pathname: '/events',
+        icon: 'calendar-alt',
+    },
 ];
 
 type PaletteLinksType = {
