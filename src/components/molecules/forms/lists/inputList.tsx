@@ -25,6 +25,7 @@ export const InputList = ({
     description,
     perElement,
     meta,
+    start,
     ...rest
 }: FormsListInputListType) => {
     const existsData = overrideOpen === undefined ? data?.length > 0 : overrideOpen;
@@ -39,13 +40,9 @@ export const InputList = ({
             title={title}
         />
     );
-    const header = (
-        <Header tag="h2" fontSize="m">
-            {title}
-        </Header>
-    );
+
     return (
-        <BarLayout start={perElement ? header : barLayoutStart} overrideOpen={existsData}>
+        <BarLayout start={perElement ? start : barLayoutStart} overrideOpen={existsData}>
             <InputListContainer
                 data={data}
                 edit={edit}
@@ -71,14 +68,14 @@ export const InputListContainer = ({
     const container = map(({ data = [], uid }) => {
         let desc = description;
 
-        if (includes('new-whisky', uid)) {
-            desc = 'New whisky';
+        if (includes('new-spirit', uid)) {
+            desc = 'New spirit';
         }
         if (includes('new-cask', uid)) {
             desc = 'New cask';
         }
-        if (includes('new-whisky-cask', uid)) {
-            desc = 'New whisky and cask';
+        if (includes('new-spirit-cask', uid)) {
+            desc = 'New spirit and cask';
         }
         const heading = (
             <InputListBar
@@ -154,6 +151,11 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
 
                     const { value: fValue, newValue: fNewValue, initiator: fInitiator } = focus || {};
                     const focusValue = fInitiator === 'undo' ? fValue : fNewValue;
+                    let inputDisabled = disabled || false;
+
+                    if (disabled === undefined && edit !== undefined) {
+                        inputDisabled = !edit;
+                    }
 
                     return (
                         <Fragment key={`${uid}-${id}`}>
@@ -168,7 +170,7 @@ export const InputListItems = ({ data = [], uid, onBlurInput, edit }: FormsListI
                                     onBlur={(event) =>
                                         event.currentTarget.value !== value && onBlur({ event, id: id?.toString() })
                                     }
-                                    disabled={disabled === undefined ? !edit : disabled}
+                                    disabled={inputDisabled}
                                     focusValue={focusValue}
                                 />
                             </li>

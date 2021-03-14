@@ -1,8 +1,7 @@
 import { InputVarsType } from './inputTypes';
-import { WhiskyType } from './whiskyTypes';
+import { SpiritType } from './spiritsTypes';
 
 export type APICaskReturnType = CaskType & {
-    id?: string;
     createdAtUtc?: string;
     updatedAtUtc?: string;
 };
@@ -13,10 +12,11 @@ export type CaskType = {
     size?: number;
     base?: string;
     id?: string;
-    whisky?: {
-        id?: WhiskyType['id'];
-        name?: WhiskyType['name'];
+    spirit?: {
+        id?: SpiritType['id'];
+        name?: SpiritType['name'];
     };
+    log?: {};
 };
 
 export type CaskKeyType = keyof CaskType;
@@ -47,7 +47,7 @@ export const CaskVars: CaskVarsType[] = [
     },
     {
         id: 'base',
-        title: 'Usage',
+        title: 'Base',
         type: 'text',
         value: '',
         belonging: 'cask',

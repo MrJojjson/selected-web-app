@@ -7,6 +7,6 @@ export type toTypes =
     | '/casks'
     | '/rerack'
     | '/events'
-    | '/whiskies'
+    | '/spirits'
     | '/purchases'
     | '/signIn';

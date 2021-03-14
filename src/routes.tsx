@@ -8,7 +8,7 @@ const Dashboard = lazy(() => import('./pages/dashboard'));
 const Profile = lazy(() => import('./pages/profile'));
 const Purchases = lazy(() => import('./pages/purchases'));
 const Settings = lazy(() => import('./pages/settings'));
-const Whiskies = lazy(() => import('./pages/whiskies'));
+const Spirits = lazy(() => import('./pages/spirits'));
 const Rerack = lazy(() => import('./pages/rerack'));
 const Events = lazy(() => import('./pages/events'));
 
@@ -43,11 +43,11 @@ const routeList: RouteType[] = [
         ),
     },
     {
-        path: '/whiskies',
+        path: '/spirits',
         component: (
             <Suspense fallback={<LoadingIndicator />}>
-                <QueryProvider id="whiskies">
-                    <Whiskies />
+                <QueryProvider id="spirits">
+                    <Spirits />
                 </QueryProvider>
             </Suspense>
         ),

@@ -16,8 +16,8 @@ $shadow-h: 5px;
     margin-bottom: $shadow-h;
     &.primary {
         color: $color-primary;
-        background-color: $color-primary-background;
-        box-shadow: $shadow-h $shadow-h $color-primary-background-back;
+        background-color: $color-background;
+        box-shadow: $shadow-h $shadow-h $color-primary-back;
 
         .icon {
             path {
@@ -28,8 +28,8 @@ $shadow-h: 5px;
 
     &.secondary {
         color: $color-secondary;
-        background-color: $color-secondary-background;
-        box-shadow: $shadow-h $shadow-h $color-secondary-background-back;
+        background-color: $color-primary;
+        box-shadow: $shadow-h $shadow-h $color-secondary-back;
         .text {
             color: $color-secondary;
         }

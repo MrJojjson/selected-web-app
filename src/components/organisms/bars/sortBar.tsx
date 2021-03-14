@@ -3,7 +3,7 @@ import React from 'react';
 import { useQuery } from '../../../hooks/useQuery';
 import { StoreStateField } from '../../../redux/storeState';
 import { ApiCaskVars } from '../../../types/caskTypes';
-import { ApiWhiskyVars } from '../../../types/whiskyTypes';
+import { ApiSpiritVars } from '../../../types/spiritsTypes';
 import { Dropdown, DropdownOptionType, DropdownType } from '../../atoms';
 import './sortBar.style.scss';
 
@@ -32,13 +32,13 @@ export const SortBar = ({ id }: SortBarType) => {
     const { by, order } = queryType || {};
     let options = [] as DropdownOptionType[];
     switch (id) {
-        case 'whiskies':
+        case 'spirits':
             options = map(
                 ({ id, title }) => ({
                     value: id,
                     label: title,
                 }),
-                ApiWhiskyVars,
+                ApiSpiritVars,
             );
             break;
         case 'casks':

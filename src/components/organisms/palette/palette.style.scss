@@ -8,7 +8,7 @@
     @include flex(center, space-between, column);
     height: 100%;
     width: $palette-width;
-    background-color: $color-secondary-background;
+    background-color: $color-primary;
     .top,
     .middle,
     .bottom {
@@ -21,7 +21,6 @@
     .bottom {
         @include flex(center, center, column);
         flex: 0.5;
-        border-top: 1px solid $color-divider;
     }
 }
 
@@ -40,7 +39,7 @@
         transition: all $transition-speed;
         left: -75%;
         &.open_mobile {
-            box-shadow: 5px 0px 10px 5px $color-secondary-shadow;
+            box-shadow: 5px 0px 10px 5px $color-shadow;
             left: 0;
         }
     }

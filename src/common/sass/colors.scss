@@ -1,30 +1,41 @@
 /** MAIN */
-$color-primary: rgba(45, 52, 54, 1);
-$color-secondary: rgba(245, 245, 245, 1);
-
-$color-highlight: rgb(240, 137, 128);
-$color-highlight-back: rgba(92, 137, 146, 0.75);
-
-$color-error: rgba(237, 155, 147, 1);
-$color-alert: rgba(237, 209, 147, 1);
-
-$color-primary-shadow: rgba(178, 190, 195, 1);
-$color-secondary-shadow: rgba(45, 52, 54, 0.25);
-
-$color-overlay: rgba(126, 131, 131, 0.5);
-$color-disabled: rgba(45, 52, 54, 0.25);
-
-$color-primary-background: rgba(255, 255, 255, 1);
-$color-secondary-background: $color-primary;
-
-$color-primary-background-back: rgba(0, 0, 0);
-$color-secondary-background-back: rgba(44, 62, 80, 0.5);
-
-$color-primary-border: rgba(45, 52, 54, 0.5);
-$color-secondary-border: $color-secondary;
-
-$color-icon: rgba(31, 86, 96, 1);
-$color-divider: rgba(245, 245, 245, 0.5);
-
 $color-black: #000000;
 $color-white: #ffffff;
+$color-primary: rgba(45, 52, 54, 1);
+$color-primary-back: rgba(47, 72, 88, 0.5);
+
+$color-secondary: rgba(245, 245, 245, 1);
+$color-secondary-back: rgba(47, 72, 88, 0.5);
+
+$color-highlight: rgb(240, 137, 128);
+$color-highlight-back: rgba(47, 72, 88, 0.5);
+
+$color-error: rgba(237, 155, 147, 1);
+$color-error-back: rgba(47, 72, 88, 0.5);
+
+$color-alert: rgba(237, 209, 147, 1);
+$color-alert-back: rgba(47, 72, 88, 0.5);
+
+$color-border: rgba(47, 72, 88, 1);
+$color-shadow: rgba(47, 72, 88, 0.5);
+$color-disabled: rgba(47, 72, 88, 0.25);
+$color-overlay: rgba(47, 72, 88, 0.5);
+$color-background: rgba(255, 255, 255, 1);
+$color-background-back: rgba(0, 0, 0);
+$color-divider: $color-white;
+// $color-primary-shadow: rgba(178, 190, 195, 1);
+// $color-secondary-shadow: rgba(45, 52, 54, 0.25);
+
+// $color-overlay: rgba(126, 131, 131, 0.5);
+// $color-disabled: rgba(45, 52, 54, 0.25);
+
+// $color-secondary-background: $color-primary;
+
+// $color-primary-background-back: rgba(0, 0, 0);
+// $color-secondary-background-back: rgba(44, 62, 80, 0.5);
+
+// $color-primary-border: rgba(45, 52, 54, 0.5);
+// $color-secondary-border: $color-secondary;
+
+// $color-icon: rgba(31, 86, 96, 1);
+// $color-divider: rgba(245, 245, 245, 0.5);

@@ -8,13 +8,13 @@ import './newPurchaseForms.style.scss';
 export const NewPurchaseButtons = () => {
     const { mobile } = useWindowSize();
     const dispatch = useDispatch();
-    const whisky = (
+    const spirit = (
         <Button
             mini={mobile}
-            label="Whisky"
+            label="Spirit"
             theme="primary"
             icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded({ whisky: true }))}
+            onClick={() => dispatch(purchaseIncomingAdded({ spirit: true }))}
         />
     );
     const cask = (
@@ -26,21 +26,21 @@ export const NewPurchaseButtons = () => {
             onClick={() => dispatch(purchaseIncomingAdded({ cask: true }))}
         />
     );
-    const whiskyAndCask = (
+    const spiritAndCask = (
         <Button
             mini={mobile}
-            label="Whisky and cask"
+            label="Spirit and cask"
             theme="primary"
             icon="plus"
-            onClick={() => dispatch(purchaseIncomingAdded({ whiskyWithCask: true }))}
+            onClick={() => dispatch(purchaseIncomingAdded({ spiritWithCask: true }))}
         />
     );
 
     return (
         <>
             <div className="new_purchase_add_buttons">
-                {whiskyAndCask}
-                {whisky}
+                {spiritAndCask}
+                {spirit}
                 {cask}
             </div>
         </>

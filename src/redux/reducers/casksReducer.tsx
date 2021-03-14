@@ -13,7 +13,7 @@ import {
     CASKS_TOGGLE_EDIT,
     CASKS_UNDO,
 } from '../types/casksTypes';
-import { HistoryDataType } from '../types/whiskyTypes';
+import { HistoryDataType } from '../types/spiritsTypes';
 
 const initialState: CasksState = {
     data: [],

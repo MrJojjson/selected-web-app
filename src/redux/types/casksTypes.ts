@@ -1,7 +1,7 @@
 import { BarElementType, BarHeadingType } from '../../layout/barLayout/bar';
 import { CaskVarsType } from '../../types/caskTypes';
-import { FormsListWhiskyOnBlurType } from './formsTypes';
-import { HistoryDataType } from './whiskyTypes';
+import { FormsListSpiritOnBlurType } from './formsTypes';
+import { HistoryDataType } from './spiritsTypes';
 
 export const CASKS_SELECTED = 'CASKS_SELECTED';
 export const CASKS_ADD_DATA = 'CASKS_ADD_DATA';
@@ -84,7 +84,7 @@ export type CasksUndoAction = {
 };
 
 // RENAME
-export type CasksRenameActionType = FormsListWhiskyOnBlurType;
+export type CasksRenameActionType = FormsListSpiritOnBlurType;
 
 export type CasksRenameAction = {
     type: 'CASKS_RENAME';

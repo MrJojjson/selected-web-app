@@ -7,12 +7,12 @@ import {
     getAuthTokenState,
     getPurchaseIncomingState,
     purchaseIncomingSelected,
-    whiskiesSetFetch,
+    spiritsSetFetch,
 } from '../../../../redux';
 import { PurchaseIncomingAddedState } from '../../../../redux/types/purchaseTypes';
 import { UseApiType } from '../../../../types/apiTypes';
 import { CaskType, APICaskReturnType } from '../../../../types/caskTypes';
-import { WhiskyType, APIWhiskiesReturnType } from '../../../../types/whiskyTypes';
+import { SpiritType, APISpiritsReturnType } from '../../../../types/spiritsTypes';
 import { Button } from '../../../atoms';
 import { NavbarContentTemplate } from '../navbarContentTemplate';
 
@@ -56,7 +56,12 @@ const PurchaseNav = () => {
         />
     );
 
-    const postWhisky = async (data: WhiskyType, fetch: UseApiType): Promise<APIWhiskiesReturnType> => {
+    type PostSpirit = {
+        spirit: SpiritType;
+        caskId?: CaskType['id'];
+    };
+
+    const postSpirit = async (data: PostSpirit, fetch: UseApiType): Promise<APISpiritsReturnType> => {
         return await fetchData({
             data,
             token,
@@ -78,7 +83,7 @@ const PurchaseNav = () => {
 
     const resetIncomingPurchaseFields = () => {
         dispatch(purchaseIncomingSelected({ all: true }));
-        dispatch(whiskiesSetFetch({ fetch: true }));
+        dispatch(spiritsSetFetch({ fetch: true }));
         setTimeout(() => {
             dispatch(purchaseIncomingSelected({ remove: true }));
         }, 2500);
@@ -86,13 +91,13 @@ const PurchaseNav = () => {
 
     const onSubmit = () => {
         map(async ({ data: addedData, fetch, preFetch }) => {
-            let whisky = mergeAll(
+            let spirit = mergeAll(
                 map(({ id, value, belonging }) => {
-                    if (belonging === 'whisky') {
+                    if (belonging === 'spirit') {
                         return { [(id as unknown) as string]: value };
                     }
                 }, addedData),
-            ) as WhiskyType;
+            ) as SpiritType;
 
             const cask = mergeAll(
                 map(({ id, value, belonging }) => {
@@ -102,15 +107,15 @@ const PurchaseNav = () => {
                 }, addedData),
             ) as CaskType;
 
-            if (!isEmpty(whisky) && !isEmpty(cask) && !isEmpty(preFetch)) {
-                return postCask(cask, preFetch).then(async ({ id }) => {
-                    whisky = set(lensPath(['cask', 'id']), id, whisky);
-                    await postWhisky(whisky, fetch);
+            if (!isEmpty(spirit) && !isEmpty(cask) && !isEmpty(preFetch)) {
+                return postCask(cask, preFetch).then(async ({ id: caskId }) => {
+                    spirit = set(lensPath(['spiritCask', 'id']), caskId, spirit);
+                    await postSpirit({ spirit, caskId }, fetch);
                     resetIncomingPurchaseFields();
                 });
             }
-            if (!isEmpty(whisky)) {
-                return postWhisky(whisky, fetch).then(async () => resetIncomingPurchaseFields());
+            if (!isEmpty(spirit)) {
+                return postSpirit({ spirit }, fetch).then(async () => resetIncomingPurchaseFields());
             }
             if (!isEmpty(cask)) {
                 return postCask(cask, fetch).then(async () => resetIncomingPurchaseFields());

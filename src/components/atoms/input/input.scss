@@ -10,7 +10,7 @@ $label-padding: 1px $spacing-s;
 $label-shown-pos: ($height-s / 3);
 $error-shown-pos: ($height-s / 4);
 
-$input-border: 1px solid $color-primary-border;
+$input-border: 1px solid $color-border;
 
 .input_wrapper {
     @include flex(flex-start, center, column);
@@ -33,7 +33,7 @@ $input-border: 1px solid $color-primary-border;
             transition: all $transition-speed;
             position: absolute;
             top: -$label-shown-pos;
-            background-color: $color-primary-background;
+            background-color: $color-background;
             border: $input-border;
             opacity: 1;
         }
@@ -88,8 +88,8 @@ $input-border: 1px solid $color-primary-border;
 
     &.primary {
         color: $color-primary;
-        background-color: $color-primary-background;
-        border: 1px solid $color-primary-border;
+        background-color: $color-background;
+        border: 1px solid $color-border;
     }
 
     &.secondary {

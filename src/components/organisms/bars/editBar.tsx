@@ -5,18 +5,18 @@ import { getAuthTokenState, setSystemLayoutColumns } from '../../../redux';
 import { getSystemLayoutColumnsState } from '../../../redux/selectors/systemSelector';
 import { CasksState } from '../../../redux/types/casksTypes';
 import { SystemLayoutState } from '../../../redux/types/systemTypes';
-import { WhiskiesFocusActionType, WhiskiesSelectedActionType, WhiskiesState } from '../../../redux/types/whiskyTypes';
+import { SpiritsFocusActionType, SpiritsSelectedActionType, SpiritsState } from '../../../redux/types/spiritsTypes';
 import { Button } from '../../atoms';
 import { NavbarContentTemplate } from '../navbar/navbarContentTemplate';
 
 type EditBarType = {
-    state: CasksState | WhiskiesState;
+    state: CasksState | SpiritsState;
     page: keyof SystemLayoutState;
     onToggleEdit: () => void;
     onRedo: () => void;
     onUndo: () => void;
-    onFocus: (props: WhiskiesFocusActionType) => void;
-    onSelected: (props: WhiskiesSelectedActionType) => void;
+    onFocus: (props: SpiritsFocusActionType) => void;
+    onSelected: (props: SpiritsSelectedActionType) => void;
 };
 
 export const EditBar = ({ state, page, onToggleEdit, onRedo, onUndo, onFocus, onSelected }: EditBarType) => {
@@ -135,7 +135,7 @@ export const EditBar = ({ state, page, onToggleEdit, onRedo, onUndo, onFocus, on
             icon="columns"
             onClick={() =>
                 dispatch(
-                    setSystemLayoutColumns({ page: 'whiskies', columns: columnsCarousel.toString() as typeof columns }),
+                    setSystemLayoutColumns({ page: 'spirits', columns: columnsCarousel.toString() as typeof columns }),
                 )
             }
         />
@@ -146,13 +146,13 @@ export const EditBar = ({ state, page, onToggleEdit, onRedo, onUndo, onFocus, on
         //     const data = mergeAll(map(({ id, value }) => ({ [id]: value }), addedData));
         //     await fetchData({
         //         method: 'post',
-        //         endpoint: 'whiskies',
+        //         endpoint: 'spirits',
         //         data,
         //         token,
         //     })
         //         .then((res) => {
         //             dispatch(purchaseIncomingSelected({ all: true }));
-        //             dispatch(whiskiesSetFetch({ fetch: true }));
+        //             dispatch(spiritsSetFetch({ fetch: true }));
         //             setTimeout(() => {
         //                 dispatch(purchaseIncomingSelected({ remove: true }));
         //             }, 2500);

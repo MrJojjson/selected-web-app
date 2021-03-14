@@ -1,4 +1,4 @@
-import { HistoryDataType } from './whiskyTypes';
+import { HistoryDataType } from './spiritsTypes';
 
 export const SYSTEM_LAYOUT_COLUMNS = 'SYSTEM_LAYOUT_COLUMNS';
 export const SYSTEM_FOCUS = 'SYSTEM_FOCUS';
@@ -8,7 +8,7 @@ export type SystemLayoutPageState = {
 };
 
 export type SystemLayoutState = {
-    whiskies: SystemLayoutPageState;
+    spirits: SystemLayoutPageState;
     casks: SystemLayoutPageState;
 };
 

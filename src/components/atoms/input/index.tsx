@@ -32,7 +32,7 @@ export const Input = ({
     theme,
     error = '',
     className,
-    disabled = false,
+    disabled,
     value,
     focusValue,
     ...rest
