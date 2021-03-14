@@ -6,7 +6,6 @@ import { PageLayout } from '../layout/pageLayout';
 const Purchases = () => {
     return (
         <PageLayout>
-            <NewPurchaseButtons key="purchases-incoming-buttons" />
             <NewPurchaseForm key="purchases-incoming-item" />
         </PageLayout>
     );

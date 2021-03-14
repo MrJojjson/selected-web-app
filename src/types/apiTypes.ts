@@ -1,4 +1,6 @@
 import { AxiosError } from 'axios';
+import { CasksDataType } from '../redux/types/casksTypes';
+import { SpiritsDataType } from '../redux/types/spiritsTypes';
 
 export type UseApiReturn = {
     data: any;
@@ -6,7 +8,7 @@ export type UseApiReturn = {
     error: AxiosError<any>;
 };
 
-export type ApiEndpointTypes = 'users' | 'authenticate' | 'casks' | 'whiskies' | 'rerack';
+export type ApiEndpointTypes = 'users' | 'authenticate' | 'casks' | 'spirits' | 'rerack';
 export type ApiMethodTypes = 'get' | 'post' | 'put' | 'delete';
 
 export type UseApiType = {
@@ -17,4 +19,18 @@ export type UseApiType = {
     params?: any;
     data?: any;
     token?: string;
+};
+
+export type FetchType = {
+    token: string;
+};
+
+export type FetchSpiritReturnType = {
+    error?: string;
+    data?: SpiritsDataType[];
+};
+
+export type FetchCaskReturnType = {
+    error?: string;
+    data?: CasksDataType[];
 };

@@ -9,7 +9,7 @@ import { modalToggleOpen } from '../../../redux';
 import { getSpecificState } from '../../../redux/selectors/baseSelector';
 import { StoreStateField } from '../../../redux/storeState';
 import { CasksState } from '../../../redux/types/casksTypes';
-import { WhiskiesState } from '../../../redux/types/whiskyTypes';
+import { SpiritsState } from '../../../redux/types/spiritsTypes';
 import { Button, Header } from '../../atoms';
 import { Chip } from '../../atoms/chip';
 import { Slider } from '../../atoms/slider';
@@ -126,7 +126,7 @@ const sortValues = (nextValue: string, postValue: string) => {
 };
 
 export const FilterBar = ({ id }: FilterBarType) => {
-    const { data } = getSpecificState({ page: id }) as WhiskiesState | CasksState;
+    const { data } = getSpecificState({ page: id }) as SpiritsState | CasksState;
     const [filterOptions, setFilterOptions] = useState<FilterOptionsType[]>([]);
     const { queryType, onQuerySearch } = useQuery({ storageKey: id, type: 'filter' });
     const { mobile } = useWindowSize();

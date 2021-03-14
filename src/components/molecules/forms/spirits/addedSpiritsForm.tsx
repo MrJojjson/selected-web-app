@@ -3,20 +3,26 @@ import React from 'react';
 import { DateFormatted } from '../../../../common/utils/dateFormat';
 import { useQuery } from '../../../../hooks/useQuery';
 import { CompLayout } from '../../../../layout/compLayout';
-import { getWhiskiesExpandAllState, getWhiskiesState, whiskiesRename, whiskiesSelected } from '../../../../redux';
-import { WhiskiesDataType } from '../../../../redux/types/whiskyTypes';
-import { ApiWhiskyVarsType } from '../../../../types/whiskyTypes';
+import { getSpiritsExpandAllState, getSpiritsState, spiritsRename, spiritsSelected } from '../../../../redux';
+import { SpiritsDataType } from '../../../../redux/types/spiritsTypes';
+import { ApiSpiritVarsType } from '../../../../types/spiritsTypes';
 import { InputList } from '../lists/inputList';
 
-export const AddedWhiskiesForm = () => {
-    const { data, selected, edit } = getWhiskiesState();
+export const AddedSpiritsForm = () => {
+    const { data, selected, edit } = getSpiritsState();
+
     const { query } = useQuery({});
     const { filter: queryFilters, sort: querySort } = query || {};
-    const expandAll = getWhiskiesExpandAllState();
-    const diff = ({ data: nextData }: WhiskiesDataType, { data: postData }: WhiskiesDataType) => {
+    const expandAll = getSpiritsExpandAllState();
+    console.log('data', data);
+
+    if (data?.length <= 0) {
+        return null;
+    }
+    const diff = ({ data: nextData }: SpiritsDataType, { data: postData }: SpiritsDataType) => {
         const { by, order } = querySort || {};
-        const { value: nextValue } = find(propEq('id', by))(nextData) as ApiWhiskyVarsType;
-        const { value: postValue } = find(propEq('id', by))(postData) as ApiWhiskyVarsType;
+        const { value: nextValue } = find(propEq('id', by))(nextData) as ApiSpiritVarsType;
+        const { value: postValue } = find(propEq('id', by))(postData) as ApiSpiritVarsType;
 
         const modNextValue = nextValue?.replace(/\s/g, '')?.toLowerCase();
         const modPostValue = postValue?.replace(/\s/g, '')?.toLowerCase();
@@ -60,14 +66,14 @@ export const AddedWhiskiesForm = () => {
               }, sortedData)
             : sortedData;
 
-    const returnWhiskies = map(({ uid, data, ...rest }) => {
+    const returnSpirits = map(({ uid, data, ...rest }) => {
         return (
             <CompLayout key={uid}>
                 <InputList
                     uid={uid}
                     selected={selected}
-                    onChangeSelect={({ uid }) => whiskiesSelected({ id: uid })}
-                    onBlurInput={(props) => whiskiesRename({ ...props })}
+                    onChangeSelect={({ uid }) => spiritsSelected({ id: uid })}
+                    onBlurInput={(props) => spiritsRename({ ...props })}
                     data={[{ data, uid }]}
                     overrideOpen={expandAll}
                     edit={edit}
@@ -76,5 +82,5 @@ export const AddedWhiskiesForm = () => {
             </CompLayout>
         );
     }, filteredData);
-    return <>{returnWhiskies}</>;
+    return <>{returnSpirits}</>;
 };

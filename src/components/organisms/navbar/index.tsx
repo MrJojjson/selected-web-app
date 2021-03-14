@@ -3,7 +3,7 @@ import { find, includes } from 'ramda';
 import React, { lazy, Suspense } from 'react';
 const DashboardNav = lazy(() => import('./content/dashboard'));
 const CaskNav = lazy(() => import('./content/cask'));
-const WhiskyNav = lazy(() => import('./content/whisky'));
+const SpiritNav = lazy(() => import('./content/spirit'));
 const ProfileNav = lazy(() => import('./content/profile'));
 const SettingseNav = lazy(() => import('./content/settings'));
 const PurchaseNav = lazy(() => import('./content/purchase'));
@@ -38,10 +38,10 @@ const navList: { path: string; comp: JSX.Element }[] = [
         ),
     },
     {
-        path: 'whiskies',
+        path: 'spirits',
         comp: (
             <Suspense fallback={<LoadingIndicator />}>
-                <WhiskyNav />
+                <SpiritNav />
             </Suspense>
         ),
     },

@@ -13,11 +13,11 @@ input[type='checkbox'] {
         width: $size;
         height: $size;
         background: $color-white left top no-repeat;
-        border: 1px solid $color-primary-border;
+        border: 1px solid $color-border;
         border-radius: $default-border-radius;
         cursor: pointer;
         transition: all $transition-speed;
-        box-shadow: $shadow-h $shadow-h $color-primary-background-back;
+        box-shadow: $shadow-h $shadow-h $color-background-back;
 
         svg {
             path {
@@ -31,7 +31,7 @@ input[type='checkbox'] {
     &:checked + span {
         border: 1px solid $color-primary;
         background-color: $color-primary;
-        box-shadow: 0px 0px $color-primary-background-back;
+        box-shadow: 0px 0px $color-background-back;
         svg {
             path {
                 color: $color-secondary;

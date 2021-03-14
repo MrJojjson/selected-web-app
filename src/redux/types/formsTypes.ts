@@ -1,9 +1,6 @@
 import { BarLayoutType } from '../../layout/barLayout';
 import { BarHeadingType } from '../../layout/barLayout/bar';
-import { CaskKeyType } from '../../types/caskTypes';
 import { InputVarsType } from '../../types/inputTypes';
-import { WhiskyCaskVarsType } from '../../types/whiskyCaskTypes';
-import { WhiskyKeyType } from '../../types/whiskyTypes';
 
 export type FormsListInputListType = FormsListInputListContainerType & BarLayoutType;
 
@@ -17,7 +14,7 @@ export type FormsListInputListContainerType = Pick<
         uid?: string;
     };
 
-export type FormsListWhiskyOnBlurType = {
+export type FormsListSpiritOnBlurType = {
     uid: string;
     id: string;
     value: string;
@@ -29,7 +26,7 @@ export type FormsListInputListItemsType = {
     data: FormsListInputListItemDataType[];
     uid: string;
     edit?: boolean;
-    onBlurInput?: (props: FormsListWhiskyOnBlurType) => void;
+    onBlurInput?: (props: FormsListSpiritOnBlurType) => void;
 };
 
 type FormsListInputListBarOnChangeType = {

@@ -1,4 +1,4 @@
-import { HistoryDataType } from '../redux/types/whiskyTypes';
+import { HistoryDataType } from '../redux/types/spiritsTypes';
 
 export type InputVarsType = {
     id: string;

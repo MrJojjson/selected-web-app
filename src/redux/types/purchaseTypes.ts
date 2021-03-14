@@ -1,9 +1,9 @@
 import { UseApiType } from '../../types/apiTypes';
 import { CaskVarsType } from '../../types/caskTypes';
 import { InputVarsType } from '../../types/inputTypes';
-import { WhiskyCaskVarsType } from '../../types/whiskyCaskTypes';
-import { WhiskyVarsType } from '../../types/whiskyTypes';
-import { FormsListWhiskyOnBlurType } from './formsTypes';
+import { SpiritCaskVarsType } from '../../types/spiritCaskTypes';
+import { SpiritVarsType } from '../../types/spiritsTypes';
+import { FormsListSpiritOnBlurType } from './formsTypes';
 export const PURCHASE_INCOMING_SELECTED = 'PURCHASE_INCOMING_SELECTED';
 export const PURCHASE_INCOMING_ADDED = 'PURCHASE_INCOMING_ADDED';
 export const PURCHASE_INCOMING_ADDED_DATA = 'PURCHASE_INCOMING_ADDED_DATA';
@@ -11,7 +11,7 @@ export const PURCHASE_INCOMING_ADDED_DATA = 'PURCHASE_INCOMING_ADDED_DATA';
 export type PurchaseIncomingAddedState = {
     fetch: UseApiType;
     preFetch?: UseApiType | null;
-    data: InputVarsType<WhiskyCaskVarsType | WhiskyVarsType | CaskVarsType>[];
+    data: InputVarsType<SpiritCaskVarsType | SpiritVarsType | CaskVarsType>[];
     uid: string;
 };
 
@@ -28,8 +28,8 @@ export type PurchaseState = {
 // NEW ITEM
 export type PurchaseIncomingAddedActionType = {
     cask?: boolean;
-    whisky?: boolean;
-    whiskyWithCask?: boolean;
+    spirit?: boolean;
+    spiritWithCask?: boolean;
 };
 
 export type PurchaseIncomingAddedAction = {
@@ -52,7 +52,7 @@ export type PurchaseIncomingSelectedAction = {
 
 // DATA
 
-export type PurchaseIncomingAddedDataActionType = FormsListWhiskyOnBlurType;
+export type PurchaseIncomingAddedDataActionType = FormsListSpiritOnBlurType;
 
 export type PurchaseIncomingAddedDataAction = {
     type: 'PURCHASE_INCOMING_ADDED_DATA';

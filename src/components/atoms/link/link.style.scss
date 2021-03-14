@@ -22,9 +22,9 @@
     }
 }
 
-.reach_link {
-    &.active {
-        transition: all $transition-speed;
+.react_link {
+    transition: all $transition-speed;
+    &.is-active {
         pointer-events: none;
         cursor: default;
         .link {
@@ -44,7 +44,6 @@
 .link_list {
     width: 100%;
     li .text {
-        border-bottom: 1px solid $color-divider;
         padding: $default-padding * 1.5 0;
     }
     &.mini {

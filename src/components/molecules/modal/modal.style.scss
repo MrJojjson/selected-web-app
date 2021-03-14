@@ -10,7 +10,7 @@
     @include flex(center, center, column);
     min-width: $modal-min-width;
     height: calc(100vh - #{$navbar-height} - #{$default-app-spacing * 2});
-    background: $color-primary-background;
+    background: $color-background;
     transition: all $transition-modal-speed;
     padding: $spacing-m;
     z-index: $z-index-shirt;
@@ -22,9 +22,9 @@
     &.active {
         opacity: 1;
         transform: translateX(0);
-        border-top-left-radius: $border-radius-m;
-        border-bottom-left-radius: $border-radius-m;
-        box-shadow: 0px 0px 15px 5px $color-primary-shadow;
+        border-top-left-radius: $border-radius-s;
+        border-bottom-left-radius: $border-radius-s;
+        box-shadow: 0px 0px 15px 5px $color-shadow;
     }
 
     .header_close__hide {

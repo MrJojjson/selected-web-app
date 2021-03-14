@@ -28,7 +28,7 @@
     }
 
     &:not(:last-of-type) {
-        border-bottom: 1px solid $color-primary-border;
+        border-bottom: 1px solid $color-border;
     }
 }
 .input_list_bar_description {

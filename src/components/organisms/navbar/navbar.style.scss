@@ -14,7 +14,7 @@ header {
     padding: 0 $default-padding;
     width: calc(100% - #{$palette-width});
     z-index: $z-index-belt;
-    box-shadow: 0px 5px 5px $color-secondary-shadow;
+    box-shadow: 0px 5px 5px $color-shadow;
     .navbar_content_template {
         width: 100%;
         @include flex(center, space-between, row);

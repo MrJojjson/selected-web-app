@@ -1,11 +1,10 @@
-// import { Link as ReachLink } from '@reach/router';
 import { map } from 'ramda';
 import React from 'react';
 import './link.style.scss';
 import { toTypes } from '../../../types/linkTypes';
 import { Text, TextType } from '../text';
 import cn from 'classnames';
-import { Link as ReactLink } from 'react-router-dom';
+import { NavLink as ReactLink } from 'react-router-dom';
 
 export type LinkType = Omit<TextType, 'children'> & {
     pathname: toTypes;
@@ -16,10 +15,6 @@ export type LinkType = Omit<TextType, 'children'> & {
     onClick?: () => void;
 };
 
-const isActive = ({ isCurrent }) => {
-    return isCurrent ? { className: `reach_link  active` } : {};
-};
-
 export const Link = ({ pathname, hash, query, title, className, ...rest }: LinkType) => {
     let to = pathname;
     if (query) {
@@ -28,7 +23,7 @@ export const Link = ({ pathname, hash, query, title, className, ...rest }: LinkT
         pathname += `#${hash}`;
     }
     return (
-        <ReactLink to={to}>
+        <ReactLink className="react_link" activeClassName="is-active" to={to}>
             <Text className="link" theme="secondary" tag="span" oneLine={true} {...rest}>
                 {title}
             </Text>

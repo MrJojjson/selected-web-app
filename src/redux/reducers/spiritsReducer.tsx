@@ -1,21 +1,21 @@
 import { append, findIndex, includes, lensPath, pluck, propEq, reject, set, view, without } from 'ramda';
 import {
     HistoryDataType,
-    WhiskiesActions,
-    WhiskiesDataType,
-    WhiskiesState,
-    WHISKIES_ADD_DATA,
-    WHISKIES_EXPAND_ALL,
-    WHISKIES_REDO,
-    WHISKIES_REMOTE_FOCUS,
-    WHISKIES_RENAME,
-    WHISKIES_SELECTED,
-    WHISKIES_SET_FETCH,
-    WHISKIES_TOGGLE_EDIT,
-    WHISKIES_UNDO,
-} from '../types/whiskyTypes';
+    SpiritsActions,
+    SpiritsDataType,
+    SpiritsState,
+    SPIRITS_ADD_DATA,
+    SPIRITS_EXPAND_ALL,
+    SPIRITS_REDO,
+    SPIRITS_REMOTE_FOCUS,
+    SPIRITS_RENAME,
+    SPIRITS_SELECTED,
+    SPIRITS_SET_FETCH,
+    SPIRITS_TOGGLE_EDIT,
+    SPIRITS_UNDO,
+} from '../types/spiritsTypes';
 
-const initialState: WhiskiesState = {
+const initialState: SpiritsState = {
     data: [],
     selected: [],
     fetch: true,
@@ -32,19 +32,19 @@ const initialState: WhiskiesState = {
 };
 
 type FindDataIndex = {
-    data: WhiskiesDataType[];
+    data: SpiritsDataType[];
     uid: string;
 };
 
 const findUidIndex = ({ data, uid }: FindDataIndex) => findIndex(propEq('uid', uid))(data);
 
-export const WhiskiesReducer = (state: WhiskiesState = initialState, action: WhiskiesActions) => {
+export const SpiritsReducer = (state: SpiritsState = initialState, action: SpiritsActions) => {
     const { data, selected, history } = state;
     const historyDataLength = history?.data.length;
     const historyIndex = history?.index;
 
     switch (action.type) {
-        case WHISKIES_REDO:
+        case SPIRITS_REDO:
             const { index: redoIndex, deepIndex: redoDeepIndex, newValue: redoNewValue } = history?.data[
                 historyIndex
             ] as HistoryDataType;
@@ -62,7 +62,7 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                     },
                 },
             });
-        case WHISKIES_UNDO:
+        case SPIRITS_UNDO:
             const { index: undoIndex, deepIndex: undoDeepIndex, value: undoValue } = history?.data[
                 historyIndex
             ] as HistoryDataType;
@@ -80,7 +80,7 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                     },
                 },
             });
-        case WHISKIES_SELECTED:
+        case SPIRITS_SELECTED:
             if (action.payload.remove) {
                 return {
                     ...state,
@@ -107,13 +107,13 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                 state,
             );
 
-        case WHISKIES_ADD_DATA:
+        case SPIRITS_ADD_DATA:
             return { ...state, data: action.payload.data };
-        case WHISKIES_SET_FETCH:
+        case SPIRITS_SET_FETCH:
             return set(lensPath(['fetch']), action.payload.fetch, state);
-        case WHISKIES_TOGGLE_EDIT:
+        case SPIRITS_TOGGLE_EDIT:
             return set(lensPath(['edit']), !state.edit, state);
-        case WHISKIES_RENAME:
+        case SPIRITS_RENAME:
             const index = findUidIndex({ data, uid: action?.payload.uid });
             const deepIndex = findIndex(propEq('id', action?.payload.id))(data[index].data);
             const lens = lensPath(['data', index, 'data', deepIndex, 'value']);
@@ -134,7 +134,7 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                     },
                 },
             });
-        case WHISKIES_REMOTE_FOCUS:
+        case SPIRITS_REMOTE_FOCUS:
             const { remove, initiator = 'undo' } = action?.payload;
             const { index: focusIndex, deepIndex: foxusDeepIndex } = action?.payload?.data || {};
             if (remove) {
@@ -145,7 +145,7 @@ export const WhiskiesReducer = (state: WhiskiesState = initialState, action: Whi
                 { ...action?.payload?.data, initiator },
                 state,
             );
-        case WHISKIES_EXPAND_ALL:
+        case SPIRITS_EXPAND_ALL:
             return set(lensPath(['expandAll']), !state.expandAll, state);
         default:
             return state;

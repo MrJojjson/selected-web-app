@@ -2,8 +2,8 @@ import { append, findIndex, includes, lensPath, pluck, propEq, reject, set, with
 import { uniqueId } from '../../common/utils/uniqueId';
 import { UseApiType } from '../../types/apiTypes';
 import { CaskVars } from '../../types/caskTypes';
-import { WhiskyCaskVars } from '../../types/whiskyCaskTypes';
-import { WhiskyVars } from '../../types/whiskyTypes';
+import { SpiritCaskVars } from '../../types/spiritsCaskTypes';
+import { SpiritVars } from '../../types/spiritsTypes';
 import {
     PurchaseActions,
     PurchaseState,
@@ -29,14 +29,14 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
             let uidPrefix = '';
 
             let fetch: UseApiType = {
-                endpoint: 'whiskies',
+                endpoint: 'spirits',
                 method: 'post',
             };
             let preFetch: UseApiType = {};
 
-            if (action.payload.whiskyWithCask) {
-                incomingAddData = WhiskyCaskVars;
-                uidPrefix = 'new-whisky-cask';
+            if (action.payload.spiritWithCask) {
+                incomingAddData = SpiritCaskVars;
+                uidPrefix = 'new-spirit-cask';
                 preFetch.endpoint = 'casks';
                 preFetch.method = 'post';
             }
@@ -45,9 +45,9 @@ export const PurchaseReducer = (state: PurchaseState = initialState, action: Pur
                 uidPrefix = 'new-cask';
                 fetch.endpoint = 'casks';
             }
-            if (action.payload.whisky) {
-                incomingAddData = WhiskyVars;
-                uidPrefix = 'new-whisky';
+            if (action.payload.spirit) {
+                incomingAddData = SpiritVars;
+                uidPrefix = 'new-spirit';
             }
 
             return set(

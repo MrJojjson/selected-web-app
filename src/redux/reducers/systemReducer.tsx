@@ -3,7 +3,7 @@ import { SystemActions, SystemState, SYSTEM_FOCUS, SYSTEM_LAYOUT_COLUMNS } from 
 
 const initialState: SystemState = {
     layout: {
-        whiskies: {
+        spirits: {
             columns: '1',
         },
         casks: {
