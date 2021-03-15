@@ -12,7 +12,7 @@ export const fetchSpirits = ({ token }: FetchType): Promise<FetchSpiritReturnTyp
     })
         .then((res: APISpiritsReturnType[]) => {
             if (includes('TypeError', res?.toString())) {
-                return { error: 'Connection to server failed' };
+                return { error: 'Connection to server failed: Spirited away!' };
             }
             const data = map((rest) => {
                 const { id: uid, name: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;

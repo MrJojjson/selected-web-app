@@ -12,7 +12,7 @@ export const fetchCasks = ({ token }: FetchType): Promise<FetchCaskReturnType> =
     })
         .then((res: APICaskReturnType[]) => {
             if (includes('TypeError', res?.toString())) {
-                return { error: 'Connection to server failed' };
+                return { error: 'Connection to server failed: No casks as far as the eye can see' };
             }
             const data = map((rest) => {
                 const { id: uid, number: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;

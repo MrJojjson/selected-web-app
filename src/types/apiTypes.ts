@@ -1,6 +1,8 @@
 import { AxiosError } from 'axios';
 import { CasksDataType } from '../redux/types/casksTypes';
 import { SpiritsDataType } from '../redux/types/spiritsTypes';
+import { APICaskReturnType, CaskType } from './caskTypes';
+import { APISpiritsReturnType, SpiritType } from './spiritsTypes';
 
 export type UseApiReturn = {
     data: any;
@@ -33,4 +35,30 @@ export type FetchSpiritReturnType = {
 export type FetchCaskReturnType = {
     error?: string;
     data?: CasksDataType[];
+};
+
+export type PostType = {
+    token: string;
+    fetch?: UseApiType;
+};
+
+export type PostCaskType = PostType & {
+    data: CaskType;
+};
+
+export type PostCaskReturnType = {
+    error?: string;
+    data?: APICaskReturnType;
+};
+
+export type PostSpiritType = PostType & {
+    data: {
+        spirit: SpiritType;
+        caskId?: CaskType['id'];
+    };
+};
+
+export type PostSpiritReturnType = {
+    error?: string;
+    data?: APISpiritsReturnType;
 };

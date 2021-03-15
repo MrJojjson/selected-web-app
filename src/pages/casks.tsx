@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchCasks } from '../api/fetchCasks';
+import { uniqueId } from '../common/utils/uniqueId';
 import { Button } from '../components/atoms';
 import { AddedCasksForm } from '../components/molecules/forms/casks/addedCasksForm';
 import { FilterBar } from '../components/organisms/bars/filterBar';
@@ -8,7 +9,7 @@ import { SortBar } from '../components/organisms/bars/sortBar';
 import { BarElement } from '../layout/barLayout/bar';
 import { CompLayout } from '../layout/compLayout';
 import { PageLayout } from '../layout/pageLayout';
-import { getAuthTokenState } from '../redux';
+import { getAuthTokenState, systemAlertContentLog } from '../redux';
 import { casksAddData, casksExpandAll, casksSetFetch } from '../redux/actions/casksActions';
 import { getCasksExpandAllState, getCasksFetchState } from '../redux/selectors/casksSelector';
 import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
@@ -26,7 +27,7 @@ const Casks = () => {
                 dispatch(casksSetFetch({ fetch: false }));
                 dispatch(casksAddData({ data }));
             } else if (error) {
-                // dispatch error
+                dispatch(systemAlertContentLog({ type: 'error', id: `${uniqueId('server-error')}`, value: error }));
             }
         };
 

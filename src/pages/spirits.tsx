@@ -1,14 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchSpirits } from '../api/fetchSpirits';
-import { Button } from '../components/atoms';
+import { uniqueId } from '../common/utils/uniqueId';
+import { Button, Text } from '../components/atoms';
+import { setAlert } from '../components/molecules';
 import { AddedSpiritsForm } from '../components/molecules/forms/spirits/addedSpiritsForm';
 import { FilterBar } from '../components/organisms/bars/filterBar';
 import { SortBar } from '../components/organisms/bars/sortBar';
 import { BarElement } from '../layout/barLayout/bar';
 import { CompLayout } from '../layout/compLayout';
 import { PageLayout } from '../layout/pageLayout';
-import { getAuthTokenState, spiritsAddData, spiritsExpandAll, spiritsSetFetch } from '../redux';
+import {
+    getAuthTokenState,
+    setSystemError,
+    spiritsAddData,
+    spiritsExpandAll,
+    spiritsSetFetch,
+    systemAlertContent,
+    systemAlertContentLog,
+} from '../redux';
 import { getSpiritsExpandAllState, getSpiritsFetchState } from '../redux/selectors/spiritsSelector';
 import { getSystemLayoutColumnsState } from '../redux/selectors/systemSelector';
 
@@ -27,8 +37,7 @@ const Spirits = () => {
                 dispatch(spiritsSetFetch({ fetch: false }));
                 dispatch(spiritsAddData({ data }));
             } else if (error) {
-                // dispatch error
-                console.log('error', error);
+                dispatch(systemAlertContentLog({ type: 'error', id: `${uniqueId('server-error')}`, value: error }));
             }
         };
 

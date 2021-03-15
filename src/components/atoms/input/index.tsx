@@ -37,8 +37,8 @@ export const Input = ({
     focusValue,
     ...rest
 }: InputType) => {
-    if (rest.type === 'date') {
-        const date = value || new Date().toISOString();
+    if (rest.type === 'date' && value) {
+        const date = value;
         value = DateFormatted({
             date,
             options: { year: 'numeric', month: 'numeric', day: 'numeric' },

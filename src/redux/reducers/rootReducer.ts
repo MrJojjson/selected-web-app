@@ -1,6 +1,4 @@
 import { SpiritsReducer } from './spiritsReducer';
-import { AlertActions } from './../types/alertTypes';
-import { AlertReducer } from './alertReducer';
 import { combineReducers, Reducer } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { StoreState } from '../storeState';
@@ -18,11 +16,10 @@ import { SystemActions } from '../types/systemTypes';
 
 export type ThunkResult<R> = ThunkAction<R, StoreState, undefined, any>;
 
-export type StoreAction = ModalActions | AlertActions | PurchaseActions | SpiritsActions | CasksActions | SystemActions;
+export type StoreAction = ModalActions | PurchaseActions | SpiritsActions | CasksActions | SystemActions;
 
 export const rootReducer: Reducer<StoreState, StoreAction> = combineReducers({
     purchase: PurchaseReducer,
-    alert: AlertReducer,
     auth: AuthReducer,
     modal: ModalReducer,
     spirits: SpiritsReducer,

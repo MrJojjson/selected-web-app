@@ -107,9 +107,11 @@ export const InputListBar = ({
     meta,
 }: FormsListInputListBarType) => {
     const dispatch = useDispatch();
+
+    const displaySelector = edit === undefined ? true : edit;
     return (
         <>
-            {
+            {displaySelector && (
                 <Selector
                     className={cn('input_list_selector', {
                         hide: edit === undefined ? false : !edit,
@@ -117,7 +119,7 @@ export const InputListBar = ({
                     checked={isSelected}
                     onChange={() => dispatch(onChangeSelect({ uid }))}
                 />
-            }
+            )}
             {title && <Header>{title}</Header>}
             <Text fontSize="l">{description}</Text>
             <Text fontSize="l">{meta}</Text>
