@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { map } from 'ramda';
 import './dropdown.style.scss';
 
@@ -16,7 +16,7 @@ export type DropdownOptionType = {
 
 export const Dropdown = ({ options, label, defaultValue, onOptionChange }: DropdownType) => {
     const [value, setValue] = useState<string>(defaultValue);
-
+    useEffect(() => setValue(defaultValue), [defaultValue]);
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         onOptionChange(event);
         setValue(event.target.value);

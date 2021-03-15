@@ -48,7 +48,6 @@ export const SystemReducer = (state: SystemState = initialState, action: SystemA
             return set(lensPath(['alert', 'open']), override || !alert.open, state);
         case SYSTEM_ALERT_CONTENT:
             const { content, contentString } = action?.payload;
-            console.log('action.payload', action.payload);
             return set(lensPath(['alert', content ? 'content' : 'contentString']), content || contentString, {
                 ...state,
                 alert: {

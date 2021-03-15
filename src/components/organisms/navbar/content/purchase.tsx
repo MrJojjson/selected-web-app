@@ -127,7 +127,6 @@ const PurchaseNav = () => {
             } else if (!isEmpty(cask)) {
                 error = await saveCask({ data: cask, fetch });
             }
-            console.log('error', error);
             if (error === null) {
                 return resetIncomingPurchaseFields(uid);
             } else {
