@@ -10,7 +10,7 @@ export const NewPurchaseButtons = () => {
     const dispatch = useDispatch();
     const spirit = (
         <Button
-            mini={mobile}
+            mini
             label="Spirit"
             theme="primary"
             icon="plus"
@@ -19,7 +19,7 @@ export const NewPurchaseButtons = () => {
     );
     const cask = (
         <Button
-            mini={mobile}
+            mini
             label="Cask"
             theme="primary"
             icon="plus"
@@ -28,7 +28,7 @@ export const NewPurchaseButtons = () => {
     );
     const spiritAndCask = (
         <Button
-            mini={mobile}
+            mini
             label="Spirit and cask"
             theme="primary"
             icon="plus"

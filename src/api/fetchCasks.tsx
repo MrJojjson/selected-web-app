@@ -1,8 +1,6 @@
 import { includes, map } from 'ramda';
-import { useDispatch } from 'react-redux';
 import { DateFormatted } from '../common/utils/dateFormat';
 import { fetchData } from '../hooks/useApi';
-import { casksAddData, casksSetFetch, getAuthTokenState } from '../redux';
 import { CasksDataType } from '../redux/types/casksTypes';
 import { FetchCaskReturnType, FetchType } from '../types/apiTypes';
 import { APICaskReturnType, ApiCaskVars, ApiCaskVarsType } from '../types/caskTypes';
@@ -17,8 +15,6 @@ export const fetchCasks = ({ token }: FetchType): Promise<FetchCaskReturnType> =
                 return { error: 'Connection to server failed' };
             }
             const data = map((rest) => {
-                console.log('rest', rest);
-
                 const { id: uid, number: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;
 
                 const data = map(({ id, title, type }) => {

@@ -23,7 +23,7 @@ $shadow-hover-h: 2.5px;
         box-shadow: $shadow-hover-h $shadow-hover-h $color-highlight-back;
     }
     &.active {
-        box-shadow: $shadow-active-h $shadow-active-h $color-secondary-background-back;
+        box-shadow: $shadow-active-h $shadow-active-h $color-highlight-back;
         .chip_label {
             color: $color-primary;
         }

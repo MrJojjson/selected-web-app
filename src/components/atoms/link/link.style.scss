@@ -1,8 +1,8 @@
 @import '../../../common/sass/colors.scss';
 @import '../../../common/sass/metrics.scss';
-@mixin styleLink() {
+@mixin styleLink($color) {
     color: $color-secondary;
-    background-color: $color-highlight;
+    background-color: $color;
     svg {
         path {
             fill: $color-secondary;
@@ -13,22 +13,21 @@
     transition: all $transition-speed;
     white-space: nowrap;
     cursor: pointer;
-
-    &:hover {
-        @include styleLink();
-    }
-    &:active {
-        transform: translateY($active-size);
-    }
 }
 
 .react_link {
     transition: all $transition-speed;
+    &:hover,
+    &:focus {
+        .link {
+            @include styleLink($color-focus);
+        }
+    }
     &.is-active {
         pointer-events: none;
         cursor: default;
         .link {
-            @include styleLink();
+            @include styleLink($color-highlight);
             font-weight: $font-weight-bold;
         }
     }

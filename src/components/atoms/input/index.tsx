@@ -60,7 +60,12 @@ export const Input = ({
         >
             <input
                 onChange={({ currentTarget }) => setVal(currentTarget.value)}
-                onBlur={(event) => onBlur && onBlur(event)}
+                onBlur={(event) => {
+                    const { value: currentValue } = event?.target || {};
+                    if (onBlur && currentValue !== value) {
+                        onBlur(event);
+                    }
+                }}
                 disabled={disabled}
                 value={val}
                 {...rest}

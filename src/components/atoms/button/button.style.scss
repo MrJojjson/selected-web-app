@@ -5,6 +5,7 @@
 $shadow-h: 5px;
 
 .button {
+    position: relative;
     @include flex(center, center, row);
     border: none;
     border-radius: $border-radius-s;
@@ -18,10 +19,23 @@ $shadow-h: 5px;
         color: $color-primary;
         background-color: $color-background;
         box-shadow: $shadow-h $shadow-h $color-primary-back;
-
+        border: 1px solid $color-border;
         .icon {
             path {
                 fill: $color-primary;
+            }
+        }
+        &:hover,
+        &:focus {
+            border: 1px solid transparent;
+            .text {
+                color: $color-secondary;
+            }
+            background-color: $color-focus;
+            .icon {
+                path {
+                    fill: $color-secondary;
+                }
             }
         }
     }
@@ -63,8 +77,11 @@ $shadow-h: 5px;
         height: auto;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
+        transition: all $transition-speed;
         border-radius: $border-radius-none;
+        background-color: $color-focus;
     }
 
     &.disabled {

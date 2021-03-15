@@ -11,7 +11,12 @@ type SelectorType = {
 export const Selector = ({ checked = false, onChange, className }: SelectorType) => {
     return (
         <span className={className} onClick={onChange}>
-            <input onChange={onChange} type="checkbox" checked={checked} />
+            <input
+                onChange={onChange}
+                onKeyPress={({ key }) => key === 'Enter' && onChange()}
+                type="checkbox"
+                checked={checked}
+            />
             <span>
                 <FontAwesomeIcon icon={['fas', 'check']} />
             </span>

@@ -14,7 +14,6 @@ export const AddedSpiritsForm = () => {
     const { query } = useQuery({});
     const { filter: queryFilters, sort: querySort } = query || {};
     const expandAll = getSpiritsExpandAllState();
-    console.log('data', data);
 
     if (data?.length <= 0) {
         return null;

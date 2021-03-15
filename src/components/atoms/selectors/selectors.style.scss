@@ -5,7 +5,8 @@
 $size: $height-xs * 1.5;
 $shadow-h: 5px;
 input[type='checkbox'] {
-    display: none;
+    position: absolute;
+    opacity: 0;
 
     + span {
         position: relative;
@@ -24,8 +25,13 @@ input[type='checkbox'] {
                 color: $color-secondary;
             }
         }
-        &:hover {
+    }
+    &:hover,
+    &:focus {
+        + span {
             border-radius: $border-radius-none;
+
+            background-color: $color-focus;
         }
     }
     &:checked + span {
@@ -39,6 +45,16 @@ input[type='checkbox'] {
         }
         &:hover {
             border-radius: $border-radius-none;
+        }
+    }
+
+    &:checked {
+        &:hover,
+        &:focus {
+            + span {
+                border-radius: $border-radius-none;
+                background-color: $color-focus;
+            }
         }
     }
 }

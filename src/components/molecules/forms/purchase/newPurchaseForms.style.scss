@@ -8,7 +8,7 @@
     @include flex(center, space-between, row);
     width: 100%;
     .new_purchase_add_buttons {
-        @include flex(flex-start, center, row);
+        @include flex(flex-start, flex-end, row);
         flex-wrap: wrap;
         width: 100%;
         button {
