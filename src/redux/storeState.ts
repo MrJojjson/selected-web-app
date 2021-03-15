@@ -4,6 +4,7 @@ import { ModalState } from './types/modalTypes';
 import { PurchaseState } from './types/purchaseTypes';
 import { CasksState } from './types/casksTypes';
 import { SystemState } from './types/systemTypes';
+import { ChartState } from './types/chartTypes';
 export interface StoreState {
     purchase: PurchaseState;
     modal: ModalState;
@@ -11,6 +12,7 @@ export interface StoreState {
     spirits: SpiritsState;
     casks: CasksState;
     system: SystemState;
+    charts: ChartState;
 }
 
 export type StoreStateField = keyof StoreState;
