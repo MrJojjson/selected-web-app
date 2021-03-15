@@ -1,5 +1,4 @@
 import React from 'react';
-import { NewPurchaseButtons } from '../components/molecules/forms/purchase/newPurchaseButtons';
 import { NewPurchaseForm } from '../components/molecules/forms/purchase/newPurchaseForm';
 import { PageLayout } from '../layout/pageLayout';
 

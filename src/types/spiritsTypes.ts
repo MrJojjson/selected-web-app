@@ -4,6 +4,9 @@ import { InputVarsType } from './inputTypes';
 export type APISpiritsReturnType = SpiritType & {
     createdAtUtc?: string;
     updatedAtUtc?: string;
+    status?: number;
+    message?: string;
+    errorCode?: unknown;
 };
 
 export type SpiritType = {
@@ -33,63 +36,63 @@ export const SpiritVars: SpiritVarsType[] = [
         id: 'name',
         title: 'Name',
         type: 'text',
-        value: '',
+        value: '1',
         belonging: 'spirit',
     },
     {
         id: 'distillery',
         title: 'Distillery',
         type: 'text',
-        value: '',
+        value: 'b',
         belonging: 'spirit',
     },
     {
         id: 'status',
         title: 'Status',
         type: 'text',
-        value: '',
+        value: 'c',
         belonging: 'spirit',
     },
     {
         id: 'recipe',
         title: 'Recipe',
         type: 'text',
-        value: '',
+        value: 'd',
         belonging: 'spirit',
     },
     {
         id: 'distilledDate',
         title: 'Distilled date',
         type: 'date',
-        value: '',
+        value: '2020-10-12',
         belonging: 'spirit',
     },
     {
         id: 'volume',
         title: 'Volume',
         type: 'number',
-        value: '',
+        value: '400',
         belonging: 'spirit',
     },
     {
         id: 'ppm',
         title: 'PPM',
         type: 'number',
-        value: '',
+        value: '40',
         belonging: 'spirit',
     },
     {
         id: 'ola',
         title: 'OLA',
         type: 'number',
-        value: '',
+        value: '50',
         belonging: 'spirit',
     },
     {
         id: 'abv',
         title: 'ABV',
         type: 'number',
-        value: '',
+        value: '67',
         belonging: 'spirit',
     },
 ];

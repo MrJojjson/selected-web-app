@@ -4,6 +4,7 @@ import { SpiritType } from './spiritsTypes';
 export type APICaskReturnType = CaskType & {
     createdAtUtc?: string;
     updatedAtUtc?: string;
+    status?: number;
 };
 
 export type CaskType = {

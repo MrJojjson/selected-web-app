@@ -15,3 +15,7 @@ export const getSpecificSystemLayoutState = ({ page }: GetSpecificSystemLayoutSt
 
 export const getSystemLayoutColumnsState = ({ page }: GetSpecificSystemLayoutStateType) =>
     getSystemState()?.layout[page]?.columns;
+
+export const getSystemErrorState = () => getSystemState()?.error;
+
+export const getSystemAlertState = () => getSystemState()?.alert;
