@@ -1,20 +1,15 @@
-import { map } from 'ramda';
-import React, { PureComponent } from 'react';
-import { PieChart as RechartPieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
-import { getSpiritsState } from '../../../../redux';
-import { ChartsType } from '../../../../redux/types/chartTypes';
-import { ChartBar } from '../../bars/chartBar';
-import { generetateChartOptions } from '../generateChartOptions';
-import '../lineChart/lineChart.style.scss';
+import React from 'react';
+import { Pie, PieChart as RechartPieChart, ResponsiveContainer } from 'recharts';
+import { ChartsType } from '../../../redux/types/chartTypes';
+import '../chart.style.scss';
+import { generetateChartOptions } from './generateChartOptions';
 type BarChartType = ChartsType;
 
-const PieChart = ({ id, xAxis, yAxis, content }: BarChartType) => {
-    const { data, selected, edit } = getSpiritsState();
-    const chartOptions = generetateChartOptions({ data, xAxis, yAxis });
+const PieChart = ({ ...rest }: BarChartType) => {
+    const chartOptions = generetateChartOptions({ ...rest });
 
     return (
         <div className="chart_wrapper">
-            <ChartBar id={id} xAxis={xAxis} yAxis={yAxis} content={content} />
             <ResponsiveContainer width="100%" height={400}>
                 <RechartPieChart width={400} height={400}>
                     <Pie

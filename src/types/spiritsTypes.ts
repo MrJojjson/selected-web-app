@@ -28,6 +28,7 @@ export type SpiritType = {
 };
 
 export type SpiritKeyType = keyof SpiritType;
+export type SpiritNumberKeyType = keyof Pick<SpiritType, 'abv' | 'ola' | 'ppm' | 'volume'>;
 
 export type SpiritVarsType = InputVarsType;
 

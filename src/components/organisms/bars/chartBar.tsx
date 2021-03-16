@@ -1,12 +1,12 @@
-import { map } from 'ramda';
+import { addIndex, map } from 'ramda';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setChartData } from '../../../redux/actions/chartActions';
-import { ChartsType } from '../../../redux/types/chartTypes';
+import { addNewChartLine, setChartData } from '../../../redux/actions/chartActions';
+import { ChartAxisNumberValueType, ChartAxisValueType, ChartsType } from '../../../redux/types/chartTypes';
 import { ApiCaskVars } from '../../../types/caskTypes';
 import { InputVarsType } from '../../../types/inputTypes';
 import { ApiSpiritVars } from '../../../types/spiritsTypes';
-import { Dropdown, DropdownType } from '../../atoms';
+import { Button, Dropdown, DropdownType } from '../../atoms';
 import './bar.style.scss';
 
 type xYOptionsType = {
@@ -46,7 +46,7 @@ const contentOptions = [
 
 type ChartBarType = ChartsType;
 
-export const ChartBar = ({ id, yAxis, xAxis, content }: ChartBarType) => {
+export const ChartBar = ({ id, yAxis, xAxis, content, graphs }: ChartBarType) => {
     const dispatch = useDispatch();
 
     let data: xYOptionsType['data'] = ApiSpiritVars;
@@ -58,8 +58,8 @@ export const ChartBar = ({ id, yAxis, xAxis, content }: ChartBarType) => {
     const yAxisDropDownOptions = yOptions({ data });
 
     useEffect(() => {
-        dispatch(setChartData({ type: 'xAxis', value: xAxisDropDownOptions[0].value, id }));
-        dispatch(setChartData({ type: 'yAxis', value: yAxisDropDownOptions[0].value, id }));
+        dispatch(setChartData({ type: 'xAxis', value: xAxisDropDownOptions[0].value as ChartAxisValueType, id }));
+        dispatch(setChartData({ type: 'yAxis', value: yAxisDropDownOptions[0].value as ChartAxisValueType, id }));
     }, [content]);
 
     const contentDropDown = {
@@ -67,7 +67,7 @@ export const ChartBar = ({ id, yAxis, xAxis, content }: ChartBarType) => {
         options: contentOptions,
         defaultValue: content,
         onOptionChange: ({ currentTarget }) => {
-            dispatch(setChartData({ type: 'content', value: currentTarget.value, id }));
+            dispatch(setChartData({ type: 'content', value: currentTarget.value as ChartAxisValueType, id }));
         },
     } as DropdownType;
 
@@ -77,15 +77,7 @@ export const ChartBar = ({ id, yAxis, xAxis, content }: ChartBarType) => {
         defaultValue: xAxis,
 
         onOptionChange: ({ currentTarget }) =>
-            dispatch(setChartData({ type: 'xAxis', value: currentTarget.value, id })),
-    } as DropdownType;
-
-    const ySecondAxisDropDown = {
-        label: 'X-Axis:',
-        options: yAxisDropDownOptions,
-        defaultValue: xAxis,
-        onOptionChange: ({ currentTarget }) =>
-            dispatch(setChartData({ type: 'y2Axis', value: currentTarget.value, id })),
+            dispatch(setChartData({ type: 'xAxis', value: currentTarget.value as ChartAxisValueType, id })),
     } as DropdownType;
 
     const yAxisDropDown = {
@@ -93,15 +85,40 @@ export const ChartBar = ({ id, yAxis, xAxis, content }: ChartBarType) => {
         options: yAxisDropDownOptions,
         defaultValue: yAxis,
         onOptionChange: ({ currentTarget }) =>
-            dispatch(setChartData({ type: 'yAxis', value: currentTarget.value, id })),
+            dispatch(setChartData({ type: 'yAxis', value: currentTarget.value as ChartAxisNumberValueType, id })),
     } as DropdownType;
+
+    const linesDropDowns = addIndex(map)((graph: ChartAxisNumberValueType, index) => {
+        return (
+            <Dropdown
+                key={`${graph}-${index}`}
+                label={`Graph ${index}`}
+                options={yAxisDropDownOptions}
+                defaultValue={graph}
+                onOptionChange={({ currentTarget }) =>
+                    dispatch(
+                        setChartData({ type: 'graphs', value: currentTarget.value as ChartAxisNumberValueType, id }),
+                    )
+                }
+            />
+        );
+    }, graphs);
 
     return (
         <div className="chart_bar">
-            <Dropdown {...contentDropDown} />
-            <Dropdown {...xAxisDropDown} />
-            <Dropdown {...ySecondAxisDropDown} />
-            <Dropdown {...yAxisDropDown} />
+            <div className="chart_bar_dropdowns">
+                <Dropdown {...contentDropDown} />
+                <Dropdown {...xAxisDropDown} />
+                <Dropdown {...yAxisDropDown} />
+                {linesDropDowns}
+            </div>
+
+            <Button
+                mini
+                className="chart_add_new_line_button"
+                label="New graph"
+                onClick={() => dispatch(addNewChartLine({ id }))}
+            />
         </div>
     );
 };

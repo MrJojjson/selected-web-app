@@ -39,10 +39,23 @@
 }
 
 .chart_bar {
-    @include flex(center, center, row);
+    position: relative;
+    @include flex(center, flex-start, row);
     width: 100%;
     padding: $default-padding;
-    .dropdown:not(:last-of-type) {
+    .chart_bar_dropdowns {
+        @include flex(center, flex-start, row);
+        flex: 1;
+        overflow-x: auto;
+        padding: $default-padding 0;
         margin-right: $default-margin;
+        .dropdown:not(:last-of-type) {
+            margin-right: $default-margin;
+        }
+    }
+
+    .chart_add_new_line_button {
+        margin-left: auto;
+        flex: 0.1;
     }
 }
