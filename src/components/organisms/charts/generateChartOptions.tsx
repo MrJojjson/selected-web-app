@@ -34,7 +34,6 @@ export const generetateChartOptions = ({ content, xAxis, yAxis, graphs = [] }: G
 
         data,
     );
-    console.log('chartOptions', chartOptions);
 
     return chartOptions;
 };

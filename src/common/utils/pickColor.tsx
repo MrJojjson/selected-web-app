@@ -2,6 +2,6 @@ type PickColorByIndexType = {
     index: number;
 };
 
-const colors = ['rgba(45, 52, 54, 1)', 'rgb(240, 137, 128)', '#b4554f', 'rgba(237, 209, 147, 1)', '#72638d'];
+const colors = ['#F08980', '#D07690', '#A26C96', '#72638D', '#485776', '#2F4858'];
 
 export const pickColorByIndex = ({ index }: PickColorByIndexType) => colors[index];

@@ -45,11 +45,19 @@
     padding: $default-padding;
     .chart_bar_dropdowns {
         @include flex(center, flex-start, row);
-        flex: 1;
+        flex: 0.5;
         overflow-x: auto;
         padding: $default-padding 0;
         margin-right: $default-margin;
         .dropdown:not(:last-of-type) {
+            margin-right: $default-margin;
+        }
+    }
+
+    .chart_bar_selectors {
+        flex: 0.4;
+        @include flex(center, flex-start, row);
+        .selector:not(:last-of-type) {
             margin-right: $default-margin;
         }
     }

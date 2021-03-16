@@ -9,6 +9,7 @@ export type DropdownType = {
     defaultValue?: string;
     onOptionChange: (e: ChangeEvent<HTMLSelectElement>) => void;
     mini?: boolean;
+    color?: string;
 };
 
 export type DropdownOptionType = {
@@ -16,7 +17,7 @@ export type DropdownOptionType = {
     value: string;
 };
 
-export const Dropdown = ({ options, label, defaultValue, onOptionChange, mini }: DropdownType) => {
+export const Dropdown = ({ options, label, defaultValue, onOptionChange, mini, color }: DropdownType) => {
     const [value, setValue] = useState<string>(defaultValue);
     useEffect(() => setValue(defaultValue), [defaultValue]);
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -30,8 +31,10 @@ export const Dropdown = ({ options, label, defaultValue, onOptionChange, mini }:
                 mini,
             })}
         >
-            <label htmlFor={label}>{label}</label>
-            <select name={label} id={label} value={value} onChange={handleChange}>
+            <label style={{ color: color }} htmlFor={label}>
+                {label}
+            </label>
+            <select style={{ color: color }} name={label} id={label} value={value} onChange={handleChange}>
                 {map(({ value, label }) => {
                     return (
                         <option key={value} value={value}>

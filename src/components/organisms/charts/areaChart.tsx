@@ -12,8 +12,7 @@ import {
 } from 'recharts';
 import { pickColorByIndex } from '../../../common/utils/pickColor';
 import { ChartsType } from '../../../redux/types/chartTypes';
-import { ChartBar } from '../bars/chartBar';
-import '../chart.style.scss';
+import './chart.style.scss';
 import { generetateChartOptions } from './generateChartOptions';
 
 type LineChartType = ChartsType;
@@ -28,8 +27,8 @@ const AreaChart = ({ ...rest }: LineChartType) => {
                 type="monotone"
                 dataKey={graph}
                 stackId="1"
-                stroke={pickColorByIndex({ index })}
-                fill={pickColorByIndex({ index })}
+                stroke={pickColorByIndex({ index: index + 1 })}
+                fill={pickColorByIndex({ index: index + 1 })}
             />
         );
     }, graphs);
@@ -42,7 +41,13 @@ const AreaChart = ({ ...rest }: LineChartType) => {
                     <Legend className="chart_legend" />
                     <Tooltip />
                     <CartesianGrid stroke="#f5f5f5" />
-                    <Area type="monotone" dataKey={yAxis} stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+                    <Area
+                        type="monotone"
+                        dataKey={yAxis}
+                        stackId="1"
+                        stroke={pickColorByIndex({ index: 0 })}
+                        fill={pickColorByIndex({ index: 0 })}
+                    />
                     {generateGraphs}
                 </RechartAreaChart>
             </ResponsiveContainer>

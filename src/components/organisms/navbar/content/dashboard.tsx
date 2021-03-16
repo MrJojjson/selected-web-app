@@ -16,6 +16,10 @@ const typeOptions: OptionsType<NewChartType['type']>[] = [
         value: 'area',
     },
     {
+        label: 'Barchart',
+        value: 'bar',
+    },
+    {
         label: 'Linechart',
         value: 'line',
     },

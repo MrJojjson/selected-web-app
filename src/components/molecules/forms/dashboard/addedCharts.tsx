@@ -6,6 +6,7 @@ import { LoadingIndicator } from '../../../atoms';
 import { ChartBar } from '../../../organisms/bars/chartBar';
 
 const AreaChart = lazy(() => import('../../../organisms/charts/areaChart'));
+const BarChart = lazy(() => import('../../../organisms/charts/barChart'));
 const LineChart = lazy(() => import('../../../organisms/charts/lineChart'));
 
 export const AddedCharts = () => {
@@ -13,12 +14,13 @@ export const AddedCharts = () => {
 
     const charts = map(
         (chart) => {
-            console.log('b');
-
             let chartToRender: JSX.Element;
             switch (chart?.type) {
                 case 'area':
                     chartToRender = <AreaChart {...chart} />;
+                    break;
+                case 'bar':
+                    chartToRender = <BarChart {...chart} />;
                     break;
                 case 'line':
                 default:

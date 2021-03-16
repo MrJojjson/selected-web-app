@@ -4,56 +4,66 @@
 
 $size: $height-xs * 1.5;
 $shadow-h: 5px;
-input[type='checkbox'] {
-    position: absolute;
-    opacity: 0;
-
-    + span {
-        position: relative;
-        @include flex(center, center, column);
-        width: $size;
-        height: $size;
-        background: $color-white left top no-repeat;
-        border: 1px solid $color-border;
-        border-radius: $default-border-radius;
-        cursor: pointer;
-        transition: all $transition-speed;
-        box-shadow: $shadow-h $shadow-h $color-background-back;
-
-        svg {
-            path {
-                color: $color-secondary;
-            }
-        }
+.selector {
+    @include flex(center, center, row);
+    label {
+        margin-left: $spacing-xs;
     }
-    &:hover,
-    &:focus {
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.25;
+    }
+    input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+
         + span {
-            border-radius: $border-radius-none;
+            position: relative;
+            @include flex(center, center, column);
+            width: $size;
+            height: $size;
+            background: $color-white left top no-repeat;
+            border: 1px solid $color-border;
+            border-radius: $default-border-radius;
+            cursor: pointer;
+            transition: all $transition-speed;
+            box-shadow: $shadow-h $shadow-h $color-background-back;
 
-            background-color: $color-focus;
-        }
-    }
-    &:checked + span {
-        border: 1px solid $color-primary;
-        background-color: $color-primary;
-        box-shadow: 0px 0px $color-background-back;
-        svg {
-            path {
-                color: $color-secondary;
+            svg {
+                path {
+                    color: $color-secondary;
+                }
             }
         }
-        &:hover {
-            border-radius: $border-radius-none;
-        }
-    }
-
-    &:checked {
         &:hover,
         &:focus {
             + span {
                 border-radius: $border-radius-none;
+
                 background-color: $color-focus;
+            }
+        }
+        &:checked + span {
+            border: 1px solid $color-primary;
+            background-color: $color-primary;
+            box-shadow: 0px 0px $color-background-back;
+            svg {
+                path {
+                    color: $color-secondary;
+                }
+            }
+            &:hover {
+                border-radius: $border-radius-none;
+            }
+        }
+
+        &:checked {
+            &:hover,
+            &:focus {
+                + span {
+                    border-radius: $border-radius-none;
+                    background-color: $color-focus;
+                }
             }
         }
     }
