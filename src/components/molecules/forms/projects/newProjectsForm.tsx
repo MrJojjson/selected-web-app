@@ -37,7 +37,11 @@ const getOptions = ({ data, checkedOptions, setCheckedOptions, types, type }: TG
         };
         return (
             <li key={uid} className={cn({ active: alreadyChecked })} onClick={() => setChecked()}>
-                <Selector checked={alreadyChecked} onChange={() => setChecked()} />
+                <Selector
+                    type={type === 'spirits' ? 'checkbox' : 'radio'}
+                    checked={alreadyChecked}
+                    onChange={() => setChecked()}
+                />
                 {liText(title)}
                 {liText([...values].join(' - '))}
             </li>

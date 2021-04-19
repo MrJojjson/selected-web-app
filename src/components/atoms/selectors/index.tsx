@@ -10,9 +10,18 @@ type SelectorType = {
     label?: string;
     color?: string;
     disabled?: boolean;
+    type?: 'checkbox' | 'radio';
 };
 
-export const Selector = ({ checked = false, onChange, label, className, color, disabled }: SelectorType) => {
+export const Selector = ({
+    checked = false,
+    onChange,
+    label,
+    className,
+    color,
+    disabled,
+    type = 'checkbox',
+}: SelectorType) => {
     return (
         <span style={{ color: color }} className={cn('selector', className, { disabled })} onClick={onChange}>
             <input
@@ -22,7 +31,7 @@ export const Selector = ({ checked = false, onChange, label, className, color, d
                 checked={checked}
                 disabled={disabled}
             />
-            <span>
+            <span className={type}>
                 <FontAwesomeIcon icon={['fas', 'check']} />
             </span>
             {label && <label>{label}</label>}

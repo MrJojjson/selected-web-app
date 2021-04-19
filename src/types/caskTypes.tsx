@@ -1,6 +1,13 @@
 import { InputVarsType } from './inputTypes';
 import { SpiritType } from './spiritsTypes';
 
+export type APICasksReturnType = {
+    items: Array<APICaskReturnType>;
+    pageIndex: number;
+    pageSize: number;
+    totalCount: number;
+};
+
 export type APICaskReturnType = CaskType & {
     createdAtUtc?: string;
     updatedAtUtc?: string;

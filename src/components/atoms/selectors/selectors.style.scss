@@ -34,12 +34,17 @@ $shadow-h: 5px;
                     color: $color-secondary;
                 }
             }
+            &.radio {
+                border-radius: 1rem;
+            }
+            &:hover {
+                border-radius: $border-radius-none;
+            }
         }
         &:hover,
         &:focus {
             + span {
                 border-radius: $border-radius-none;
-
                 background-color: $color-focus;
             }
         }
@@ -52,6 +57,7 @@ $shadow-h: 5px;
                     color: $color-secondary;
                 }
             }
+
             &:hover {
                 border-radius: $border-radius-none;
             }

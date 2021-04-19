@@ -9,8 +9,8 @@
     .calculator {
         @include flex(center, center, column);
         flex: 1;
-        border-left: 1px solid $colors-primary;
-        border-right: 1px solid $colors-primary;
+        border-left: 1px solid $color-primary;
+        border-right: 1px solid $color-primary;
 
         min-height: $height-l;
         &.active {

@@ -23,6 +23,8 @@ const Casks = () => {
     useEffect(() => {
         const fetchData = async () => {
             const { data, error } = await fetchCasks({ token });
+            console.log('data', data);
+
             if (data) {
                 dispatch(casksSetFetch({ fetch: false }));
                 dispatch(casksAddData({ data }));

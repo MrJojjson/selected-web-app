@@ -10,10 +10,7 @@ export const fetchSpirits = ({ token }: FetchType): Promise<FetchSpiritReturnTyp
         endpoint: 'spirits',
         token,
     })
-        .then((res: APISpiritsReturnType[]) => {
-            if (includes('TypeError', res?.toString())) {
-                return { error: 'Connection to server failed: Spirited away!' };
-            }
+        .then(({ items, pageSize, pageIndex, totalCount }: APISpiritsReturnType) => {
             const data = map((rest) => {
                 const { id: uid, name: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;
 
@@ -44,7 +41,7 @@ export const fetchSpirits = ({ token }: FetchType): Promise<FetchSpiritReturnTyp
                 } as SpiritsDataType;
 
                 return returnSpirit;
-            }, res);
+            }, items);
 
             return { data };
         })
