@@ -2,7 +2,7 @@ import { config, library } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './common/sass/globals.style.scss';
 import { AlertBase } from './components/molecules';
 import ModalBase from './components/molecules/modal';
@@ -22,7 +22,7 @@ export const App = () => {
                 <Palette />
                 <div className="content">
                     <Navbar />
-                    {...appRoutes}
+                    {appRoutes}
                 </div>
                 <ModalBase />
                 <AlertBase />

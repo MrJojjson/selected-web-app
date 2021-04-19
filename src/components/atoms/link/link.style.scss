@@ -26,9 +26,16 @@
     &.is-active {
         pointer-events: none;
         cursor: default;
+
         .link {
-            @include styleLink($color-highlight);
+            @include styleLink($color-white);
             font-weight: $font-weight-bold;
+            color: $color-focus;
+            svg {
+                path {
+                    fill: $color-focus;
+                }
+            }
         }
     }
 }

@@ -40,8 +40,9 @@ export const Auth = () => {
         });
         const { token = null, user = null } = data || {};
         dispatch(authSetLoggedIn({ token, user }));
+        console.log('token', token);
 
-        if (token && user) {
+        if (token) {
             localStorage.setItem('token', JSON.stringify(token));
             localStorage.setItem('user', JSON.stringify(user));
             history.go(0);

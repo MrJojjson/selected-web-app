@@ -15,5 +15,7 @@ export const postSpirit = async ({ token, data, fetch }: PostSpiritType): Promis
             }
             return { data };
         })
-        .catch((error) => ({ error }));
+        .catch((error) => {
+            return { error };
+        });
 };

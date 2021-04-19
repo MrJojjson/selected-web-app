@@ -1,4 +1,4 @@
-import { BarElementType } from '../../layout/barLayout/bar';
+import { BarElementType, BarHeadingType } from '../../layout/barLayout/bar';
 import { SpiritVarsType } from '../../types/spiritsTypes';
 import { FormsListSpiritOnBlurType } from './formsTypes';
 
@@ -37,10 +37,11 @@ export type SpiritsState = {
     };
 };
 
-export type SpiritsDataType = Omit<BarElementType, 'barBtn' | 'className'> & {
-    data: SpiritVarsType[];
-    uid: string;
-};
+export type SpiritsDataType = Omit<BarElementType, 'barBtn' | 'className'> &
+    BarHeadingType & {
+        data: SpiritVarsType[];
+        uid: string;
+    };
 
 // SELECTED
 export type SpiritsSelectedActionType = {

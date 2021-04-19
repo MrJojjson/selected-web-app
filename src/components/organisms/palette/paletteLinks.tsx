@@ -24,9 +24,9 @@ const links: LinkType[] = [
         icon: 'flask',
     },
     {
-        title: 'Rerack',
-        pathname: '/rerack',
-        icon: 'divide',
+        title: 'Projects',
+        pathname: '/projects',
+        icon: 'project-diagram',
     },
     {
         title: 'Events',

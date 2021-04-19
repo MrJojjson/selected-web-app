@@ -12,6 +12,7 @@ import './newPurchaseForms.style.scss';
 export const NewPurchaseForm = () => {
     const added = getPurchaseIncomingAddedState();
     const selected = getPurchaseIncomingSelectedState();
+    console.log('added', added);
 
     return (
         <InputList

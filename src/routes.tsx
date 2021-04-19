@@ -1,6 +1,6 @@
 import { map } from 'ramda';
 import React, { lazy, Suspense } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { toTypes } from './types/linkTypes';
 
 const Casks = lazy(() => import('./pages/casks'));
@@ -9,7 +9,7 @@ const Profile = lazy(() => import('./pages/profile'));
 const Purchases = lazy(() => import('./pages/purchases'));
 const Settings = lazy(() => import('./pages/settings'));
 const Spirits = lazy(() => import('./pages/spirits'));
-const Rerack = lazy(() => import('./pages/rerack'));
+const Projects = lazy(() => import('./pages/projects'));
 const Events = lazy(() => import('./pages/events'));
 
 import { LoadingIndicator } from './components/atoms/loading';
@@ -71,10 +71,10 @@ const routeList: RouteType[] = [
         ),
     },
     {
-        path: '/rerack',
+        path: '/projects',
         component: (
             <Suspense fallback={<LoadingIndicator />}>
-                <Rerack />
+                <Projects />
             </Suspense>
         ),
     },
@@ -92,4 +92,4 @@ const routes = map(({ path, component }) => {
     return <Route key={path} path={path} render={() => component} />;
 }, routeList);
 
-export default routes;
+export default <Switch>{routes}</Switch>;

@@ -1,0 +1,57 @@
+@import '../../../../common/sass/mixins/flex.scss';
+@import '../../../../common/sass/colors.scss';
+@import '../../../../common/sass/metrics.scss';
+
+.new_projects_form {
+    @include flex(center, flex-start, row);
+    width: 100%;
+
+    .calculator {
+        @include flex(center, center, column);
+        flex: 1;
+        border-left: 1px solid $colors-primary;
+        border-right: 1px solid $colors-primary;
+
+        min-height: $height-l;
+        &.active {
+        }
+    }
+    ul {
+        @include flex(flex-start, flex-start, column);
+        padding: $default-padding / 2;
+        flex: 3;
+        li {
+            @include flex(center, flex-start, row);
+            width: 100%;
+            padding: $default-padding / 2 $default-padding;
+            cursor: pointer;
+            transition: all $transition-speed;
+
+            &.active {
+                background-color: $color-focus-back;
+                p {
+                    color: $color-secondary;
+                }
+            }
+            &:hover {
+                background-color: $color-focus;
+                p {
+                    color: $color-secondary;
+                }
+            }
+
+            p {
+                &:first-of-type {
+                    margin-left: $default-margin / 2;
+                }
+                &:not(:last-of-type) {
+                    margin-right: $default-margin / 2;
+                    &::after {
+                        content: '-';
+                        margin-left: $default-margin / 2;
+                    }
+                }
+            }
+        }
+    }
+}
