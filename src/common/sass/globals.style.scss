@@ -38,14 +38,16 @@ body,
     min-height: 100vh;
     height: 100%;
     width: 100%;
+    background: #eee;
     .content {
+        background-color: $color-white;
         position: relative;
         @include flex(flex-start, flex-start, column);
         width: 100%;
         flex: 1;
-        background-color: $color-secondary;
-        height: 100vh;
+        height: calc(100vh - #{$navbar-height + $default-padding * 3});
         overflow-y: auto;
-        padding-top: $navbar-height;
+        border-radius: $default-border-radius;
+        margin: $navbar-height + $default-padding * 2 $default-padding 0 0;
     }
 }

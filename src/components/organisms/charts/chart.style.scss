@@ -1,0 +1,16 @@
+@import '../../../common/sass/mixins/flex.scss';
+
+.chart_wrapper {
+    @include flex(center, flex-start, column);
+    width: 100%;
+    height: 100%;
+    .line-chart {
+        width: 100%;
+        height: 100%;
+    }
+    .chart_legend {
+        span {
+            text-transform: capitalize;
+        }
+    }
+}

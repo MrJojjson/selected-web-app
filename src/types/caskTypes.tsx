@@ -1,6 +1,13 @@
 import { InputVarsType } from './inputTypes';
 import { SpiritType } from './spiritsTypes';
 
+export type APICasksReturnType = {
+    items: Array<APICaskReturnType>;
+    pageIndex: number;
+    pageSize: number;
+    totalCount: number;
+};
+
 export type APICaskReturnType = CaskType & {
     createdAtUtc?: string;
     updatedAtUtc?: string;
@@ -21,27 +28,28 @@ export type CaskType = {
 };
 
 export type CaskKeyType = keyof CaskType;
+export type CaskNumberKeyType = keyof Pick<CaskType, 'size'>;
 
 export type CaskVarsType = InputVarsType;
 
 export const CaskVars: CaskVarsType[] = [
     {
         id: 'number',
-        title: 'Cask number',
+        title: 'Number',
         type: 'text',
         value: '',
         belonging: 'cask',
     },
     {
         id: 'type',
-        title: 'Material',
+        title: 'Type',
         type: 'text',
         value: '',
         belonging: 'cask',
     },
     {
         id: 'size',
-        title: 'Volume in liter',
+        title: 'Size',
         type: 'number',
         value: '',
         belonging: 'cask',

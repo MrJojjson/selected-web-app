@@ -1,7 +1,14 @@
 import { CaskType } from './caskTypes';
 import { InputVarsType } from './inputTypes';
 
-export type APISpiritsReturnType = SpiritType & {
+export type APISpiritsReturnType = {
+    items: Array<APISpiritReturnType>;
+    pageIndex: number;
+    pageSize: number;
+    totalCount: number;
+};
+
+export type APISpiritReturnType = SpiritType & {
     createdAtUtc?: string;
     updatedAtUtc?: string;
     status?: number;
@@ -13,12 +20,12 @@ export type SpiritType = {
     name?: string;
     distillery?: string;
     distilledDate?: string;
-    volume?: number;
-    status?: string;
+    originalVolume?: number;
     recipe?: string;
     ppm?: number;
     ola?: number;
     abv?: number;
+    createdByMerge?: boolean;
     id?: string;
     cask?: {
         id?: CaskType['id'];
@@ -28,6 +35,7 @@ export type SpiritType = {
 };
 
 export type SpiritKeyType = keyof SpiritType;
+export type SpiritNumberKeyType = keyof Pick<SpiritType, 'abv' | 'ola' | 'ppm' | 'originalVolume'>;
 
 export type SpiritVarsType = InputVarsType;
 
@@ -47,13 +55,6 @@ export const SpiritVars: SpiritVarsType[] = [
         belonging: 'spirit',
     },
     {
-        id: 'status',
-        title: 'Status',
-        type: 'text',
-        value: 'c',
-        belonging: 'spirit',
-    },
-    {
         id: 'recipe',
         title: 'Recipe',
         type: 'text',
@@ -68,7 +69,7 @@ export const SpiritVars: SpiritVarsType[] = [
         belonging: 'spirit',
     },
     {
-        id: 'volume',
+        id: 'originalVolume',
         title: 'Volume',
         type: 'number',
         value: '400',

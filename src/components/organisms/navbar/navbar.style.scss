@@ -2,19 +2,19 @@
 @import '../../../common/sass/metrics.scss';
 @import '../../../common/sass/mixins/flex.scss';
 @import '../../../common/sass/mixins/fades.scss';
-
 @import '../../../common/sass/mixins/breakpoints.scss';
 
 header {
     position: fixed;
-    top: 0;
+    top: $default-padding;
     @include flex(center, flex-start, row);
     height: $navbar-height;
     background-color: $color-white;
     padding: 0 $default-padding;
-    width: calc(100% - #{$palette-width});
+    width: calc(100% - #{$palette-width + $default-padding * 3});
     z-index: $z-index-belt;
     box-shadow: 0px 5px 5px $color-shadow;
+    border-radius: $default-border-radius;
     .navbar_content_template {
         width: 100%;
         @include flex(center, space-between, row);

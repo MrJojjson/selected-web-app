@@ -106,7 +106,7 @@ const PurchaseNav = () => {
     const mergeData = (data: InputVarsType[], belongsTo: 'cask' | 'spirit') => {
         return mergeAll(
             map(({ id, value, belonging }) => {
-                if (belonging === belongsTo) {
+                if (belonging === belongsTo && value) {
                     return { [(id as unknown) as string]: value };
                 }
             }, data),
@@ -127,10 +127,9 @@ const PurchaseNav = () => {
             } else if (!isEmpty(cask)) {
                 error = await saveCask({ data: cask, fetch });
             }
-            console.log('error', error);
-            if (error === null) {
+            if (typeof error !== 'string') {
                 return resetIncomingPurchaseFields(uid);
-            } else {
+            } else if (typeof error === 'string') {
                 disapatchAlertError(error);
             }
         }, added);

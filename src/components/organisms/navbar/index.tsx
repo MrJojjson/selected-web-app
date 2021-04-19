@@ -11,6 +11,7 @@ const PurchaseNav = lazy(() => import('./content/purchase'));
 import { LoadingIndicator } from '../../atoms/loading';
 
 import './navbar.style.scss';
+import ProjectsNav from './content/projects';
 
 const navList: { path: string; comp: JSX.Element }[] = [
     {
@@ -42,6 +43,14 @@ const navList: { path: string; comp: JSX.Element }[] = [
         comp: (
             <Suspense fallback={<LoadingIndicator />}>
                 <SpiritNav />
+            </Suspense>
+        ),
+    },
+    {
+        path: 'projects',
+        comp: (
+            <Suspense fallback={<LoadingIndicator />}>
+                <ProjectsNav />
             </Suspense>
         ),
     },

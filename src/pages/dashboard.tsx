@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text } from '../components/atoms';
+import { AddedCharts } from '../components/molecules/forms/dashboard/addedCharts';
 import { PageLayout } from '../layout/pageLayout';
 
 const Dashboard = () => {
     return (
-        <PageLayout>
-            <Text>Dashboard</Text>
+        <PageLayout disableLayout>
+            <AddedCharts />
         </PageLayout>
     );
 };

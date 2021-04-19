@@ -1,24 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { BarElement } from '../../../../layout/barLayout/bar';
-import Dashboard from '../../../../pages/dashboard';
-import { purchaseIncomingSelected } from '../../../../redux';
-import { Button } from '../../../atoms';
+import { addNewChart } from '../../../../redux/actions/chartActions';
+import { ChartAvailableContentType, ChartAvailableType } from '../../../../redux/types/chartTypes';
+import { Button, Dropdown } from '../../../atoms';
+import { NavbarContentTemplate } from '../navbarContentTemplate';
 
-const DashboardNav = () => {
-    const dispatch = useDispatch();
-
-    const test = (
-        <Button
-            mini
-            label="Dashboard"
-            theme="secondary"
-            icon="trash"
-            onClick={() => dispatch(purchaseIncomingSelected({ remove: true }))}
-        />
-    );
-
-    return <BarElement end={test} />;
+type OptionsType<T> = {
+    label: string;
+    value: T;
 };
 
-export default Dashboard;
+const typeOptions: OptionsType<NewChartType['type']>[] = [
+    {
+        label: 'Areachart',
+        value: 'area',
+    },
+    {
+        label: 'Barchart',
+        value: 'bar',
+    },
+    {
+        label: 'Linechart',
+        value: 'line',
+    },
+];
+
+const contentOptions: OptionsType<NewChartType['content']>[] = [
+    {
+        label: 'Spirits',
+        value: 'spirits',
+    },
+    {
+        label: 'Casks',
+        value: 'casks',
+    },
+];
+
+type NewChartType = {
+    type: ChartAvailableType;
+    content: ChartAvailableContentType;
+};
+
+const DashboardNav = () => {
+    const [newChart, setNewChart] = useState<NewChartType>({ type: 'line', content: 'spirits' });
+    const dispatch = useDispatch();
+
+    const add = <Button mini label="Add chart" onClick={() => dispatch(addNewChart({ type, content }))} />;
+
+    const typeDropdown = (
+        <Dropdown
+            mini
+            label={`Type:`}
+            options={typeOptions}
+            defaultValue={newChart?.type}
+            onOptionChange={({ currentTarget }) =>
+                setNewChart({ ...newChart, type: currentTarget.value as ChartAvailableType })
+            }
+        />
+    );
+    const contentDropdown = (
+        <Dropdown
+            mini
+            label={`Content:`}
+            options={contentOptions}
+            defaultValue={newChart?.content}
+            onOptionChange={({ currentTarget }) =>
+                setNewChart({ ...newChart, content: currentTarget.value as ChartAvailableContentType })
+            }
+        />
+    );
+    const { type, content } = newChart || {};
+
+    return (
+        <NavbarContentTemplate
+            start={
+                <>
+                    {typeDropdown}
+                    {contentDropdown}
+                </>
+            }
+            end={add}
+        />
+    );
+};
+
+export default DashboardNav;

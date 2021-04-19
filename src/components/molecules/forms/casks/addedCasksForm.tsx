@@ -10,7 +10,7 @@ import { ApiCaskVarsType } from '../../../../types/caskTypes';
 import { InputList } from '../lists/inputList';
 
 export const AddedCasksForm = () => {
-    const { data, selected, edit } = getCasksState();
+    const { data = [], selected = [], edit } = getCasksState() || {};
     const { query } = useQuery({});
     const expandAll = getCasksExpandAllState();
     const { filter: queryFilters, sort: querySort } = query || {};

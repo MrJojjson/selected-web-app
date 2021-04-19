@@ -3,17 +3,14 @@ import { DateFormatted } from '../common/utils/dateFormat';
 import { fetchData } from '../hooks/useApi';
 import { CasksDataType } from '../redux/types/casksTypes';
 import { FetchCaskReturnType, FetchType } from '../types/apiTypes';
-import { APICaskReturnType, ApiCaskVars, ApiCaskVarsType } from '../types/caskTypes';
+import { APICaskReturnType, APICasksReturnType, ApiCaskVars, ApiCaskVarsType } from '../types/caskTypes';
 
 export const fetchCasks = ({ token }: FetchType): Promise<FetchCaskReturnType> =>
     fetchData({
         endpoint: 'casks',
         token,
     })
-        .then((res: APICaskReturnType[]) => {
-            if (includes('TypeError', res?.toString())) {
-                return { error: 'Connection to server failed: No casks as far as the eye can see' };
-            }
+        .then(({ items, pageIndex, pageSize, totalCount }: APICasksReturnType) => {
             const data = map((rest) => {
                 const { id: uid, number: title, createdAtUtc = '---', updatedAtUtc = '---' } = rest;
 
@@ -44,7 +41,7 @@ export const fetchCasks = ({ token }: FetchType): Promise<FetchCaskReturnType> =
                 } as CasksDataType;
 
                 return returnCasks;
-            }, res);
+            }, items);
             return { data };
         })
         .catch((error) => ({ error }));

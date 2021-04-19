@@ -5,7 +5,7 @@ import { StoreStateField } from '../../../redux/storeState';
 import { ApiCaskVars } from '../../../types/caskTypes';
 import { ApiSpiritVars } from '../../../types/spiritsTypes';
 import { Dropdown, DropdownOptionType, DropdownType } from '../../atoms';
-import './sortBar.style.scss';
+import './bar.style.scss';
 
 type SortBarType = {
     id: StoreStateField;

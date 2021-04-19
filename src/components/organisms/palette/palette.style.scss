@@ -6,9 +6,12 @@
 .palette {
     position: relative;
     @include flex(center, space-between, column);
-    height: 100%;
+    height: calc(100% - #{$default-padding * 2});
     width: $palette-width;
-    background-color: $color-primary;
+    background-color: $color-primary-back;
+    margin: $default-padding;
+    border-radius: $default-border-radius;
+    padding-top: $navbar-height + $default-padding;
     .top,
     .middle,
     .bottom {
